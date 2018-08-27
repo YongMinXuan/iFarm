@@ -15,6 +15,18 @@ export class HomePage {
     @ViewChild('username') uname;
     @ViewChild('password') password;
 
+    provider = {
+     
+      name : '',
+      profilePicture: '',
+      email: '',
+      loggedin : false
+    }
+
+    
+  
+    
+
 
 
   constructor(private fire: AngularFireAuth, public navCtrl: NavController, public alertCtrl: AlertController) {
@@ -35,21 +47,40 @@ export class HomePage {
     this.navCtrl.push(RegisterPage);
   }
 
+  loginWithGoogle(){
+    this.fire.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .then (res => {
+      console.log(res)
+      console.log('from -Google--')
+
+      this.provider.loggedin = true;
+      this.provider.name = res.user.displayName;
+      this.provider.name = res.user.email;
+      this.provider.profilePicture = res.user.photoURL;
+
+    })
+  }
+
   loginWithFacebook(){
 
     this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
     .then(res => {
 
       console.log(res);
-      this.navCtrl.push(LoggedinPage);
+       //this.navCtrl.push(LoggedinPage);
+      this.provider.loggedin = true;
+      this.provider.name = res.user.displayName;
+      this.provider.name = res.user.email;
+      this.provider.profilePicture = res.user.photoURL;
 
     })
 
   }
 
-  logoutOfFacebook(){
+  logout(){
 
     this.fire.auth.signOut();
+    this.provider.loggedin = false;
 
   }
 

@@ -19,8 +19,22 @@
 
         <div>
       
-          <button block ion-button (click)="loginWithFacebook()" item-left>Login With Facebook</button>
-          <button block ion-button (click)="logoutOfFacebook()" item-left>Logout of Facebook</button>
+          <button block ion-button (click)="loginWithFacebook()" *ngIf = "!provider.loggedin" item-left>Login With Facebook</button>
+          <button block ion-button (click)="loginWithGoogle()" *ngIf = "!provider.loggedin" item-left>Login With Google</button>
+          <ion-card *ngIf = "provider.loggedin">
+            <img src="{{ provider.profilePicture }}"/>
+            <ion-card-content>
+              <ion-card-title>
+                {{ provider.name }}
+                </ion-card-title>
+              <p style = "text-align: center">
+                {{ provider.email }}
+              </p>
+            </ion-card-content>
+          </ion-card>
+
+
+          <button block ion-button (click)="logout()" *ngIf = "provider.loggedin" item-left>Logout</button>
 
         </div>
 

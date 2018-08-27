@@ -15,4 +15,17 @@
 
 <ion-content padding>
 
+    <ion-card *ngIf = "facebookloggedin">
+        <img src="{{ facebook.profilePicture }}"/>
+        <ion-card-content>
+          <ion-card-title>
+            {{facebook.name}}
+            </ion-card-title>
+          <p style = "text-align: center">
+            {{ facebook.email }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+
 </ion-content>
