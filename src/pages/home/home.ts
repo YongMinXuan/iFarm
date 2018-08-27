@@ -2,7 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
-
+import firebase from 'firebase';
+import {AngularFireAuth} from 'angularfire2/auth';
+import { LoggedinPage } from '../loggedin/loggedin';
 
 @Component({
   selector: 'page-home',
@@ -14,7 +16,11 @@ export class HomePage {
     @ViewChild('password') password;
 
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+
+  constructor(private fire: AngularFireAuth, public navCtrl: NavController, public alertCtrl: AlertController) {
+
+
+    
 
   }
 
@@ -29,4 +35,26 @@ export class HomePage {
     this.navCtrl.push(RegisterPage);
   }
 
-}
+  loginWithFacebook(){
+
+    this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(res => {
+
+      console.log(res);
+      this.navCtrl.push(LoggedinPage);
+
+    })
+
+  }
+
+  logoutOfFacebook(){
+
+    this.fire.auth.signOut();
+
+  }
+
+  }
+
+
+
+

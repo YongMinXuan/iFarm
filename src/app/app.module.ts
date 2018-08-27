@@ -10,9 +10,10 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { LoggedinPage } from  '../pages/loggedin/loggedin'
 import { AngularFireModule } from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 const firebaseAuth = {
+
   apiKey: "AIzaSyATCXL5EfzKJOxJUHoNSRAvVnEFkfF3FcA",
     authDomain: "ifarm-d5508.firebaseapp.com",
     databaseURL: "https://ifarm-d5508.firebaseio.com",
@@ -35,7 +36,8 @@ const firebaseAuth = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseAuth),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
