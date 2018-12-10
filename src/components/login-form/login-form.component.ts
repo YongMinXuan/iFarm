@@ -1,7 +1,8 @@
+import { LoginResponse } from './../../models/login/login-response.interface';
 import { Account } from './../../models/account/account.interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NavController } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component,EventEmitter,Output } from '@angular/core';
 
 
 
@@ -20,9 +21,11 @@ export class LoginFormComponent {
 
   text: string;
   account = {} as Account;
+  @Output() loginStatus: EventEmitter<LoginResponse>;
   constructor(private afAuth : AngularFireAuth, private navCtrl : NavController) {
     console.log('Hello LoginFormComponent Component');
     this.text = 'Hello World';
+    this.loginStatus = new EventEmitter<any>();
   }
 
   navigateToPage(pageName: string){
@@ -31,11 +34,17 @@ export class LoginFormComponent {
 
   async login(){
     try{
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(this.account.email,this.account.password);
-      console.log(result);
-    }
+      const result: LoginResponse  = {
+            result: await this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
+          }
+          this.loginStatus.emit(result);
+        }
    catch(e){
-     console.log(e)
+     console.error(e)
+     const error : LoginResponse = {
+       error: e
+     }
+     this.loginStatus.emit(error);
    }
   }
 

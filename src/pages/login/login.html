@@ -15,5 +15,5 @@
 
 <ion-content padding>
   <img src="assets/imgs/ifarm.png" alt="" class = "logo">
-  <app-login-form></app-login-form>
+  <app-login-form (loginStatus)="login($event)"></app-login-form>
 </ion-content>
