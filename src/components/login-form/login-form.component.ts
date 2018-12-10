@@ -1,8 +1,10 @@
+import { AuthService } from './../../providers/auth/auth.service';
 import { LoginResponse } from './../../models/login/login-response.interface';
 import { Account } from './../../models/account/account.interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NavController } from 'ionic-angular';
 import { Component,EventEmitter,Output } from '@angular/core';
+
 
 
 
@@ -22,7 +24,7 @@ export class LoginFormComponent {
   text: string;
   account = {} as Account;
   @Output() loginStatus: EventEmitter<LoginResponse>;
-  constructor(private afAuth : AngularFireAuth, private navCtrl : NavController) {
+  constructor(private auth : AuthService, private afAuth : AngularFireAuth, private navCtrl : NavController) {
     console.log('Hello LoginFormComponent Component');
     this.text = 'Hello World';
     this.loginStatus = new EventEmitter<any>();
@@ -33,19 +35,21 @@ export class LoginFormComponent {
   }
 
   async login(){
-    try{
-      const result: LoginResponse  = {
-            result: await this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
-          }
-          this.loginStatus.emit(result);
-        }
-   catch(e){
-     console.error(e)
-     const error : LoginResponse = {
-       error: e
-     }
-     this.loginStatus.emit(error);
-   }
+    const loginResponse = await this.auth.signInWithEmailAndPassword(this.account);
+    this.loginStatus.emit(loginResponse);
+  //   try{
+  //     const result: LoginResponse  = {
+  //           result: await this.afAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
+  //         }
+  //         this.loginStatus.emit(result);
+  //       }
+  //  catch(e){
+  //    console.error(e)
+  //    const error : LoginResponse = {
+  //      error: e
+  //    }
+  //    this.loginStatus.emit(error);
+  //  }
   }
 
 }
