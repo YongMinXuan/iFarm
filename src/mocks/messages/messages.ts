@@ -1,6 +1,6 @@
 import {Message} from '../../models/messages/message.interface';
-import { User } from '../../models/user/user.interface';
-import { USER_LIST } from '../users/users';
+// import { Profile } from '../../models/user/user.interface';
+import { USER_LIST } from '../profiles/profiles';
 
 const userList  = USER_LIST;
 const messageList: Message[] = [];
