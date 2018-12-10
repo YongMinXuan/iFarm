@@ -1,8 +1,8 @@
 {
   "name": "blankProject",
-  "app_id": "fea40ca0",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "id": "fea40ca0"
 }
