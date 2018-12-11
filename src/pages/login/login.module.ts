@@ -1,17 +1,21 @@
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LoginPage } from './login';
-import { ComponentsModule } from '../../components/components.module'
+import { LoginPage } from "./login";
+import {ComponentsModule} from "../../components/components.module";
+import {AngularFireAuthModule} from "angularfire2/auth";
 
 @NgModule({
   declarations: [
-    LoginPage,
-  ],
+      LoginPage
+    ],
   imports: [
-    IonicPageModule.forChild(LoginPage),
-    ComponentsModule,
-    AngularFireAuthModule,
-  ],
+      IonicPageModule.forChild(LoginPage),
+      ComponentsModule,
+      AngularFireAuthModule
+    ],
+  exports: [
+      LoginPage
+    ]
 })
-export class LoginPageModule {}
+
+export class LoginPageModule{}

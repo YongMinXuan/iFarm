@@ -7,26 +7,24 @@ import { Subscribable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
-/**
- * Generated class for the EditProfileFormComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'app-edit-profile-form',
   templateUrl: 'edit-profile-form.component.html'
 })
-export class EditProfileFormComponent {
+export class EditProfileFormComponent implements OnDestroy {
 
-  text: string;
-  profile = {} as Profile;
+  @Output() saveProfileResult: EventEmitter<boolean>;
+
   private authenticatedUser$: Subscription;
   private authenticatedUser: User;
 
+  profile = {} as Profile;
+
   constructor(private auth: AuthService, private data: DataService) {
-    console.log('Hello EditProfileFormComponent Component');
-    this.text = 'Hello World';
+
+    this.saveProfileResult = new EventEmitter<boolean>();
+
     this.authenticatedUser$ = this.auth.getAuthenticatedUser().subscribe((user: User) => {
       this.authenticatedUser = user;
     })
@@ -37,7 +35,15 @@ export class EditProfileFormComponent {
       this.profile.email = this.authenticatedUser.email;
       const result = await this.data.saveProfile(this.authenticatedUser, this.profile);
       console.log(result);
-      // this.saveProfileResult.emit(result);
+      this.saveProfileResult.emit(result);
     }
+
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.authenticatedUser$.unsubscribe();
+  }
+
 }

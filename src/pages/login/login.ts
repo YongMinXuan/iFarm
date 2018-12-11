@@ -1,43 +1,50 @@
-import { LoginResponse } from './../../models/login/login-response.interface';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Component, OnDestroy} from '@angular/core';
+import {NavController, NavParams, IonicPage, ToastController} from 'ionic-angular';
+import {LoginResponse} from "../../models/login/login-response.interface";
+import {DataService} from "../../providers/data/data.service";
+import {Subscription} from "rxjs/Subscription";
+import {User} from "firebase";
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnDestroy{
 
-  constructor(private toast: ToastController, private navCtrl: NavController, private navParams: NavParams) {
+  private profile$: Subscription;
+
+  constructor(private data: DataService,
+              private toast: ToastController,
+              private navCtrl: NavController,
+              private navParams: NavParams) {
   }
-  navigateToPage(pageName: string){
-  pageName === 'TabsPage' ? this.navCtrl.setRoot(pageName) : this.navCtrl.push(pageName);
-}
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+
+  login(event: LoginResponse) {
+    console.log(event); //check event object
+    if (!event.error) {
+      this.toast.create({
+        message: `Welcome to OPSAP, ${event.result.email}`,
+        duration: 3000
+      }).present();
+
+      this.profile$ = this.data.getProfile(<User>event.result)
+        .snapshotChanges()
+        .subscribe(res => {
+          console.log(res.payload.val());
+          res.payload.val() ? this.navCtrl.setRoot('TabsPage') : this.navCtrl.setRoot('EditProfilePage')
+        });
+    }
+    else {
+      this.toast.create({
+        message: event.error.message,
+        duration: 3000
+      }).present()
+    }
   }
-login(event: LoginResponse){
-  console.log(event);
-  if(!event.error){
-    this.toast.create({
-      message:`${event.result.uid}`,
-      duration:3000
-    }).present();
-    this.navCtrl.setRoot('EditProfilePage')
+
+  ngOnDestroy() {
+    this.profile$.unsubscribe();
   }
-  else{
-    this.toast.create({
-      message:event.error.message,
-      duration:3000,
-    }).present();
-  }
-}
+
 }

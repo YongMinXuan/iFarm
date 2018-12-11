@@ -13,6 +13,7 @@ export class DataService{
 
   getProfile(user: User){
     this.profileObject = this.database.object(`/profiles/${user.uid}`);
+    console.log(this.profileObject)
     return this.profileObject;
   }
 

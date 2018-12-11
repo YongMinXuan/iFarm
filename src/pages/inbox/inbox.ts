@@ -1,14 +1,9 @@
-import { Message } from '../../models/messages/message.interface';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {MESSAGE_LIST} from '../../mocks/messages/messages';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 
-/**
- * Generated class for the InboxPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MESSAGE_LIST } from "../../mocks/messages/messages";
+import {Message} from "../../models/messages/message.interface";
+
 
 @IonicPage()
 @Component({
@@ -16,8 +11,10 @@ import {MESSAGE_LIST} from '../../mocks/messages/messages';
   templateUrl: 'inbox.html',
 })
 export class InboxPage {
-  messageList:Message[] = MESSAGE_LIST;
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
+
+  messageList: Message[] = MESSAGE_LIST;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {

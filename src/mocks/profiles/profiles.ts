@@ -1,38 +1,12 @@
-import { Profile } from '../../models/profile/profile.interface';
+import {Profile} from "../../models/profile/profile.interface";
 
 const userList: Profile[] = [
-  {
-    firstName: 'Marni',
-    lastName: 'Brewster',
-    email: 'marni@statumhealth.com',
-    avatar: 'assets/imgs/avatar.png',
-    dateOfBirth: new Date(),
-    // $key: '438ruhfdsilfhsd8'
-  },
-  {
-    firstName: 'Paul',
-    lastName: 'Halliday',
-    email: 'paul@statumhealth.com',
-    avatar: 'assets/imgs/avatar.png',
-    dateOfBirth: new Date(),
-    // $key: 'cja4j2o85u82oh5ywin'
-  },
-  {
-    firstName: 'Monica',
-    lastName: 'Callen',
-    email: 'monica@statumhealth.com',
-    avatar: 'assets/imgs/avatar.png',
-    dateOfBirth: new Date(),
-    // $key: '53y843hjkhrjk43hj45'
-  },
-  {
-    firstName: 'Sarah',
-    lastName: 'Preesh',
-    email: 'sarah@statumhealth.com',
-    avatar: 'assets/imgs/avatar.png',
-    dateOfBirth: new Date(),
-    // $key: 'a4h325y89y8543y5h48ioh5y'
-  }
+  {firstName: 'Sean', lastName: 'Knowels', email: 'sean.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
+  {firstName: 'John', lastName: 'Doe', email: 'john.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
+  {firstName: 'Paul', lastName: 'Halliday', email: 'halliday.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
+  {firstName: 'Mike', lastName: 'Smith', email: 'mike.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
+  {firstName: 'Debi', lastName: 'Koti', email: 'debi.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
+  {firstName: 'Philip', lastName: 'Gunter', email: 'philip.code@outlook.com', avatar: 'assets/img/ellipse.png', dateOfBirth: new Date()},
 ];
 
 export const USER_LIST = userList;

@@ -1,50 +1,46 @@
-import { LoginResponse } from './../../models/login/login-response.interface';
-import { Account } from './../../models/account/account.interface';
-import { AngularFireAuth } from 'angularfire2/auth';
-// import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Account} from "../../models/account/account.interface";
+import {LoginResponse} from "../../models/login/login-response.interface";
+import {AngularFireAuth} from "angularfire2/auth";
 
 
-
-
-/*
-  Generated class for the AuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth) {
-    console.log('Hello  AuthProvider Provider');
+  account = {} as Account;
+
+  constructor(private afAuth: AngularFireAuth) {
   }
 
-  getAuthenticatedUser(){
-    return this.auth.authState;
+  getAuthenticatedUser() {
+    return this.afAuth.authState;
   }
 
   async createUserWithEmailAndPassword(account: Account) {
     try {
       return <LoginResponse> {
-        result: await this.auth.auth.createUserWithEmailAndPassword(account.email, account.password)
+        result: await
+          this.afAuth.auth.createUserWithEmailAndPassword(account.email, account.password)
       }
-
-    } catch(e) {
+    }
+    catch (e) {
       return <LoginResponse> {
         error: e
       }
     }
   }
-  async signInWithEmailAndPassword(account: Account) {
+
+  async SignInWithEmailAndPassword(account: Account) {
     try {
       return <LoginResponse> {
-        result: await this.auth.auth.signInWithEmailAndPassword(account.email, account.password)
-      };
-    } catch(e) {
+        result: await
+        this.afAuth.auth.signInWithEmailAndPassword(account.email, account.password)
+    }
+    }
+    catch (e) {
       return <LoginResponse> {
         error: e
-      };
+      }
     }
   }
 }
