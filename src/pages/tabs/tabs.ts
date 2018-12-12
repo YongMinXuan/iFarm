@@ -24,7 +24,7 @@ export class TabsPage {
     this.tab1Root = 'InboxPage';
     this.tab2Root = 'ChannelsPage';
     this.tab3Root = 'ProfilePage';
-    this.tab3Root = 'WeatherPage';
+    this.tab4Root = 'WeatherPage';
   }
 
  
