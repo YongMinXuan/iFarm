@@ -19,12 +19,14 @@ export class TabsPage {
   tab2Root: string;
   tab3Root: string;
   tab4Root: string;
+  tab5Root: string;
 
   constructor(){
     this.tab1Root = 'InboxPage';
     this.tab2Root = 'ChannelsPage';
     this.tab3Root = 'ProfilePage';
     this.tab4Root = 'WeatherPage';
+    this.tab5Root = 'QuestionFirstPage';
   }
 
  
