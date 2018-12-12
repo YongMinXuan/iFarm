@@ -1,9 +1,16 @@
+import { WeatherPageModule } from './../pages/weather/weather.module';
+import { WeatherPage } from './../pages/weather/weather';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {FormsModule} from "@angular/forms";
+import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { WeatherProvider } from '../providers/weather/weather';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 
 import { MyApp } from './app.component';
@@ -21,6 +28,7 @@ import { DataService } from '../providers/data/data.service';
 @NgModule({
   declarations: [
     MyApp,
+    // WeatherPage,
   ],
   imports: [
     BrowserModule,
@@ -29,18 +37,25 @@ import { DataService } from '../providers/data/data.service';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    HttpModule,
+    IonicStorageModule.forRoot(),
+    WeatherPageModule,
 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    WeatherPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    DataService
+    DataService,
+    Geolocation,
+    WeatherProvider,
+    
   ]
 })
 export class AppModule {}
