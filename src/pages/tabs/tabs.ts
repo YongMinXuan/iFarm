@@ -1,3 +1,4 @@
+import { FeedPage } from './../feed/feed';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -19,14 +20,15 @@ export class TabsPage {
   tab2Root: string;
   tab3Root: string;
   tab4Root: string;
-  tab5Root: string;
+  tab5Root = FeedPage;
 
   constructor(){
     this.tab1Root = 'InboxPage';
     this.tab2Root = 'ChannelsPage';
     this.tab3Root = 'ProfilePage';
     this.tab4Root = 'WeatherPage';
-    this.tab5Root = 'QuestionFirstPage';
+    // this.tab5Root = 'FeedPage';
+    // this.tab5Root = FeedPage;
   }
 
  
