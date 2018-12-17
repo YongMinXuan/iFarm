@@ -8,6 +8,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpClient } from '@angular/common/http';
 import { CommentsPage } from '../comments/comments';
 import { Firebase } from '@ionic-native/firebase'
+import {App} from 'ionic-angular';
+
 
 
 /**
@@ -30,7 +32,7 @@ export class FeedPage {
   infiniteEvent: any;
   image: string;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase) {
+  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase) {
     this.getPosts();
 
     this.firebaseCordova.getToken().then((token) => {
@@ -195,7 +197,10 @@ export class FeedPage {
         duration: 3000
       }).present();
 
-      this.navCtrl.setRoot('LoginPage');
+      // this.navCtrl.setRoot('LoginPage');
+      this.app.getRootNav().setRoot('LoginPage');
+
+
     });
 
   }

@@ -1,3 +1,4 @@
+import { WeatherIcon } from './../pipes/weather-icon/weather-icon';
 import { CommentsPageModule } from './../pages/comments/comments.module';
 import { FeedPageModule } from './../pages/feed/feed.module';
 import { QuestionfirstPageModule } from './../pages/questionfirst/questionfirst.module';
@@ -20,7 +21,13 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { HttpClientModule } from "@angular/common/http";
 import { FeedPage } from '../pages/feed/feed';
 import { CommentsPage } from '../pages/comments/comments';
-
+import { Network } from "@ionic-native/network";
+import { ForecastServiceProvider } from '../providers/weather-forcast/forecast.service';
+import { AppConfig }    from '../config/app.config';
+import { FormatDate } from '../pipes/format-date/format-date';
+import { LocationServiceProvider } from '../providers/weather-forcast/location.service';
+import { LoadingServiceProvider } from '../providers/weather-forcast/loading.service';
+import { ToastServiceProvider } from '../providers/weather-forcast/toast.service';
 import { MyApp } from './app.component';
 import {AngularFireModule} from "angularfire2";
 import {AngularFireAuthModule} from "angularfire2/auth";
@@ -50,6 +57,8 @@ firebase.firestore().settings({
     // CommentsPage
     // WeatherPage,
     // QuestionFirstPage,
+    // FormatDate,
+    // WeatherIcon,
   ],
   imports: [
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
@@ -66,7 +75,8 @@ firebase.firestore().settings({
     QuestionPageModule,
     QuestionfirstPageModule,
     FeedPageModule,
-    CommentsPageModule
+    CommentsPageModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -89,6 +99,12 @@ firebase.firestore().settings({
     HttpModule,
     Firebase,
     Camera,
+    ForecastServiceProvider,
+    AppConfig,
+    LocationServiceProvider,
+    ToastServiceProvider,
+    LoadingServiceProvider,
+    Network
   ]
 })
 export class AppModule {}
