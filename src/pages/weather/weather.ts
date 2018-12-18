@@ -19,6 +19,8 @@ export class WeatherPage {
   public skycons: any;
   public forecast: Forecast;
   public locationName: string;
+  public locationNamesp: string;
+
   public bgColorClassName: string;
 
   constructor(
@@ -51,6 +53,8 @@ export class WeatherPage {
           this.forecast = resources[0];
           console.log(this.forecast);
           this.locationName = resources[1].results[2].formatted_address;
+          this.locationNamesp = resources[1].results[1].address_components[2].long_name;
+          console.log(this.locationNamesp);
           this.bgColorClassName = this.backgroundColorClassName();
         },
         (error) => {
