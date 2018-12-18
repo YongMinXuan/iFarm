@@ -13,7 +13,7 @@ export class ForecastServiceProvider {
 
   load(latitude: number, longtude: number): Observable<Forecast> {
     console.log('hello');
-    return this.http.get<Forecast>(`https://api.darksky.net/forecast/ae10fe3f2dcb03263f7dfefd15aba61c/${latitude},${longtude}`);
+    return this.http.get<Forecast>(`${this.appConfig.darkSkyApiUrl()}/ae10fe3f2dcb03263f7dfefd15aba61c/${latitude},${longtude}`);
   }
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad Forcast Service.ts');

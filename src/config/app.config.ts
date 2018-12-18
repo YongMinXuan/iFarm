@@ -14,7 +14,7 @@ export class AppConfig {
   }
 
   public darkSkyApiUrl() {
-    return isProd ? 'https://api.darksky.net/forecast' : '/api/forecast';
+    return '/api/forecast';
   }
 
   // private _readString(key: string, defaultValue?: string): string {
