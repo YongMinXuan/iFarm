@@ -10,7 +10,7 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 text-center>
-        <h1>
+        <h1 text-center>
           <ion-icon name="{{ forecast.daily.data[0].icon | weatherIcon }}"></ion-icon>
           {{ forecast.daily.data[0].temperatureMin | number:'.0-0' }}&deg;C&nbsp;-&nbsp;{{ forecast.daily.data[0].temperatureMax | number:'.0-0' }}&deg;C
         </h1>
@@ -24,7 +24,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
+      <ion-col col-6 text-center>
         <p>
           Pressure: {{ forecast.daily.data[0].pressure | number:'.0-0' }} hPa
         </p>
@@ -37,14 +37,16 @@
     </ion-row>
     <hr>
     <ion-row>
-        <ion-col col-2 *ngFor="let hourForecast of forecast.hourly.data | slice:0:12">
-          <p>
+        <ion-col col-2 *ngFor= "let hourForecast of forecast.hourly.data | slice:0:12">
+          <p text-center>
             {{ hourForecast.time * 1000 | date: 'HH:mm' }}
           </p>
-          <p>
-            {{ hourForecast.precipIntensity | number:'.0-0'}}&nbsp;mm
+          <p text-center>
+            <!-- {{ hourForecast.precipIntensity | number:'.0-0'}}&nbsp;mm -->
+            <ion-icon center name="{{ hourForecast.icon | weatherIcon }}"></ion-icon><br>
+            <!-- {{ hourForecast.summary }} -->
           </p>
-          <p>
+          <p text-center>
             {{ hourForecast.temperature | number:'.0-0' }}&deg;C
           </p>
         </ion-col>
