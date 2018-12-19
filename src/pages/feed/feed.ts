@@ -156,7 +156,7 @@ export class FeedPage {
   post() {
 
     firebase.firestore().collection("posts").add({
-      likesCount: 0,
+      // likesCount: 0,
       text: this.text,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       owner: firebase.auth().currentUser.uid,
