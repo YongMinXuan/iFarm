@@ -27,7 +27,7 @@ export class LoginPage {
       console.log(user)
 
       this.toastCtrl.create({
-        message: "Welcome " + user.user.email,
+        message: "Welcome " + user.user.displayName,
         duration: 3000
       }).present();
 
