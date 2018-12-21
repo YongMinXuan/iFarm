@@ -10,8 +10,6 @@ import { CommentsPage } from '../comments/comments';
 import { Firebase } from '@ionic-native/firebase'
 import {App} from 'ionic-angular';
 
-
-
 /**
  * Generated class for the FeedPage page.
  *
@@ -27,7 +25,7 @@ import {App} from 'ionic-angular';
 export class FeedPage {
   text: string = "";
   posts: any[] = [];
-  pageSize: number = 10;
+  pageSize: number = 50;
   cursor: any;
   infiniteEvent: any;
   image: string;
@@ -68,6 +66,7 @@ export class FeedPage {
     let loading = this.loadingCtrl.create({
       content: "Loading Feed..."
     });
+
 
     loading.present();
 
@@ -154,12 +153,12 @@ export class FeedPage {
   }
 
   post() {
-
+    console.log(firebase.auth().currentUser.uid);
     firebase.firestore().collection("posts").add({
       // likesCount: 0,
       text: this.text,
       created: firebase.firestore.FieldValue.serverTimestamp(),
-      owner: firebase.auth().currentUser.uid,
+      owner: firebase.auth().currentUser.uid,      
       owner_name: firebase.auth().currentUser.displayName
     }).then(async (doc) => {
       console.log(doc)
@@ -296,7 +295,7 @@ export class FeedPage {
 
     toast.present();
 
-    this.http.post("https://us-central-ifarm-a79f0.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
+    this.http.post("https://cors-anywhere.herokuapp.com/https://us-central1-ifarm-a79f0.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
       responseType: "text"
     }).subscribe((data) => {
       console.log(data)
