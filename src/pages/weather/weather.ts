@@ -35,8 +35,13 @@ export class WeatherPage {
 
   ionViewDidLoad() {
     this.loadingServiceProvider.show();
+    var posOptions = {
+      enableHighAccuracy: true ,      timeout:30000,
 
-    this.geolocation.getCurrentPosition().then((location) => {
+       
+  };     
+
+    this.geolocation.getCurrentPosition(posOptions).then((location) => {
       this.location = location;
       console.log(this.location);
       console.log(this.location.coords.latitude);
