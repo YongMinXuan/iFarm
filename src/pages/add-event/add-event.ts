@@ -1,15 +1,15 @@
+import { DatabaseProvider } from './../../providers/database/database.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DatabaseProvider } from '../../providers/database/database.service';
 
 
 @IonicPage()
 @Component({
-  selector: 'question',
-  templateUrl: 'question.html',
+  selector: 'add-event',
+  templateUrl: 'add-event.html',
 })
-export class QuestionPage {
+export class AddEventPage {
 
 
 
@@ -50,22 +50,6 @@ export class QuestionPage {
     * @description     Model for population form field
     */
    public population    : string          = '';
-   
-    /**
-    * @name StartDate
-    * @type {object}
-    * @public
-    * @description     Defines an object for returning documents from Cloud Firestore database
-    */
-   public StartDate       : Date;
-
-   /**
-    * @name EndDate
-    * @type {object}
-    * @public
-    * @description     Defines an object for returning documents from Cloud Firestore database
-    */
-   public EndDate       : Date;
 
 
 
@@ -116,7 +100,7 @@ export class QuestionPage {
     * @private
     * @description     property that stores the value for the database collection
     */
-   private _COLL 		: string 			= "Events";
+   private _COLL 		: string 			= "Britain";
 
 
    constructor(public navCtrl        : NavController,
@@ -131,8 +115,6 @@ export class QuestionPage {
       // form / form fields in the component template
       this.form 		= _FB.group({
          'city' 		        : ['', Validators.required],
-         'StartDate' 		        : ['', Validators.required],
-         'EndDate' 		        : ['', Validators.required],
          'population' 	        : ['', Validators.required],
          'established'	        : ['', Validators.required]
       });
@@ -145,10 +127,8 @@ export class QuestionPage {
       {
           let record 		        = params.get('record');
 
-          this.city	           = record.location.city;
+          this.city	            = record.location.city;
           this.population   	  = record.location.population;
-          this.StartDate	     = record.location.StartDate;
-          this.EndDate	         = record.location.EndDate;
           this.established      = record.location.established;
           this.docID            = record.location.id;
           this.isEditable       = true;
@@ -170,9 +150,7 @@ export class QuestionPage {
    saveDocument(val : any) : void
    {
       let city	            : string		= this.form.controls["city"].value,
-         StartDate        : Date 		= this.form.controls["StartDate"].value,
-         EndDate       : Date 		= this.form.controls["EndDate"].value,
-	 	   population        : string 		= this.form.controls["population"].value,
+	 	      population        : string 		= this.form.controls["population"].value,
   		    established       : string		= this.form.controls["established"].value;
 
 
@@ -185,9 +163,7 @@ export class QuestionPage {
          this._DB.updateDocument(this._COLL,
                                this.docID,
                                {
-                                  city    		 : city,
-                                  StartDate    		 : StartDate,
-                                  EndDate          :EndDate,
+	                               city    		 : city,
 	                               population    : population,
 	                               established   : established
 	                           })
@@ -210,9 +186,7 @@ export class QuestionPage {
          // with the addDocument method
          this._DB.addDocument(this._COLL,
                             {
-                              city    		 : city,
-                              StartDate    		 : StartDate,
-                              EndDate          :EndDate,
+	                           city    		 : city,
 	                           population    : population,
 	                           established   : established
 	                        })

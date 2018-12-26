@@ -1,13 +1,13 @@
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { Component } from '@angular/core';
-import { NavController, AlertController, IonicPage } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
+import { AddEventPage } from '../add-event/add-event';
 
-@IonicPage()
 @Component({
-  selector: 'questionfirst',
-  templateUrl: 'questionfirst.html'
+  selector: 'page-event',
+  templateUrl: 'event.html'
 })
-export class QuestionFirstPage {
+export class EventPage {
 
 
 
@@ -17,7 +17,7 @@ export class QuestionFirstPage {
     * @private
     * @description      Defines the name of the database collection
     */
-   private _COLL 		: string 			= "Events";
+   private _COLL 		: string 			= "Britain";
 
 
 
@@ -123,7 +123,7 @@ export class QuestionFirstPage {
       this._DB.getDocuments(this._COLL)
       .then((data) =>
       {
-         console.log(data);
+
          // IF we don't have any documents then the collection doesn't exist
          // so we create it!
          if(data.length === 0)
@@ -154,7 +154,7 @@ export class QuestionFirstPage {
     */
    addDocument() : void
    {
-      this.navCtrl.push('QuestionPage');
+      this.navCtrl.push(AddEventPage);
    }
 
 
@@ -174,7 +174,7 @@ export class QuestionFirstPage {
          collection   : this._COLL,
          location     : obj
       };
-      this.navCtrl.push('QuestionPage', { record : params, isEdited : true });
+      this.navCtrl.push('AddEventPage', { record : params, isEdited : true });
    }
 
 

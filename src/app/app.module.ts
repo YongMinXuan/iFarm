@@ -40,6 +40,10 @@ import { DataService } from '../providers/data/data.service';
 import firebase from 'firebase';
 import { Camera } from '@ionic-native/camera';
 import { Firebase } from '@ionic-native/firebase';
+import { EventPage } from '../pages/event/event';
+import { AddEventPage } from '../pages/add-event/add-event';
+import { EventPageModule } from '../pages/event/event.module';
+import { AddEventPageModule } from '../pages/add-event/add-event.module';
 
 
 //initialise firebase
@@ -59,6 +63,8 @@ firebase.firestore().settings({
     // QuestionFirstPage,
     // FormatDate,
     // WeatherIcon,
+    // EventPage,
+    // AddEventPage
   ],
   imports: [
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
@@ -76,6 +82,8 @@ firebase.firestore().settings({
     QuestionfirstPageModule,
     FeedPageModule,
     CommentsPageModule,
+    EventPageModule,
+    AddEventPageModule
 
   ],
   bootstrap: [IonicApp],
@@ -85,7 +93,9 @@ firebase.firestore().settings({
     QuestionPage,
     QuestionFirstPage,
     FeedPage,
-    CommentsPage
+    CommentsPage,
+    EventPage,
+    AddEventPage
   ],
   providers: [
     StatusBar,

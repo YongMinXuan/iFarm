@@ -61,6 +61,8 @@ export class DatabaseProvider {
           obj.push({
            id             : doc.id,
            city           : doc.data().city,
+           StartDate      : doc.data().StartDate,
+           EndDate        : doc.data().EndDate,
            population     : doc.data().population,
            established    : doc.data().established
           });

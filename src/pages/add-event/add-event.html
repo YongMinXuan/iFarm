@@ -13,23 +13,13 @@
     (ngSubmit)='saveDocument(form.value)'>
 
     <ion-item>
-      <ion-label stacked>What will you be teaching?:</ion-label>
+      <ion-label stacked>City:</ion-label>
       <ion-input
         type='text'
         formControlName='city'
         [(ngModel)]='city'>
       </ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label stacked>Start Time:</ion-label>
-      <ion-datetime displayFormat="DD MMM , YYYY HH:mm"  formControlName='StartDate' ></ion-datetime>
-    </ion-item>
-    <ion-item>
-        <ion-label stacked>End Time:</ion-label>
-      <ion-datetime displayFormat="DD MMM , YYYY HH:mm"  formControlName='EndDate' ></ion-datetime>
-    </ion-item>
-    
-    
 
     <ion-item>
        <ion-label stacked>Population:</ion-label>
