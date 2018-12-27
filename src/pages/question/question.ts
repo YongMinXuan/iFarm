@@ -211,8 +211,8 @@ export class QuestionPage {
          this._DB.addDocument(this._COLL,
                             {
                               city    		 : city,
-                              StartDate    		 : StartDate,
-                              EndDate          :EndDate,
+                              StartDate    	: new Date(StartDate),
+                              EndDate         :new Date(EndDate),
 	                           population    : population,
 	                           established   : established
 	                        })
