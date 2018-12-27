@@ -20,8 +20,8 @@
     <ion-item *ngFor='let location of locations'>
       <h2>{{ location.city }}</h2>
       <p>
-        StartDate: {{ location.StartDate}}<br>
-        EndDate: {{ location.EndDate}}<br>
+        StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br>
+        EndDate: {{ location.EndDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br>
         Population: {{ location.population}}<br>
         Established: {{ location.established }}
       </p>

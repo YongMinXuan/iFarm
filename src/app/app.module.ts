@@ -33,6 +33,7 @@ import {AngularFireModule} from "angularfire2";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireDatabaseModule} from 'angularfire2/database'
 import {FIREBASE_CONFIG} from "./app.firebase.config";
+import { DatetimePickerModule } from 'ion-datetime-picker';
 
 //providers
 import { AuthService } from '../providers/auth/auth.service';
@@ -83,7 +84,8 @@ firebase.firestore().settings({
     FeedPageModule,
     CommentsPageModule,
     EventPageModule,
-    AddEventPageModule
+    AddEventPageModule,
+    DatetimePickerModule,
 
   ],
   bootstrap: [IonicApp],
