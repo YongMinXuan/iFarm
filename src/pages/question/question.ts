@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database.service';
-
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -11,7 +11,10 @@ import { DatabaseProvider } from '../../providers/database/database.service';
 })
 export class QuestionPage {
 
+    
 
+
+   myDate = moment(new Date().toISOString()).locale('es').format();
 
    /**
     * @name form
@@ -170,12 +173,20 @@ export class QuestionPage {
    saveDocument(val : any) : void
    {
       let city	            : string		= this.form.controls["city"].value,
-         StartDate        : Date 		= this.form.controls["StartDate"].value,
-         EndDate       : Date 		= this.form.controls["EndDate"].value,
+         StartDate        : string 		= this.form.controls["StartDate"].value,
+         EndDate       : string 		= this.form.controls["EndDate"].value,
 	 	   population        : string 		= this.form.controls["population"].value,
   		    established       : string		= this.form.controls["established"].value;
 
-
+      console.log(StartDate);
+      console.log(new Date(StartDate));
+      console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() - new Date(StartDate).getTimezoneOffset()));
+      console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() + new Date(StartDate).getTimezoneOffset())
+      );
+      console.log(moment().format(StartDate));
+      console.log(typeof moment().format(StartDate));
+      console.log(new Date(moment().format(StartDate)));
+      console.log(EndDate);
       // If we are editing an existing record then handle this scenario
       if(this.isEditable)
       {
@@ -186,8 +197,8 @@ export class QuestionPage {
                                this.docID,
                                {
                                   city    		 : city,
-                                  StartDate    		 : StartDate,
-                                  EndDate          :EndDate,
+                                  StartDate    	: new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() + new Date(StartDate).getTimezoneOffset()),
+                                    EndDate        :new Date(moment().format(EndDate)),
 	                               population    : population,
 	                               established   : established
 	                           })
@@ -211,13 +222,14 @@ export class QuestionPage {
          this._DB.addDocument(this._COLL,
                             {
                               city    		 : city,
-                              StartDate    	: new Date(StartDate),
-                              EndDate         :new Date(EndDate),
+                              StartDate    	: new Date(moment().format(StartDate)),
+                              EndDate         :new Date(moment().format(EndDate)),
 	                           population    : population,
 	                           established   : established
 	                        })
          .then((data) =>
          {
+            console.log(data);
             this.clearForm();
             this.displayAlert('Record added', 'The document ' +  city + ' was successfully added');
          })

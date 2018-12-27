@@ -28,12 +28,12 @@
     </ion-item>
     <ion-item>
         <ion-label stacked>Start Time:</ion-label>
-      <ion-datetime picker displayFormat="DD MMM , YYYY HH:mm"  formControlName='StartDate' ></ion-datetime>
+      <ion-datetime picker displayFormat="DD MMM , YYYY HH:mm"[min]="myDate" max="2020-10-31"  formControlName='StartDate'  ></ion-datetime>
     </ion-item>
     
     <ion-item>
         <ion-label stacked>End Time:</ion-label>
-      <ion-datetime picker displayFormat="DD MMM , YYYY HH:mm"  formControlName='EndDate' ></ion-datetime>
+      <ion-datetime picker displayFormat="DD MMM , YYYY HH:mm" [min]="myDate" max="2020-10-31"  formControlName='EndDate' ></ion-datetime>
     </ion-item>
     
     
