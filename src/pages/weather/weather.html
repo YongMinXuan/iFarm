@@ -1,4 +1,9 @@
+
+
 <ion-content fullscreen="true" padding class="{{ bgColorClassName }}">
+    <ion-refresher (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <div *ngIf="location && forecast" margin-top>
     <ion-row>
       <ion-col text-center>

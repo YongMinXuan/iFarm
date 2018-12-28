@@ -242,4 +242,12 @@ export class QuestionFirstPage {
       alert.present();
    }
 
+   refresh(event) {
+
+      this.retrieveCollection();
+  
+      event.complete();
+  
+    }
+
 }

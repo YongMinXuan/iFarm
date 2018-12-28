@@ -200,10 +200,12 @@ export class QuestionPage {
                                this.docID,
                                {
                                   city    		 : city,
-                                  StartDate    	: new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() + new Date(StartDate).getTimezoneOffset()),
+                                  StartDate    	: new Date(moment().format(StartDate)),
                                     EndDate        :new Date(moment().format(EndDate)),
 	                               population    : population,
-	                               established   : established
+                                  established   : established,
+                                  user : user
+                                  
 	                           })
          .then((data) =>
          {
@@ -241,6 +243,7 @@ export class QuestionPage {
          {
             this.displayAlert('Adding document failed', error.message);
          });
+         this.navCtrl.pop();
       }
    }
 

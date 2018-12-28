@@ -7,7 +7,9 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-refresher (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <button
     ion-button
     block
@@ -24,8 +26,8 @@
       <p>
         StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br>
         EndDate: {{ location.EndDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br>
-        Population: {{ location.population}}<br>
-        Established: {{ location.established }}
+        Description: {{ location.population}}<br>
+        Items to Bring: {{ location.established }}
       </p>
     </ion-item>
       <ion-item-options  side="right">

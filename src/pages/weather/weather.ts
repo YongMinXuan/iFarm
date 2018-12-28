@@ -73,6 +73,50 @@ export class WeatherPage {
     });
   }
 
+  refresh(event) {
+    this.loadingServiceProvider.show();
+    var posOptions = {
+      enableHighAccuracy: true ,      timeout:30000,
+
+       
+  };     
+
+    this.geolocation.getCurrentPosition(posOptions).then((location) => {
+      this.location = location;
+      console.log(this.location);
+      console.log(this.location.coords.latitude);
+      console.log(this.location.coords.longitude);
+      Observable.forkJoin(
+        this.forecastServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude),
+        this.locationServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude)
+      ).finally(
+        () => {
+          this.loadingServiceProvider.hide();
+        }
+      ).subscribe(
+        (resources) => {
+          this.forecast = resources[0];
+          console.log(this.forecast);
+          this.locationName = resources[1].results[2].formatted_address;
+          this.locationNamesp = resources[1].results[1].address_components[2].long_name;
+          console.log(this.locationNamesp);
+          this.bgColorClassName = this.backgroundColorClassName();
+        },
+        (error) => {
+          this.toastServiceProvider.error('Error occured during fetching data.')
+        }
+      );
+    }).catch((error) => {
+      this.loadingServiceProvider.hide();
+      console.log('Error Here')
+      this.toastServiceProvider.error('Error occured during fetching current location.')
+    });
+   
+
+    event.complete();
+
+  }
+
   private backgroundColorClassName(): string {
     let result;
     const tempMax = this.forecast.daily.data[0].temperatureMax;
