@@ -1,7 +1,7 @@
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { Component } from '@angular/core';
 import { NavController, AlertController, IonicPage } from 'ionic-angular';
-
+import firebase from 'firebase';
 @IonicPage()
 @Component({
   selector: 'questionfirst',
@@ -82,7 +82,6 @@ export class QuestionFirstPage {
 
 
 
-
    /**
     * Creates the collection and populates that with an initial document
     * using the createAndPopulateDocument method of the DatabaseProvider
@@ -141,8 +140,19 @@ export class QuestionFirstPage {
       })
       .catch();
    }
-
-
+   
+   user_identification(obj){
+      
+      console.log(obj.user);
+      console.log(obj.id);
+      console.log(firebase.auth().currentUser.uid);
+      if (obj.user == firebase.auth().currentUser.uid){
+         return true;
+      }
+      else{
+         return false;
+      }
+   }
 
 
    /**

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database.service';
 import * as moment from 'moment';
+import { Firebase } from '@ionic-native/firebase'
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -176,7 +178,8 @@ export class QuestionPage {
          StartDate        : string 		= this.form.controls["StartDate"].value,
          EndDate       : string 		= this.form.controls["EndDate"].value,
 	 	   population        : string 		= this.form.controls["population"].value,
-  		    established       : string		= this.form.controls["established"].value;
+            established       : string		= this.form.controls["established"].value,
+            user	            : string		= firebase.auth().currentUser.uid;
 
       console.log(StartDate);
       console.log(new Date(StartDate));
@@ -225,7 +228,8 @@ export class QuestionPage {
                               StartDate    	: new Date(moment().format(StartDate)),
                               EndDate         :new Date(moment().format(EndDate)),
 	                           population    : population,
-	                           established   : established
+                              established   : established,
+                              user : user
 	                        })
          .then((data) =>
          {

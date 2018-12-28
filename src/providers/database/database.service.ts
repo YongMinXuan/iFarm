@@ -65,7 +65,8 @@ export class DatabaseProvider {
            StartDate      : doc.data().StartDate,
            EndDate        : doc.data().EndDate,
            population     : doc.data().population,
-           established    : doc.data().established
+           established    : doc.data().established,
+           user : doc.data().user,
           });
         });
 

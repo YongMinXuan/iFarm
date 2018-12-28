@@ -29,14 +29,14 @@
       <button
         ion-button
         color='secondary'
-        (click)='updateDocument(location)'>
+        (click)='updateDocument(location)' *ngIf="user_identification(location)">
         Update this record
       </button>
 
       <button
         ion-button
         color='danger'
-        (click)="deleteDocument(location)">
+        (click)="deleteDocument(location)" *ngIf="user_identification(location)">
         Delete this record
       </button>
     </ion-item>
