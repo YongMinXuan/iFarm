@@ -17,7 +17,9 @@
   </button>
 
   <ion-list>
-    <ion-item *ngFor='let location of locations'>
+    <ion-item-sliding *ngFor='let location of locations'>
+        <ion-item>
+
       <h2>{{ location.city }}</h2>
       <p>
         StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br>
@@ -25,21 +27,26 @@
         Population: {{ location.population}}<br>
         Established: {{ location.established }}
       </p>
-
+    </ion-item>
+      <ion-item-options  side="right">
       <button
         ion-button
         color='secondary'
         (click)='updateDocument(location)' *ngIf="user_identification(location)">
-        Update this record
+        <ion-icon name="clipboard"></ion-icon>
+        Update
       </button>
 
       <button
         ion-button
         color='danger'
         (click)="deleteDocument(location)" *ngIf="user_identification(location)">
-        Delete this record
+        <ion-icon name="trash"></ion-icon>
+        Delete
       </button>
-    </ion-item>
+    </ion-item-options>
+    
+    </ion-item-sliding>
   </ion-list>
   
 </ion-content>
