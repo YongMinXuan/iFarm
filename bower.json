@@ -1,0 +1,21 @@
+{
+  "name": "blankProject",
+  "description": "An Ionic project",
+  "main": "",
+  "authors": [
+    "Max Yong"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/YongMinXuan/iFarm",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ion-datetime-picker": "^0.5.2"
+  }
+}

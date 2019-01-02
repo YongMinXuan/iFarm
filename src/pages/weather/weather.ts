@@ -8,6 +8,11 @@ import { Observable } from 'rxjs/Rx';
 import { LoadingServiceProvider } from '../../providers/weather-forcast/loading.service';
 import { ToastServiceProvider } from '../../providers/weather-forcast/toast.service';
 import {forkJoin} from "rxjs/observable/forkJoin";
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
 
 @IonicPage()
 @Component({
@@ -30,25 +35,33 @@ export class WeatherPage {
     private forecastServiceProvider: ForecastServiceProvider,
     private locationServiceProvider: LocationServiceProvider,
     private toastServiceProvider: ToastServiceProvider,
-    private loadingServiceProvider: LoadingServiceProvider
+    private loadingServiceProvider: LoadingServiceProvider,
+    public http: Http,
+    private locationAccuracy: LocationAccuracy
   ) {}
 
   ionViewDidLoad() {
     this.loadingServiceProvider.show();
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
     var posOptions = {
-      enableHighAccuracy: true ,      timeout:30000,
+      enableHighAccuracy: true ,      timeout:30000,  maximumAge: 0
 
        
   };     
 
+    // this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCStWuZ8Z2PFmw04iTjA1nr_gWZr9c81XM', JSON.stringify(location),{headers: headers}).subscribe((location) => {
+      this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+        () => {  
     this.geolocation.getCurrentPosition(posOptions).then((location) => {
-      this.location = location;
-      console.log(this.location);
-      console.log(this.location.coords.latitude);
-      console.log(this.location.coords.longitude);
-      Observable.forkJoin(
-        this.forecastServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude),
-        this.locationServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude)
+        this.location = location;
+        console.log(this.location);
+        console.log(this.location.coords.latitude);
+        console.log(this.location.coords.longitude);
+        Observable.forkJoin(
+          this.forecastServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude),
+          this.locationServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude)
       ).finally(
         () => {
           this.loadingServiceProvider.hide();
@@ -66,52 +79,58 @@ export class WeatherPage {
           this.toastServiceProvider.error('Error occured during fetching data.')
         }
       );
-    }).catch((error) => {
+    })
+    .catch((error) => {
       this.loadingServiceProvider.hide();
       console.log('Error Here')
       this.toastServiceProvider.error('Error occured during fetching current location.')
-    });
-  }
+    });  
+  });
+}
 
   refresh(event) {
     this.loadingServiceProvider.show();
     var posOptions = {
       enableHighAccuracy: true ,      timeout:30000,
+      maximumAge: 0
 
        
   };     
 
-    this.geolocation.getCurrentPosition(posOptions).then((location) => {
-      this.location = location;
-      console.log(this.location);
-      console.log(this.location.coords.latitude);
-      console.log(this.location.coords.longitude);
-      Observable.forkJoin(
-        this.forecastServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude),
-        this.locationServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude)
-      ).finally(
-        () => {
-          this.loadingServiceProvider.hide();
-        }
-      ).subscribe(
-        (resources) => {
-          this.forecast = resources[0];
-          console.log(this.forecast);
-          this.locationName = resources[1].results[2].formatted_address;
-          this.locationNamesp = resources[1].results[1].address_components[2].long_name;
-          console.log(this.locationNamesp);
-          this.bgColorClassName = this.backgroundColorClassName();
-        },
-        (error) => {
-          this.toastServiceProvider.error('Error occured during fetching data.')
-        }
-      );
-    }).catch((error) => {
+  this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+    () => {  
+this.geolocation.getCurrentPosition(posOptions).then((location) => {
+    this.location = location;
+    console.log(this.location);
+    console.log(this.location.coords.latitude);
+    console.log(this.location.coords.longitude);
+    Observable.forkJoin(
+      this.forecastServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude),
+      this.locationServiceProvider.load(this.location.coords.latitude, this.location.coords.longitude)
+  ).finally(
+    () => {
       this.loadingServiceProvider.hide();
-      console.log('Error Here')
-      this.toastServiceProvider.error('Error occured during fetching current location.')
-    });
-   
+    }
+  ).subscribe(
+    (resources) => {
+      this.forecast = resources[0];
+      console.log(this.forecast);
+      this.locationName = resources[1].results[2].formatted_address;
+      this.locationNamesp = resources[1].results[1].address_components[2].long_name;
+      console.log(this.locationNamesp);
+      this.bgColorClassName = this.backgroundColorClassName();
+    },
+    (error) => {
+      this.toastServiceProvider.error('Error occured during fetching data.')
+    }
+  );
+})
+.catch((error) => {
+  this.loadingServiceProvider.hide();
+  console.log('Error Here')
+  this.toastServiceProvider.error('Error occured during fetching current location.')
+});  
+});
 
     event.complete();
 

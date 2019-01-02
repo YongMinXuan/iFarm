@@ -5,6 +5,7 @@ import { DatabaseProvider } from '../../providers/database/database.service';
 import * as moment from 'moment';
 import { Firebase } from '@ionic-native/firebase'
 import firebase from 'firebase';
+import { CalendarComponentOptions } from 'ion2-calendar'
 
 @IonicPage()
 @Component({
@@ -13,10 +14,19 @@ import firebase from 'firebase';
 })
 export class QuestionPage {
 
-    
+   dateRange: { from: string; to: string; };
+   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+   optionsRange: CalendarComponentOptions = {
+     pickMode: 'range'
+   };
 
+ 
 
    myDate = moment(new Date().toISOString()).locale('es').format();
+
+   dateSelected($event){
+      console.log($event);
+   }
 
    /**
     * @name form

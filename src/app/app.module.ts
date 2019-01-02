@@ -9,7 +9,7 @@ import { DatabaseProvider } from './../providers/database/database.service';
 import { WeatherPageModule } from './../pages/weather/weather.module';
 import { WeatherPage } from './../pages/weather/weather';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -45,6 +45,10 @@ import { EventPage } from '../pages/event/event';
 import { AddEventPage } from '../pages/add-event/add-event';
 import { EventPageModule } from '../pages/event/event.module';
 import { AddEventPageModule } from '../pages/add-event/add-event.module';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { CalendarModule } from "ion2-calendar";
+import { DatePickerModule } from 'ionic-calendar-date-picker';
+
 
 
 //initialise firebase
@@ -86,8 +90,10 @@ firebase.firestore().settings({
     EventPageModule,
     AddEventPageModule,
     DatetimePickerModule,
-
+    CalendarModule,
+    IonicModule
   ],
+  
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -97,7 +103,7 @@ firebase.firestore().settings({
     FeedPage,
     CommentsPage,
     EventPage,
-    AddEventPage
+    AddEventPage,
   ],
   providers: [
     StatusBar,
@@ -116,7 +122,8 @@ firebase.firestore().settings({
     LocationServiceProvider,
     ToastServiceProvider,
     LoadingServiceProvider,
-    Network
+    Network,
+    LocationAccuracy,
   ]
 })
 export class AppModule {}
