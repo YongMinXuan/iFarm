@@ -6,7 +6,8 @@ import * as moment from 'moment';
 import { Firebase } from '@ionic-native/firebase'
 import firebase from 'firebase';
 import { CalendarComponentOptions } from 'ion2-calendar'
-
+import { ModalController } from 'ionic-angular';
+import { CalendarModal, CalendarModalOptions, DayConfig, CalendarResult } from "ion2-calendar";
 @IonicPage()
 @Component({
   selector: 'question',
@@ -14,19 +15,7 @@ import { CalendarComponentOptions } from 'ion2-calendar'
 })
 export class QuestionPage {
 
-   dateRange: { from: string; to: string; };
-   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
-   optionsRange: CalendarComponentOptions = {
-     pickMode: 'range'
-   };
-
- 
-
-   myDate = moment(new Date().toISOString()).locale('es').format();
-
-   dateSelected($event){
-      console.log($event);
-   }
+   
 
    /**
     * @name form
@@ -82,6 +71,25 @@ export class QuestionPage {
     */
    public EndDate       : Date;
 
+   public starting       : string;
+   public ending      : string;
+
+    /**
+    * @name StartTime
+    * @type {object}
+    * @public
+    * @description     Defines an object for returning documents from Cloud Firestore database
+    */
+   public StartTime       : Date;
+
+   /**
+    * @name EndDate
+    * @type {object}
+    * @public
+    * @description     Defines an object for returning documents from Cloud Firestore database
+    */
+   public EndTime       : Date;
+
 
 
    /**
@@ -113,7 +121,7 @@ export class QuestionPage {
     */
    public isEditable    : boolean         = false;
 
-
+   public date:  string;
 
    /**
     * @name title
@@ -138,7 +146,8 @@ export class QuestionPage {
                public params         : NavParams,
                private _FB 	         : FormBuilder,
                private _DB           : DatabaseProvider,
-               private _ALERT        : AlertController)
+               private _ALERT        : AlertController,
+               public modalCtrl: ModalController,)
    {
 
       // Use Formbuilder API to create a FormGroup object
@@ -191,15 +200,15 @@ export class QuestionPage {
             established       : string		= this.form.controls["established"].value,
             user	            : string		= firebase.auth().currentUser.uid;
 
-      console.log(StartDate);
-      console.log(new Date(StartDate));
-      console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() - new Date(StartDate).getTimezoneOffset()));
-      console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() + new Date(StartDate).getTimezoneOffset())
-      );
-      console.log(moment().format(StartDate));
-      console.log(typeof moment().format(StartDate));
-      console.log(new Date(moment().format(StartDate)));
-      console.log(EndDate);
+      // console.log(StartDate);
+      // console.log(new Date(StartDate));
+      // console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() - new Date(StartDate).getTimezoneOffset()));
+      // console.log(new Date(StartDate).setMinutes(new Date(StartDate).getMinutes() + new Date(StartDate).getTimezoneOffset())
+      // );
+      // console.log(moment().format(StartDate));
+      // console.log(typeof moment().format(StartDate));
+      // console.log(new Date(moment().format(StartDate)));
+      // console.log(EndDate);
       // If we are editing an existing record then handle this scenario
       if(this.isEditable)
       {
@@ -210,8 +219,8 @@ export class QuestionPage {
                                this.docID,
                                {
                                   city    		 : city,
-                                  StartDate    	: new Date(moment().format(StartDate)),
-                                    EndDate        :new Date(moment().format(EndDate)),
+                                  StartDate    	: StartDate,
+                                    EndDate        :EndDate,
 	                               population    : population,
                                   established   : established,
                                   user : user
@@ -237,8 +246,8 @@ export class QuestionPage {
          this._DB.addDocument(this._COLL,
                             {
                               city    		 : city,
-                              StartDate    	: new Date(moment().format(StartDate)),
-                              EndDate         :new Date(moment().format(EndDate)),
+                              StartDate    	: StartDate,
+                              EndDate         :EndDate,
 	                           population    : population,
                               established   : established,
                               user : user
@@ -256,7 +265,8 @@ export class QuestionPage {
          this.navCtrl.pop();
       }
    }
-
+   // StartDate    	: new Date(moment().format(StartDate)),
+   // EndDate         :new Date(moment().format(EndDate)),
 
 
    /**
@@ -295,5 +305,40 @@ export class QuestionPage {
       this.established 				= '';
    }
 
+   dateRange: { from: string; to: string; };
+   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
+   optionsRange: CalendarComponentOptions = {
+     pickMode: 'range'
+   };
 
+   openCalendar() {
+      const options: CalendarModalOptions = {
+        pickMode: 'range',
+        title: 'RANGE'
+      };
+  
+      let myCalendar = this.modalCtrl.create(CalendarModal, {
+        options: options
+      });
+  
+      myCalendar.present();
+  
+      myCalendar.onDidDismiss((date: { from: CalendarResult; to: CalendarResult }, type: string) => {
+         console.log(date);
+         console.log(typeof date.to.time);
+         console.log(date.from.dateObj);
+         console.log(new Date(date.to.time*1000));
+         console.log(new Date(date.to.time));
+         this.starting = moment(date.from.time).format('Do MMM YYYY');;
+         this.ending = moment(date.to.time).format('Do MMM YYYY');
+
+         console.log(typeof this.starting);
+      });
+}
+
+ 
+
+   myDate = moment(new Date().toISOString()).locale('es').format();
+
+   
 }

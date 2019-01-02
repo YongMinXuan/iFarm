@@ -143,9 +143,9 @@ export class QuestionFirstPage {
    
    user_identification(obj){
       
-      console.log(obj.user);
-      console.log(obj.id);
-      console.log(firebase.auth().currentUser.uid);
+      // console.log(obj.user);
+      // console.log(obj.id);
+      // console.log(firebase.auth().currentUser.uid);
       if (obj.user == firebase.auth().currentUser.uid){
          return true;
       }
