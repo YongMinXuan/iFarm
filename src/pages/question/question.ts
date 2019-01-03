@@ -157,6 +157,8 @@ export class QuestionPage {
          'city' 		        : ['', Validators.required],
          'StartDate' 		        : ['', Validators.required],
          'EndDate' 		        : ['', Validators.required],
+         'StartTime' 		        : ['', Validators.required],
+         'EndTime' 		        : ['', Validators.required],
          'population' 	        : ['', Validators.required],
          'established'	        : ['', Validators.required]
       });
@@ -172,6 +174,8 @@ export class QuestionPage {
           this.city	           = record.location.city;
           this.population   	  = record.location.population;
           this.StartDate	     = record.location.StartDate;
+          this.StartTime	     = record.location.StartTime;
+          this.EndTime	     = record.location.EndTime;
           this.EndDate	         = record.location.EndDate;
           this.established      = record.location.established;
           this.docID            = record.location.id;
@@ -196,9 +200,11 @@ export class QuestionPage {
       let city	            : string		= this.form.controls["city"].value,
          StartDate        : string 		= this.form.controls["StartDate"].value,
          EndDate       : string 		= this.form.controls["EndDate"].value,
+         StartTime        : string 		= this.form.controls["StartTime"].value,
+         EndTime       : string 		= this.form.controls["EndTime"].value,
 	 	   population        : string 		= this.form.controls["population"].value,
-            established       : string		= this.form.controls["established"].value,
-            user	            : string		= firebase.auth().currentUser.uid;
+         established       : string		= this.form.controls["established"].value,
+         user	            : string		= firebase.auth().currentUser.uid;
 
       // console.log(StartDate);
       // console.log(new Date(StartDate));
@@ -220,7 +226,9 @@ export class QuestionPage {
                                {
                                   city    		 : city,
                                   StartDate    	: StartDate,
-                                    EndDate        :EndDate,
+                                 EndDate        :EndDate,
+                                 StartTime    	: StartTime,
+                                 EndTime      :EndTime,
 	                               population    : population,
                                   established   : established,
                                   user : user
@@ -248,6 +256,8 @@ export class QuestionPage {
                               city    		 : city,
                               StartDate    	: StartDate,
                               EndDate         :EndDate,
+                              StartTime    	: StartTime,
+                              EndTime      : EndTime,
 	                           population    : population,
                               established   : established,
                               user : user

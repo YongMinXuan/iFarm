@@ -64,6 +64,8 @@ export class DatabaseProvider {
            city           : doc.data().city,
            StartDate      : doc.data().StartDate,
            EndDate        : doc.data().EndDate,
+           StartTime      : doc.data().StartTime,
+           EndTime        : doc.data().EndTime,
            population     : doc.data().population,
            established    : doc.data().established,
            user : doc.data().user,
