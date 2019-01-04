@@ -154,6 +154,19 @@ export class QuestionFirstPage {
       }
    }
 
+   user_identification_register(obj){
+      
+      // console.log(obj.user);
+      // console.log(obj.id);
+      // console.log(firebase.auth().currentUser.uid);
+      if (obj.user !== firebase.auth().currentUser.uid){
+         return true;
+      }
+      else{
+         return false;
+      }
+   }
+
 
    /**
     * Navigate to the manage-document component to begin adding a new document
@@ -167,6 +180,12 @@ export class QuestionFirstPage {
       this.navCtrl.push('QuestionPage');
    }
 
+   signup_event(location)
+   {
+      this.navCtrl.push('SignupPage',{
+         data: location
+       });
+   }
 
 
 

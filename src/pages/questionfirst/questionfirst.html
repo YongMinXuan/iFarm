@@ -30,6 +30,7 @@
         StartTime: {{ location.StartTime }}<br>
         EndTime: {{ location.EndTime }}<br>
         <!-- EndDate: {{ location.EndDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
+        Location: {{ location.location}}<br>
         Description: {{ location.population}}<br>
         Items to Bring: {{ location.established }}
       </p>
@@ -49,6 +50,13 @@
         (click)="deleteDocument(location)" *ngIf="user_identification(location)">
         <ion-icon name="trash"></ion-icon>
         Delete
+      </button>
+      <button
+        ion-button
+        color='secondary'
+        (click)='signup_event(location)' *ngIf="user_identification_register(location)">
+        <ion-icon name="ios-person-add"></ion-icon>
+        Register
       </button>
     </ion-item-options>
     

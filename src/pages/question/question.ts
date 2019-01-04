@@ -15,7 +15,9 @@ import { CalendarModal, CalendarModalOptions, DayConfig, CalendarResult } from "
 })
 export class QuestionPage {
 
-   
+   ionViewDidLoad() {
+      console.log(firebase.auth().currentUser);
+   }  
 
    /**
     * @name form
@@ -54,6 +56,14 @@ export class QuestionPage {
     * @description     Model for population form field
     */
    public population    : string          = '';
+
+   /**
+    * @name population
+    * @type {string}
+    * @public
+    * @description     Model for population form field
+    */
+   public location    : string          = '';
    
     /**
     * @name StartDate
@@ -159,6 +169,7 @@ export class QuestionPage {
          'EndDate' 		        : ['', Validators.required],
          'StartTime' 		        : ['', Validators.required],
          'EndTime' 		        : ['', Validators.required],
+         'location' 		        : ['', Validators.required],
          'population' 	        : ['', Validators.required],
          'established'	        : ['', Validators.required]
       });
@@ -178,6 +189,7 @@ export class QuestionPage {
           this.EndTime	     = record.location.EndTime;
           this.EndDate	         = record.location.EndDate;
           this.established      = record.location.established;
+          this.location     = record.location.location;
           this.docID            = record.location.id;
           this.isEditable       = true;
           this.title            = 'Update this document';
@@ -202,7 +214,8 @@ export class QuestionPage {
          EndDate       : string 		= this.form.controls["EndDate"].value,
          StartTime        : string 		= this.form.controls["StartTime"].value,
          EndTime       : string 		= this.form.controls["EndTime"].value,
-	 	   population        : string 		= this.form.controls["population"].value,
+          population        : string 		= this.form.controls["population"].value,
+          location        : string 		= this.form.controls["location"].value,
          established       : string		= this.form.controls["established"].value,
          user	            : string		= firebase.auth().currentUser.uid;
 
@@ -229,7 +242,8 @@ export class QuestionPage {
                                  EndDate        :EndDate,
                                  StartTime    	: StartTime,
                                  EndTime      :EndTime,
-	                               population    : population,
+                                  population    : population,
+                                  location    : location,
                                   established   : established,
                                   user : user
                                   
@@ -258,7 +272,8 @@ export class QuestionPage {
                               EndDate         :EndDate,
                               StartTime    	: StartTime,
                               EndTime      : EndTime,
-	                           population    : population,
+                              population    : population,
+                              location : location,
                               established   : established,
                               user : user
 	                        })
