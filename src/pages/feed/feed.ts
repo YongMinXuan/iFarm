@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommentsPage } from '../comments/comments';
 import { Firebase } from '@ionic-native/firebase'
 import {App} from 'ionic-angular';
+import { DatabaseProvider } from './../../providers/database/database.service';
 
 /**
  * Generated class for the FeedPage page.
@@ -30,7 +31,7 @@ export class FeedPage {
   infiniteEvent: any;
   image: string;
   
-  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase) {
+  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private _DB     : DatabaseProvider, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase) {
     this.getPosts();
 
     this.firebaseCordova.getToken().then((token) => {
@@ -58,6 +59,37 @@ export class FeedPage {
     })
 
   }
+
+  deleteDocument(obj) : void
+   {
+      this._DB.deleteDocument('posts',
+      						obj.id)
+      .then((data : any) =>
+      {
+         this.displayAlert('Success', 'The record ' + obj.city + ' was successfully removed');
+      })
+      .catch((error : any) =>
+      {
+         this.displayAlert('Error', error.message);
+      });
+   }
+
+   displayAlert(title      : string,
+                message    : string) : void
+   {
+      let alert : any     = this.alertCtrl.create({
+         title      : title,
+         subTitle   : message,
+         buttons    : [{
+          text      : 'Got It!',
+          handler   : () =>
+          {
+            this.getPosts();
+          }
+        }]
+      });
+      alert.present();
+   }
 
   getPosts() {
 

@@ -230,7 +230,7 @@ export class SignupPage {
               buttons: ['Dismiss']
             });
             alert.present();
-          
+          this.navCtrl.pop();
          // Call the DatabaseProvider service and pass/format the data for use
          // with the updateDocument method
          // this._DB.addDocument(this._COLL,
@@ -271,6 +271,7 @@ export class SignupPage {
          {
             this.clearForm();
             this.displayAlert('Record added', +  city + ' was successfully registered');
+            this.navCtrl.pop();
          })
          .catch((error) =>
          {

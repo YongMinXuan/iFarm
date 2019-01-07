@@ -185,6 +185,7 @@ export class QuestionFirstPage {
       this.navCtrl.push('SignupPage',{
          data: location
        });
+       
    }
 
 

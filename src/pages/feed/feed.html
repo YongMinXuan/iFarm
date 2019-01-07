@@ -41,8 +41,23 @@
 
   <ion-card *ngFor="let post of posts">
 
+    <!-- <ion-item-options  side="right">
+      <button
+        ion-button
+        color='secondary'
+        (click)='deleteDocument(post)' 
+        >
+        <ion-icon name="clipboard"></ion-icon>
+        Delete
+      </button>
+      </ion-item-options> -->
     <ion-item-divider color="danger">
       {{ post.data().owner_name }} Says
+      <ion-buttons end>
+        <button ion-button icon-only clear (click)="deleteDocument(post)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-buttons>
     </ion-item-divider>
 
     <ion-item text-wrap>
@@ -68,9 +83,10 @@
         <button ion-button block icon-left clear small color="danger">
           <small>{{ ago(post.data().created.toDate()) }} ago</small>
         </button>
-      </ion-col>
-    </ion-row>
-
+      </ion-col> 
+      
+      </ion-row>
+     
   </ion-card>
 
   <ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">
