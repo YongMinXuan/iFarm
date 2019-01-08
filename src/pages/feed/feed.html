@@ -54,7 +54,7 @@
     <ion-item-divider color="danger">
       {{ post.data().owner_name }} Says
       <ion-buttons end>
-        <button ion-button icon-only clear (click)="deleteDocument(post)">
+        <button ion-button icon-only clear (click)="deleteDocument(post)" *ngIf="user_identification(post)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-buttons>

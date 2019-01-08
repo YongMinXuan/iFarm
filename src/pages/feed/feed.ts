@@ -45,6 +45,20 @@ export class FeedPage {
     
 
   }
+  user_identification(post){
+      
+    console.log(post);
+    console.log((post.data()));
+    // console.log(obj.id);
+    // console.log(firebase.auth().currentUser.uid);
+    if (post.data().owner == firebase.auth().currentUser.uid){
+       return true;
+    }
+    else{
+       return false;
+    }
+ }
+  
   updateToken(token: string, uid: string){
 
     firebase.firestore().collection("users").doc(uid).set({
