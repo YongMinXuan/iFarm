@@ -48,7 +48,7 @@ import { AddEventPageModule } from '../pages/add-event/add-event.module';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { CalendarModule } from "ion2-calendar";
 import { DatePickerModule } from 'ionic-calendar-date-picker';
-
+import { AngularFirestoreModule } from "angularfire2/firestore";
 
 
 //initialise firebase
@@ -91,7 +91,9 @@ firebase.firestore().settings({
     AddEventPageModule,
     DatetimePickerModule,
     CalendarModule,
-    IonicModule
+    IonicModule,
+    AngularFirestoreModule,
+
   ],
   
   bootstrap: [IonicApp],

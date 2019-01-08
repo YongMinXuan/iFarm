@@ -7,6 +7,6 @@ export const FIREBASE_CONFIG = {
         storageBucket: "ifarm-a79f0.appspot.com",
         messagingSenderId: "399338583037"   
         },
-        users_endpoint: "users",
+        users_endpoint: "chatusers",
         chats_endpoint: "chats"  
 }
