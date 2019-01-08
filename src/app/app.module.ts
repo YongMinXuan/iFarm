@@ -1,3 +1,7 @@
+import { ChatsPageModule } from './../pages/chats/chats.module';
+import { RoomPageModule } from './../pages/room/room.module';
+import { AddRoomPageModule } from './../pages/add-room/add-room.module';
+import { ChatsPage } from './../pages/chats/chats';
 import { WeatherIcon } from './../pipes/weather-icon/weather-icon';
 import { CommentsPageModule } from './../pages/comments/comments.module';
 import { FeedPageModule } from './../pages/feed/feed.module';
@@ -49,7 +53,8 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { CalendarModule } from "ion2-calendar";
 import { DatePickerModule } from 'ionic-calendar-date-picker';
 import { AngularFirestoreModule } from "angularfire2/firestore";
-
+import { RoomPage } from '../pages/room/room';
+import { AddRoomPage } from '../pages/add-room/add-room';
 
 //initialise firebase
 firebase.initializeApp(FIREBASE_CONFIG.firebase);
@@ -93,6 +98,9 @@ firebase.firestore().settings({
     CalendarModule,
     IonicModule,
     AngularFirestoreModule,
+    AddRoomPageModule,
+    RoomPageModule,
+    ChatsPageModule
 
   ],
   

@@ -1,8 +1,10 @@
+import { ChatsPage } from './../chats/chats';
 import { QuestionFirstPage } from './../questionfirst/questionfirst';
 import { FeedPage } from './../feed/feed';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventPage } from '../event/event';
+import { RoomPage } from '../room/room';
 
 /**
  * Generated class for the TabsPage page.
@@ -18,14 +20,14 @@ import { EventPage } from '../event/event';
 })
 export class TabsPage {
 
-  tab1Root: string;
+  tab1Root = RoomPage;
   tab2Root: string;
   tab3Root = QuestionFirstPage;
   tab4Root: string;
   tab5Root = FeedPage;
 
   constructor(){
-    this.tab1Root = 'InboxPage';
+    // this.tab1Root = 'InboxPage';
     this.tab2Root = 'ChannelsPage';
     // this.tab3Root = 'QuestionPage';
     this.tab4Root = 'WeatherPage';

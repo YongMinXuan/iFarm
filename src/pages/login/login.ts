@@ -25,7 +25,8 @@ export class LoginPage {
     firebase.auth().signInWithEmailAndPassword(this.email, this.password)
     .then((user) => {
       console.log(user)
-
+      console.log(user.user.displayName)
+      console.log(firebase.auth().currentUser.displayName)
       this.toastCtrl.create({
         message: "Welcome " + user.user.displayName,
         duration: 3000
