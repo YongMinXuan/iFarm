@@ -52,7 +52,7 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
 
 
 //initialise firebase
-firebase.initializeApp(FIREBASE_CONFIG);
+firebase.initializeApp(FIREBASE_CONFIG.firebase);
 firebase.firestore().settings({
   timestampsInSnapshots: true
 })
