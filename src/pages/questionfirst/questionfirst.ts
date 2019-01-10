@@ -188,6 +188,14 @@ export class QuestionFirstPage {
        
    }
 
+   view(location)
+   {
+      this.navCtrl.push('AttendeesPage',{
+         data: location
+       });
+       
+   }
+
 
 
    /**

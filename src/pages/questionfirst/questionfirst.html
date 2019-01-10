@@ -51,6 +51,15 @@
         <ion-icon name="trash"></ion-icon>
         Delete
       </button>
+
+      <button
+      ion-button
+      color='primary'
+      (click)="view(location)" *ngIf="user_identification(location)">
+      <ion-icon name="trash"></ion-icon>
+      View<br>Attendees
+    </button>
+
       <button
         ion-button
         color='secondary'

@@ -164,7 +164,7 @@ export class SignupPage {
            var docSnapshots = doc.docs;
            this.counts = doc.size 
            for (var i in docSnapshots) {
-            this.counts += 1;
+            // this.counts += 1;
             return this.counts
             // const doc = docSnapshots[i].data();
             // console.log(doc);

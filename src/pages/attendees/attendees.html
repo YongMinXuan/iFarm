@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Attendees Page
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+  
+
+  <ion-list>
+    <ion-item-sliding *ngFor='let location of locations'>
+        <ion-item>
+
+      <h2>{{ location.city }}</h2>
+      <p>
+        <!-- StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
+        <!-- StartDate: {{ location.StartDate }}<br>
+        EndDate: {{ location.EndDate }}<br>
+        StartTime: {{ location.StartTime }}<br>
+        EndTime: {{ location.EndTime }}<br> -->
+        <!-- EndDate: {{ location.EndDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
+        <!-- Location: {{ location.city}}<br> -->
+        Phone Number: {{ location.population}}<br>
+        Email: {{ location.established }}
+      </p>
+    </ion-item>
+     
+    
+    </ion-item-sliding>
+  </ion-list>
+  
+</ion-content>
