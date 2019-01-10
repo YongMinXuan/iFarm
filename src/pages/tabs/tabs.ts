@@ -20,15 +20,15 @@ import { RoomPage } from '../room/room';
 })
 export class TabsPage {
 
-  tab1Root = RoomPage;
-  tab2Root: string;
+  tab1Root : string;
+  tab2Root = RoomPage;
   tab3Root = QuestionFirstPage;
   tab4Root: string;
   tab5Root = FeedPage;
 
   constructor(){
-    // this.tab1Root = 'InboxPage';
-    this.tab2Root = 'ChannelsPage';
+    this.tab1Root = 'InboxPage';
+    // this.tab2Root = 'ChannelsPage';
     // this.tab3Root = 'QuestionPage';
     this.tab4Root = 'WeatherPage';
     // this.tab5Root = 'FeedPage';

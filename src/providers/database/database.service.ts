@@ -116,6 +116,62 @@ export class DatabaseProvider {
     });
   }
 
+
+  getChats(collectionObj: string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj)   
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            roomname : doc.data().roomname,
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+  getChatMessages(collectionObj: string, collectionObj2) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).doc(collectionObj2).collection("messages")
+      .orderBy("sendDate", "asc")  
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            message : doc.data().message,
+            type : doc.data().type,
+            user :doc.data().user
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
   /**
    * Add a new document to a selected database collection
    */
@@ -132,6 +188,32 @@ export class DatabaseProvider {
       });
     });
   }
+
+  addChat(collectionObj : string,
+    dataObj : any) : Promise<any>{
+return new Promise((resolve, reject) => {
+this._DB.collection(collectionObj).add(dataObj)
+.then((obj : any) => {
+resolve(obj);
+})
+.catch((error : any) => {
+reject(error);
+});
+});
+}
+
+sendchatmessage(collectionObj : string, collectionObj2 : string,
+  dataObj : any) : Promise<any>{
+return new Promise((resolve, reject) => {
+firebase.firestore().collection(collectionObj).doc(collectionObj2).collection('messages').add(dataObj)
+.then((obj : any) => {
+resolve(obj);
+})
+.catch((error : any) => {
+reject(error);
+});
+});
+}
 
   /**
    * Delete an existing document from a selected database collection
