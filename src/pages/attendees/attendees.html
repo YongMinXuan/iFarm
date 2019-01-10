@@ -11,12 +11,14 @@
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
   
-
+<h2>
+  No. Of Attendees so far : {{this.counting}}
+</h2>
   <ion-list>
     <ion-item-sliding *ngFor='let location of locations'>
         <ion-item>
 
-      <h2>{{ location.city }}</h2>
+      <h2>{{ location.city }}</h2>      
       <p>
         <!-- StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
         <!-- StartDate: {{ location.StartDate }}<br>
@@ -28,8 +30,20 @@
         Phone Number: {{ location.population}}<br>
         Email: {{ location.established }}
       </p>
+      <p *ngIf="isEditable" >
+        {{ location.id }}
+      </p>
     </ion-item>
-     
+
+    <ion-item-options  side="right">
+      <button
+        ion-button
+        color='secondary'
+        (click)='chat(location)'>
+        <ion-icon name="clipboard"></ion-icon>
+        Chat
+      </button>
+      </ion-item-options>
     
     </ion-item-sliding>
   </ion-list>

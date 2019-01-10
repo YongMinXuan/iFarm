@@ -82,9 +82,11 @@ export class DatabaseProvider {
     });
   }
 
-  getDocument(collectionObj: string) : Promise<any>{
+  getDocument(collectionObj: string, key: string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
     return new Promise((resolve, reject) => {
-      this._DB.collection(collectionObj)      
+      this._DB.collection(collectionObj).where("eventid", "==", key)    
       .get()
       .then((querySnapshot) => {
         let obj : any = [];
