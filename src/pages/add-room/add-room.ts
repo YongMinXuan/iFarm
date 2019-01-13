@@ -53,6 +53,7 @@ subTitle   : message,
 buttons    : ['Got it!']
 });
 alert.present();
+this.navCtrl.pop();
 }
 
 }

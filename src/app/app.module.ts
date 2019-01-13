@@ -1,3 +1,5 @@
+import { GroupChatImagePageModule } from './../pages/group-chat-image/group-chat-image.module';
+import { GroupChatImagePage } from './../pages/group-chat-image/group-chat-image';
 import { ChatsPageModule } from './../pages/chats/chats.module';
 import { RoomPageModule } from './../pages/room/room.module';
 import { AddRoomPageModule } from './../pages/add-room/add-room.module';
@@ -55,6 +57,8 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { RoomPage } from '../pages/room/room';
 import { AddRoomPage } from '../pages/add-room/add-room';
+import { IonicImageLoader } from 'ionic-image-loader';
+
 
 //initialise firebase
 firebase.initializeApp(FIREBASE_CONFIG.firebase);
@@ -75,6 +79,7 @@ firebase.firestore().settings({
     // WeatherIcon,
     // EventPage,
     // AddEventPage
+    // GroupChatImagePage
   ],
   imports: [
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
@@ -100,7 +105,10 @@ firebase.firestore().settings({
     AngularFirestoreModule,
     AddRoomPageModule,
     RoomPageModule,
-    ChatsPageModule
+    ChatsPageModule,
+    IonicImageLoader.forRoot(),
+    GroupChatImagePageModule
+
 
   ],
   
@@ -114,6 +122,7 @@ firebase.firestore().settings({
     CommentsPage,
     EventPage,
     AddEventPage,
+    GroupChatImagePage
   ],
   providers: [
     StatusBar,

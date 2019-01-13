@@ -143,32 +143,47 @@ export class DatabaseProvider {
     });
   }
 
-  getChatMessages(collectionObj: string, collectionObj2) : Promise<any>{
-    
+  getChatMessages(collectionObj: string, collectionObj2) : Promise<any>{    
     let user	            : string		= firebase.auth().currentUser.uid;
     return new Promise((resolve, reject) => {
       this._DB.collection(collectionObj).doc(collectionObj2).collection("messages")
       .orderBy("sendDate", "asc")  
-      .get()
-      .then((querySnapshot) => {
+      .onSnapshot
+      ((querySnapshot) => {
         let obj : any = [];
-
         querySnapshot 
-        .forEach((doc: any) => {
+        .forEach(function(doc) { 
+          console.log(typeof doc);
           console.log(doc);
           obj.push({
             id : doc.id,
             message : doc.data().message,
             type : doc.data().type,
-            user :doc.data().user
+            user :doc.data().user,
+            image: doc.data().image
           });
         });
 
         resolve(obj);
       })
-      .catch((error : any) => {
-        reject(error);
-      });
+      // (function (querySnapshot) {
+      //   let commentaries = []
+      //   console.log(querySnapshot.docChanges())
+      //   querySnapshot.forEach(function (doc) {
+      //     commentaries.push({
+      //       id : doc.id,
+      //       message : doc.data().message,
+      //       type : doc.data().type,
+      //       user :doc.data().user,
+      //       image: doc.data().image
+      //     })
+      //   })
+      //   resolve(commentaries);
+      // })
+      // .catch((error : any) => {
+      //   reject(error);
+      //   console.log(error)
+      // });
     });
   }
 
