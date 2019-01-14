@@ -1,49 +1,48 @@
 <ion-header>
 
-    <ion-navbar color="danger">
-      <ion-title>
-        <!-- <small>{{ comments.length }} people have commented.</small> -->
-      </ion-title>
-  
-      <ion-buttons end>
-        <button ion-button icon-only clear (click)="close()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-  
-    </ion-navbar>
-  
-  </ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      <!-- <small>{{ comments.length }} people have commented.</small> -->
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
 
 
-  <ion-content padding>
+<ion-content padding>
 
-      
     
-        <ion-item>
-          <img [src]="this.image" class="round-corners">        
-    
-        </ion-item>
-        <ion-grid>
-          <ion-row class = "text">
-            <ion-col col-10>
-              <ion-input type="text" placeholder="Type a message" [(ngModel)]="data.message" name="message"></ion-input>
-            </ion-col>
-            <ion-col col3>
-            <!-- <ion-col col-1 (click)="addimage(data)">
-              <ion-icon name="images"></ion-icon>
-            </ion-col>       -->
-            <!-- <ion-col col-1 (click)="sendMessage()">
-              <ion-icon name="paper-plane"></ion-icon>
-            </ion-col> -->
+  
+      <ion-item>
+        <img [src]="this.image" class="round-corners">        
+  
+      </ion-item>
+      <ion-grid>
+        <ion-row class = "text">
+          <ion-col col-10>
+            <ion-input type="text" placeholder="Type a message" [(ngModel)]="data.message" name="message"></ion-input>
           </ion-col>
-            <ion-row margin class="rowStyle" *ngIf="image">
-                <!-- <img [src]="image" class="round-corners"> -->
-            </ion-row>
+          <ion-col col3>
+          <!-- <ion-col col-1 (click)="addimage(data)">
+            <ion-icon name="images"></ion-icon>
+          </ion-col>       -->
+          <!-- <ion-col col-1 (click)="sendMessage()">
+            <ion-icon name="paper-plane"></ion-icon>
+          </ion-col> -->
+        </ion-col>
+          <ion-row margin class="rowStyle" *ngIf="image">
+              <!-- <img [src]="image" class="round-corners"> -->
           </ion-row>
-        </ion-grid>
-        <button ion-button round (click) ="sendImage(data)" >Click to send</button>
+        </ion-row>
+      </ion-grid>
+      <button ion-button round (click) ="sendImage(data)" >Click to send</button>
 
-    
-    </ion-content>
   
+  </ion-content>

@@ -87,7 +87,9 @@ console.log(data);
 // this.data.message = "";
 // this.contentArea.scrollToBottom();
 // this.image = "";
-let ref = firebase.storage().ref("postImages/" + name);
+const filename = Math.floor(Date.now() / 1000);
+
+let ref = firebase.storage().ref("postImages/" + filename);
   
       let uploadTask = ref.putString(this.image.split(',')[1], "base64");
       let loading = this.loadingCtrl.create({

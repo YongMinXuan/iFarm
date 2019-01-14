@@ -3,11 +3,13 @@ import { GroupChatImagePage } from './../group-chat-image/group-chat-image';
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { User } from './../../models/chat/chats.models';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import {  IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List } from 'ionic-angular';
+import {  IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List,normalizeURL } from 'ionic-angular';
 import { RoomPage } from '../room/room';
 import * as firebase from 'Firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Subscription } from "rxjs/Subscription";
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Crop } from '@ionic-native/crop';
 /**
  * Generated class for the ChatsPage page.
  *
@@ -26,6 +28,7 @@ export class ChatsPage {
   private _COLL2 		: string 			= this.navParams.get("key");
   private mutationObserver: MutationObserver;
  public image: string;
+ public images = [];
 
   // @ViewChild(Content) content: Content;
   @ViewChild(Content) contentArea: Content;
@@ -41,7 +44,7 @@ chatreceive: Subscription;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB: DatabaseProvider,
-    private _ALERT: AlertController,private actionSheetCtrl: ActionSheetController,private camera: Camera,private modalCtrl : ModalController) {
+    private _ALERT: AlertController,private actionSheetCtrl: ActionSheetController,private camera: Camera,private modalCtrl : ModalController,public imagePicker: ImagePicker,) {
     this.roomkey = this.navParams.get("key") as string;
     this.nickname = firebase.auth().currentUser.displayName as string;
     this.data.type = 'message';
@@ -77,7 +80,9 @@ ionViewDidLeave(){
 }
 
 ionViewWillEnter(){
- 
+  this.chatreceive = Observable.interval(3000).subscribe(()=>{
+    this.retrieveCollection();
+});
   
      this.retrieveCollection();
     //  this.content.scrollToBottom();
@@ -219,13 +224,40 @@ addimage(data){
         handler: () => {
           console.log(data);
           console.log("Image Gallery");
-          
+          this.openImagePicker(data);
 
         }
       }
     ]
   }).present();
 }
+
+openImagePicker(data){
+  this.imagePicker.hasReadPermission().then(
+    (result) => {
+      if(result == false){
+        // no callbacks required as this opens a popup which returns async
+        this.imagePicker.requestReadPermission();
+      }
+      else if(result == true){
+        this.imagePicker.getPictures({
+          maximumImagesCount: 1
+        }).then(
+          (results) => {
+            for (var i = 0; i < results.length; i++) {
+              // this.uploadImageToFirebase(results[i]);
+              this.navCtrl.push(GroupChatImagePage, {
+                "data": data.id,"image": results[i], "collection1": this._COLL,"collection2": this._COLL2
+              })
+            
+            }
+          }, (err) => console.log(err)
+        );
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
 launchCamera(data) {
   let options: CameraOptions = {
@@ -248,6 +280,8 @@ launchCamera(data) {
     console.log(data.id)
     console.log(this._COLL)
     console.log(this._COLL2)
+    // this.images.push(this.image)
+    console.log(this.images)
  this.navCtrl.push(GroupChatImagePage, {
     "data": data.id,"image": this.image, "collection1": this._COLL,"collection2": this._COLL2
   })
