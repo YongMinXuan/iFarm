@@ -36,7 +36,7 @@ export class ChatsPage {
   roomkey:string;
   nickname:string;
   offStatus:boolean = false;
- observableVar: Subscription;
+chatreceive: Subscription;
 
 
 
@@ -70,9 +70,7 @@ export class ChatsPage {
     // setInterval(function(){ this.retrieveCollection()}, 3000);
   }
 
-  chatreceive = Observable.interval(3000).subscribe(()=>{
-    this.retrieveCollection();
-});
+ 
 
 ionViewDidLeave(){
   this.chatreceive.unsubscribe();
@@ -96,6 +94,9 @@ ionViewWillEnter(){
 
 
 ionViewDidLoad(){
+  this.chatreceive = Observable.interval(3000).subscribe(()=>{
+    this.retrieveCollection();
+});
   this.retrieveCollection();
   // setInterval(function(){ this.retrieveCollection()}, 3000);
   this.mutationObserver = new MutationObserver((mutations) => {

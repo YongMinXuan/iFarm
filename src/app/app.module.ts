@@ -58,6 +58,7 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 import { RoomPage } from '../pages/room/room';
 import { AddRoomPage } from '../pages/add-room/add-room';
 import { IonicImageLoader } from 'ionic-image-loader';
+// import { ImagepickerProvider } from '../providers/imagepicker/imagepicker';
 
 
 //initialise firebase
@@ -143,6 +144,7 @@ firebase.firestore().settings({
     LoadingServiceProvider,
     Network,
     LocationAccuracy,
+    // ImagepickerProvider,
   ]
 })
 export class AppModule {}
