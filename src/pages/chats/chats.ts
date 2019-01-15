@@ -1,3 +1,4 @@
+import { GroupChatMulitpleImagePage } from './../group-chat-mulitple-image/group-chat-mulitple-image';
 import { Observable } from 'rxjs/Observable';
 import { GroupChatImagePage } from './../group-chat-image/group-chat-image';
 import { DatabaseProvider } from './../../providers/database/database.service';
@@ -40,6 +41,8 @@ export class ChatsPage {
   nickname:string;
   offStatus:boolean = false;
 chatreceive: Subscription;
+public base64Image : string;
+public photos : any;
 
 
 
@@ -76,7 +79,7 @@ chatreceive: Subscription;
  
 
 ionViewDidLeave(){
-  this.chatreceive.unsubscribe();
+  // this.chatreceive.unsubscribe();
 }
 
 ionViewWillEnter(){
@@ -95,6 +98,11 @@ ionViewWillEnter(){
   });
   
 }
+
+ngOnInit() 
+  	{
+    	this.photos = [];
+  	}
 
 
 
@@ -235,22 +243,40 @@ addimage(data){
 openImagePicker(data){
   this.imagePicker.hasReadPermission().then(
     (result) => {
+      this.photos = [];
+
       if(result == false){
         // no callbacks required as this opens a popup which returns async
         this.imagePicker.requestReadPermission();
       }
       else if(result == true){
-        this.imagePicker.getPictures({
-          maximumImagesCount: 1
-        }).then(
+        const options = {
+          maximumImagesCount: 5,
+          quality: 75,
+          width: 512,
+          height: 512,
+          outputType: 1
+          }
+
+        this.imagePicker.getPictures(options).then(
           (results) => {
             for (var i = 0; i < results.length; i++) {
-              // this.uploadImageToFirebase(results[i]);
-              this.navCtrl.push(GroupChatImagePage, {
-                "data": data.id,"image": results[i], "collection1": this._COLL,"collection2": this._COLL2
+                  this.base64Image = "data:image/jpeg;base64," + results[i];
+                  console.log(this.base64Image)
+                  this.photos.push(this.base64Image);
+              }
+                console.log(this.photos)
+              this.navCtrl.push(GroupChatMulitpleImagePage, {
+                "data": data,"image": this.photos, "collection1": this._COLL,"collection2": this._COLL2
               })
-            
-            }
+            // for (var i = 0; i < results.length; i++) {
+            //   this.uploadImageToFirebase(results[i]);
+            //   this.navCtrl.push(GroupChatMulitpleImagePage, {
+            //     "data": data.id,"image": results[i], "collection1": this._COLL,"collection2": this._COLL2
+            //   })
+            // this._DB.sendchatmessage(this._COLL, this._COLL2,
+            //   result[i]);
+            // }
           }, (err) => console.log(err)
         );
       }

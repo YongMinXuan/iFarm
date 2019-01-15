@@ -10,6 +10,7 @@ import { CommentsPage } from '../comments/comments';
 import { Firebase } from '@ionic-native/firebase'
 import {App} from 'ionic-angular';
 import { DatabaseProvider } from './../../providers/database/database.service';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 /**
  * Generated class for the FeedPage page.
@@ -31,7 +32,7 @@ export class FeedPage {
   infiniteEvent: any;
   image: string;
   
-  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private _DB     : DatabaseProvider, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase) {
+  constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private _DB     : DatabaseProvider, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase,public imagePicker: ImagePicker,) {
     this.getPosts();
 
     this.firebaseCordova.getToken().then((token) => {
@@ -252,9 +253,72 @@ export class FeedPage {
 
   addPhoto() {
 
-    this.launchCamera();
+    this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: "Camera",
+          handler: () => {
+            console.log();
+            console.log("Camera");
+            
+  
+              this.launchCamera();
+              console.log("Before Modal Cntrl")
+          
+          
+            
+          }
+        },
+        {
+          text: "Image Gallery",
+          handler: () => {
+            console.log("Image Gallery");
+            this.openImagePicker();
+  
+          }
+        }
+      ]
+    }).present();
 
   }
+
+  openImagePicker(){
+    this.imagePicker.hasReadPermission().then(
+      (result) => {
+  
+        if(result == false){
+          // no callbacks required as this opens a popup which returns async
+          this.imagePicker.requestReadPermission();
+        }
+        else if(result == true){
+          const options = {
+            maximumImagesCount: 1,
+            quality: 75,
+            width: 512,
+            height: 512,
+            outputType: 1
+            }
+  
+          this.imagePicker.getPictures(options).then(
+            (results) => {
+             
+                 this.image = "data:image/jpeg;base64," + results;
+               
+              // for (var i = 0; i < results.length; i++) {
+              //   this.uploadImageToFirebase(results[i]);
+              //   this.navCtrl.push(GroupChatMulitpleImagePage, {
+              //     "data": data.id,"image": results[i], "collection1": this._COLL,"collection2": this._COLL2
+              //   })
+              // this._DB.sendchatmessage(this._COLL, this._COLL2,
+              //   result[i]);
+              // }
+            }, (err) => console.log(err)
+          );
+        }
+      }, (err) => {
+        console.log(err);
+      });
+    }
 
   launchCamera() {
     let options: CameraOptions = {

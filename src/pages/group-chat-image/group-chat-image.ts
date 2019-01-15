@@ -38,7 +38,7 @@ export class GroupChatImagePage {
     this.image = this.navParams.get("image");
     this.collection1 = this.navParams.get("collection1");
     this.collection2 = this.navParams.get("collection2");
-    console.log(this.post)
+    console.log(this.image)
     // console.log(this.image)
 
     // firebase.firestore().collection("comments")
@@ -90,7 +90,10 @@ console.log(data);
 const filename = Math.floor(Date.now() / 1000);
 
 let ref = firebase.storage().ref("postImages/" + filename);
-  
+      console.log('Cluless Kncuklehead')
+      console.log(this.image)
+      console.log(this.image.split(',')[0])
+      console.log(this.image.split(',')[1])
       let uploadTask = ref.putString(this.image.split(',')[1], "base64");
       let loading = this.loadingCtrl.create({
         content: "Uploading Image..."

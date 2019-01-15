@@ -1,3 +1,4 @@
+import { GroupChatMulitpleImagePageModule } from './../pages/group-chat-mulitple-image/group-chat-mulitple-image.module';
 import { GroupChatImagePageModule } from './../pages/group-chat-image/group-chat-image.module';
 import { GroupChatImagePage } from './../pages/group-chat-image/group-chat-image';
 import { ChatsPageModule } from './../pages/chats/chats.module';
@@ -109,8 +110,8 @@ firebase.firestore().settings({
     RoomPageModule,
     ChatsPageModule,
     IonicImageLoader.forRoot(),
-    GroupChatImagePageModule
-
+    GroupChatImagePageModule,
+    GroupChatMulitpleImagePageModule
 
   ],
   
