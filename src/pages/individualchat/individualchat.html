@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Channels Chat
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="exitChat()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let chat of chats" no-lines>
+      <div class="chat-status" text-center *ngIf="chat.type==='join'||chat.type==='exit';else message">
+        <img [src]= load(chat.image)  *ngIf="chat.image" class="round-corners">
+        <span class="chat-date">{{chat.sendDate | date:'short'}}</span>
+        <!-- <span class="chat-content-center">{{chat.message}}</span> -->
+        <p text-wrap>{{chat.message}}</p>
+      </div>
+      <ng-template #message>
+        <div class="chat-message" text-right *ngIf="chat.user === nickname">
+          <div class="right-bubble">
+            <img [src]= load(chat.image)  *ngIf="chat.image" class="round-corners">
+            <img [src]= chat.image  *ngIf="chat.image" class="round-corners">
+            <!-- <img-loader *ngIf="chat.image" [src]="chat.image" class="round-corners" useImg></img-loader> -->
+            <!-- <span class="msg-name">Me</span> -->
+            <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
+            <p text-wrap>You</p>
+            <p text-wrap>{{chat.message}}</p>
+          </div>
+        </div>
+        <div class="chat-message" text-left *ngIf="chat.user !== nickname">
+          <div class="left-bubble">
+            <img [src]= load(chat.image)  *ngIf="chat.image" class="round-corners">
+            <!-- <span class="msg-name">{{chat.user}}</span> -->
+            <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
+            <p text-wrap>{{chat.user}}</p>
+            <p text-wrap>{{chat.message}}</p>
+          </div>
+        </div>
+      </ng-template>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row class = "text">
+      <ion-col col-10>
+        <ion-input type="text" placeholder="Type a message" [(ngModel)]="data.message" name="message"></ion-input>
+      </ion-col>
+      <ion-col col3>
+      <ion-col col-1 (click)="addimage(data)">
+        <ion-icon name="images"></ion-icon>
+      </ion-col>      
+      <ion-col col-1 (click)="sendMessage()">
+        <ion-icon name="paper-plane"></ion-icon>
+      </ion-col>
+    </ion-col>
+      <!-- <ion-row margin class="rowStyle" *ngIf="image">
+          <img [src]="image" class="round-corners">
+      </ion-row> -->
+    </ion-row>
+  </ion-grid>
+</ion-footer>

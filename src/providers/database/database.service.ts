@@ -15,6 +15,7 @@ import 'firebase/firestore';
 export class DatabaseProvider {
 
   private _DB: any;
+  private _COLL 		: string 			= "ChatRooms"
 
   constructor(public http: HttpClient) {
     console.log('Hello DatabaseProvider Provider');
@@ -70,7 +71,36 @@ export class DatabaseProvider {
            population     : doc.data().population,
            location   : doc.data().location,
            established    : doc.data().established,
+           name: doc.data().name,
            user : doc.data().user,
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+
+  getchatid(collectionObj: string, roomName) : Promise<any>{
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj)
+      .where("roomname", "==", roomName )
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id               : doc.id,
+            eventuser           : doc.data().user1,
+            attendeeuser     : doc.data().user2,                 
+           
           });
         });
 
@@ -105,6 +135,95 @@ export class DatabaseProvider {
            location   : doc.data().location,
            established    : doc.data().established,
            user : doc.data().user,
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+  getIndividualChats(collectionObj: string,roomname:string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    console.log(roomname)
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).where("roomname","==",roomname)   
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            roomname : doc.data().roomname,
+            eventuser :doc.data().user1,
+            attendee :doc.data().user2
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+  getChatsList(collectionObj: string, name :string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).where("user1", "==" , name)   
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            roomname : doc.data().roomname,
+            user1 : doc.data().user1,
+            user2 : doc.data().user2,
+            user1name : doc.data().user1name,
+            user2name : doc.data().user2name,
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+  getChatsList2(collectionObj: string, name :string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).where("user2", "==" , name)   
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            roomname : doc.data().roomname,
+            user1 : doc.data().user1,
+            user2 : doc.data().user2,
+            user1name : doc.data().user1name,
+            user2name : doc.data().user2name,
           });
         });
 

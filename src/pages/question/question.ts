@@ -217,7 +217,9 @@ export class QuestionPage {
           population        : string 		= this.form.controls["population"].value,
           location        : string 		= this.form.controls["location"].value,
          established       : string		= this.form.controls["established"].value,
-         user	            : string		= firebase.auth().currentUser.uid;
+         user	            : string		= firebase.auth().currentUser.uid,
+         name	            : string		= firebase.auth().currentUser.displayName;
+         ;
 
       // console.log(StartDate);
       // console.log(new Date(StartDate));
@@ -245,6 +247,7 @@ export class QuestionPage {
                                   population    : population,
                                   location    : location,
                                   established   : established,
+                                  name   : name,
                                   user : user
                                   
 	                           })
@@ -275,6 +278,7 @@ export class QuestionPage {
                               population    : population,
                               location : location,
                               established   : established,
+                              name   : name,
                               user : user
 	                        })
          .then((data) =>

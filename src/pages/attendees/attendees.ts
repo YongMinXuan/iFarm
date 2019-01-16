@@ -39,6 +39,7 @@ export class AttendeesPage {
    private _DOC 		: string 			= "Xy76Re34SdFR1";
 
    public isEditable    : boolean         = false;
+   private _COLL2 		: string 			= "Individual_Chats";
 
 
    /**
@@ -154,14 +155,101 @@ export class AttendeesPage {
    data = { roomname:'' };
   ref = firebase.database().ref('indivchatrooms/');
 
-  chat(location) {
-   let chat = location.id;
-   console.log(location.id);
-   let newData = this.ref.push();
-   newData.set({
-     roomname: chat
+
+  chat(location){
+   // let user1 = 
+   // if 
+   console.log(location.user)
+   console.log(firebase.auth().currentUser.uid)
+   var user1 = location.user;
+   var user2 = firebase.auth().currentUser.uid;
+   var roomName = 'chat_'+(user1<user2 ? user1+'_'+user2 : user2+'_'+user1);
+   console.log(roomName)
+
+   this._DB.getIndividualChats(this._COLL2,roomName).then((data) =>
+   {
+      console.log(data);
+      // IF we don't have any documents then the collection doesn't exist
+      // so we create it!
+      if(data.length === 0)
+      {
+        //  this.generateCollectionAndDocument();
+        this._DB.addDocument(this._COLL2,
+         {
+            user1: location.user,
+            user2: firebase.auth().currentUser.uid,
+            user1name: location.name,
+            user2name: firebase.auth().currentUser.displayName,
+            roomname : roomName
+       }).then((data) =>
+       {
+          console.log("Added Success")
+          console.log(data);
+          console.log(data.id);
+          this.joinRoom(data.id)
+       })
+       .catch((error) =>
+       {
+          this.displayAlert('Adding document failed', error.message);
+       });
+
+      }
+
+      // Otherwise the collection does exist and we assign the returned
+      // documents to the public property of locations so this can be
+      // iterated through in the component template
+      else
+      {
+         // this.chats = data;
+         console.log('Record Already exists')
+         // this.joinRoom()
+         console.log(user1)
+         console.log(user2)
+         this._DB.getchatid(this._COLL2,roomName)    
+         .then((data) =>
+         {
+            console.log(data);
+            console.log(data.id)
+            console.log(data[0])
+            console.log(data[0].id)
+            this.joinRoom(data[0].id)
+        
+         })
+         .catch((error) =>
+         {
+            this.displayAlert('Adding document failed', error.message);
+         });
+      }
+   })
+   .catch();
+   console.log('Check it here')
+  
+}
+
+joinRoom(key) {
+   this.navCtrl.setRoot('IndividualchatPage', {
+     key:key,
+     
    });
+ }
+
+displayAlert(title      : string,
+   message    : string) : void
+{
+let alert : any     = this._ALERT.create({
+title      : title,
+subTitle   : message,
+buttons    : [{
+text      : 'Got It!',
+handler   : () =>
+{
+this.retrieveCollection();
+}
+}]
+});
+alert.present();
+}
    
  }
 
-}
+

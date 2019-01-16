@@ -60,6 +60,7 @@ import { RoomPage } from '../pages/room/room';
 import { AddRoomPage } from '../pages/add-room/add-room';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { IndividualchatPageModule } from '../pages/individualchat/individualchat.module';
 // import { ImagepickerProvider } from '../providers/imagepicker/imagepicker';
 
 
@@ -111,8 +112,8 @@ firebase.firestore().settings({
     ChatsPageModule,
     IonicImageLoader.forRoot(),
     GroupChatImagePageModule,
-    GroupChatMulitpleImagePageModule
-
+    GroupChatMulitpleImagePageModule,
+    IndividualchatPageModule
   ],
   
   bootstrap: [IonicApp],

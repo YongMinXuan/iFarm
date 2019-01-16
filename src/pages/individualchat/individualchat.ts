@@ -1,3 +1,4 @@
+
 import { GroupChatMulitpleImagePage } from './../group-chat-mulitple-image/group-chat-mulitple-image';
 import { Observable } from 'rxjs/Observable';
 import { GroupChatImagePage } from './../group-chat-image/group-chat-image';
@@ -12,7 +13,7 @@ import { Subscription } from "rxjs/Subscription";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 /**
- * Generated class for the ChatsPage page.
+ * Generated class for the IndividualchatPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -20,12 +21,13 @@ import { Crop } from '@ionic-native/crop';
 
 @IonicPage()
 @Component({
-  selector: 'page-chats',
-  templateUrl: 'chats.html',
+  selector: 'page-individualchat',
+  templateUrl: 'individualchat.html',
 })
-export class ChatsPage {
+export class IndividualchatPage {
+  // private _COLL 		: string 			= this.navParams.get("nickname");
   public chatID         : string          = '';
-  private _COLL 		: string 			= "ChatRooms";
+  private _COLL 		: string 			= "Individual_Chats";
   private _COLL2 		: string 			= this.navParams.get("key");
   private mutationObserver: MutationObserver;
  public image: string;
@@ -89,14 +91,14 @@ ionViewWillEnter(){
   
      this.retrieveCollection();
     //  this.content.scrollToBottom();
-    this.mutationObserver = new MutationObserver((mutations) => {
-      this.contentArea.scrollToBottom();
-  });
+  //   this.mutationObserver = new MutationObserver((mutations) => {
+  //     this.contentArea.scrollToBottom();
+  // });
 
-  this.mutationObserver.observe(this.chatList.nativeElement, {
-      childList: true
-  });
-  
+  // this.mutationObserver.observe(this.chatList.nativeElement, {
+  //     childList: true
+  // });
+  this.contentArea.scrollToBottom();
 }
 
 ngOnInit() 
@@ -112,14 +114,14 @@ ionViewDidLoad(){
 });
   this.retrieveCollection();
   // setInterval(function(){ this.retrieveCollection()}, 3000);
-  this.mutationObserver = new MutationObserver((mutations) => {
-      this.contentArea.scrollToBottom();
-  });
+  // this.mutationObserver = new MutationObserver((mutations) => {
+  //     this.contentArea.scrollToBottom();
+  // });
 
-  this.mutationObserver.observe(this.chatList.nativeElement, {
-      childList: true
-  });
-
+  // this.mutationObserver.observe(this.chatList.nativeElement, {
+  //     childList: true
+  // });
+  this.contentArea.scrollToBottom();
 }
 
 
@@ -154,6 +156,7 @@ ionViewDidLoad(){
         else
         {
            this.chats = data;
+           this.contentArea.scrollToBottom();
         }
      })
      .catch();
@@ -197,6 +200,7 @@ this.contentArea.scrollToBottom();
 this.data.message = "";
 this.contentArea.scrollToBottom();
 this.image = "";
+this.contentArea.scrollToBottom();
 })
 .catch((error) =>
 {
@@ -382,22 +386,10 @@ upload(_COLL: string, _COLL2: string,data : string) {
 
     this.offStatus = true;
 
-    this.navCtrl.setRoot(RoomPage, {
+    this.navCtrl.setRoot('InboxPage', {
       nickname:this.nickname
     });
   }
+  }
 
-}
 
-export const snapshotToArray = snapshot => {
-    let returnArr = [];
-
-    snapshot.forEach(childSnapshot => {
-        let item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        returnArr.push(item);
-    });
-
-    return returnArr;
-
-}

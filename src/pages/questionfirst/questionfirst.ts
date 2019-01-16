@@ -1,6 +1,7 @@
+import { User } from 'firebase';
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { Component } from '@angular/core';
-import { NavController, AlertController, IonicPage } from 'ionic-angular';
+import { NavController, AlertController, IonicPage,NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class QuestionFirstPage {
     * @description      Defines the name of the database collection
     */
    private _COLL 		: string 			= "Events";
+   private _COLL2 		: string 			= "Individual_Chats";
 
 
 
@@ -55,7 +57,7 @@ export class QuestionFirstPage {
 
    constructor(public navCtrl  : NavController,
                private _DB     : DatabaseProvider,
-               private _ALERT  : AlertController)
+               private _ALERT  : AlertController, public navParams: NavParams)
    {
       this._CONTENT = {
          city 			: "London",
@@ -127,7 +129,7 @@ export class QuestionFirstPage {
          // so we create it!
          if(data.length === 0)
          {
-            this.generateCollectionAndDocument();
+            // this.generateCollectionAndDocument();
          }
 
          // Otherwise the collection does exist and we assign the returned
@@ -181,11 +183,83 @@ export class QuestionFirstPage {
    }
 
    signup_event(location)
-   {
+   {  
+      console.log(location)
       this.navCtrl.push('SignupPage',{
          data: location
        });
        
+       
+   }
+
+   chat(location){
+      // let user1 = 
+      // if 
+      console.log(location.user)
+      console.log(firebase.auth().currentUser.uid)
+      var user1 = location.user;
+      var user2 = firebase.auth().currentUser.uid;
+      var roomName = 'chat_'+(user1<user2 ? user1+'_'+user2 : user2+'_'+user1);
+      console.log(roomName)
+
+      this._DB.getIndividualChats(this._COLL2,roomName).then((data) =>
+      {
+         console.log(data);
+         // IF we don't have any documents then the collection doesn't exist
+         // so we create it!
+         if(data.length === 0)
+         {
+           //  this.generateCollectionAndDocument();
+           this._DB.addDocument(this._COLL2,
+            {
+               user1: location.user,
+               user2: firebase.auth().currentUser.uid,
+               user1name: location.name,
+               user2name: firebase.auth().currentUser.displayName,
+               roomname : roomName
+          }).then((data) =>
+          {
+             console.log("Added Success")
+             console.log(data);
+             console.log(data.id);
+             this.joinRoom(data.id)
+          })
+          .catch((error) =>
+          {
+             this.displayAlert('Adding document failed', error.message);
+          });
+
+         }
+ 
+         // Otherwise the collection does exist and we assign the returned
+         // documents to the public property of locations so this can be
+         // iterated through in the component template
+         else
+         {
+            // this.chats = data;
+            console.log('Record Already exists')
+            // this.joinRoom()
+            console.log(user1)
+            console.log(user2)
+            this._DB.getchatid(this._COLL2,roomName)    
+            .then((data) =>
+            {
+               console.log(data);
+               console.log(data.id)
+               console.log(data[0])
+               console.log(data[0].id)
+               this.joinRoom(data[0].id)
+           
+            })
+            .catch((error) =>
+            {
+               this.displayAlert('Adding document failed', error.message);
+            });
+         }
+      })
+      .catch();
+      console.log('Check it here')
+     
    }
 
    view(location)
@@ -196,6 +270,12 @@ export class QuestionFirstPage {
        
    }
 
+   joinRoom(key) {
+      this.navCtrl.setRoot('IndividualchatPage', {
+        key:key,
+        
+      });
+    }
 
 
    /**

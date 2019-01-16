@@ -67,6 +67,14 @@
         <ion-icon name="ios-person-add"></ion-icon>
         Register
       </button>
+
+      <button
+      ion-button
+      color='primary'
+      (click)='chat(location)' *ngIf="user_identification_register(location)">
+      <ion-icon name="ios-chatbubbles"></ion-icon>
+      Chat
+    </button>
     </ion-item-options>
     
     </ion-item-sliding>
