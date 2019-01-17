@@ -206,6 +206,23 @@ this.contentArea.scrollToBottom();
 {
 this.displayAlert();
 });
+
+this._DB.updateDocument(this._COLL,
+  this._COLL2,
+  {
+     
+     name   : user,
+     lastmessage : message
+     
+})
+.then((data) =>
+{
+
+})
+.catch((error) =>
+{
+
+});
   }
 
   displayAlert() : void

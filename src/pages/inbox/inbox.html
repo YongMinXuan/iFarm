@@ -16,6 +16,7 @@
     <ion-item *ngFor="let room of rooms">
       <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
     <ng-template #alternate>{{room.user1name}}</ng-template>
+    <h4>{{room.name}}: {{room.lastmessage}}</h4>
       <ion-icon name="chatboxes" item-end (click)="joinRoom(room.id)"></ion-icon>
     </ion-item>
   </ion-list>

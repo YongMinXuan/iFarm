@@ -194,6 +194,8 @@ export class DatabaseProvider {
             user2 : doc.data().user2,
             user1name : doc.data().user1name,
             user2name : doc.data().user2name,
+            lastmessage: doc.data().lastmessage,
+            name : doc.data().name
           });
         });
 
@@ -224,6 +226,8 @@ export class DatabaseProvider {
             user2 : doc.data().user2,
             user1name : doc.data().user1name,
             user2name : doc.data().user2name,
+            lastmessage: doc.data().lastmessage,
+            name : doc.data().name
           });
         });
 
