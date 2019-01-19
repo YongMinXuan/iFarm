@@ -45,7 +45,8 @@ export class IndividualchatPage {
 chatreceive: Subscription;
 public base64Image : string;
 public photos : any;
-
+public shouldScrollDown: boolean
+public showScrollButton: boolean
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB: DatabaseProvider,
@@ -99,6 +100,25 @@ ionViewWillEnter(){
   //     childList: true
   // });
   this.contentArea.scrollToBottom();
+
+
+  this.contentArea.ionScrollEnd.subscribe((data)=>{
+
+    let dimensions = this.contentArea.getContentDimensions();
+
+    let scrollTop = this.contentArea.scrollTop;
+    let contentHeight = dimensions.contentHeight;
+    let scrollHeight = dimensions.scrollHeight;
+
+    if ( (scrollTop + contentHeight + 20) > scrollHeight) {
+      this.shouldScrollDown = true;
+      this.showScrollButton = false;
+    } else {
+      this.shouldScrollDown = false;
+      this.showScrollButton = true;
+    }
+
+  });
 }
 
 ngOnInit() 

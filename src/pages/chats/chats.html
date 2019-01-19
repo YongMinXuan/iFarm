@@ -43,10 +43,23 @@
           </div>
         </div>
       </ng-template>
+      <!-- <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton" >Scroll Top</button> -->
+
     </ion-item>
+   
+    <!-- <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton" >Scroll Top</button> -->
+
+    
   </ion-list>
+  <!-- <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton" >Scroll Top</button> -->
 </ion-content>
-<ion-footer>
+
+
+
+<ion-footer no-border>
+    <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton"(click)="scrollcontent()" >  <ion-icon name="arrow-dropdown"></ion-icon>
+    </button>
+
   <ion-grid>
     <ion-row class = "text">
       <ion-col col-10>

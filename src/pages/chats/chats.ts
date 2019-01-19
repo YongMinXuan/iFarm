@@ -44,7 +44,8 @@ chatreceive: Subscription;
 public base64Image : string;
 public photos : any;
 public chatlength : number;
-
+public shouldScrollDown: boolean
+public showScrollButton: boolean
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB: DatabaseProvider,
@@ -77,7 +78,9 @@ public chatlength : number;
     // setInterval(function(){ this.retrieveCollection()}, 3000);
   }
 
- 
+  scrollcontent(){
+   this.contentArea.scrollToBottom();
+ }
 
 ionViewDidLeave(){
   this.chatreceive.unsubscribe();
@@ -97,7 +100,7 @@ ionViewWillEnter(){
   // this.mutationObserver.observe(this.chatList.nativeElement, {
   //     childList: true
   // });
-  
+  this.dropdowntolatest()
 }
 
 ngOnInit() 
@@ -141,6 +144,28 @@ this.chatreceive = Observable.interval(3000).subscribe(()=>{
   //     childList: true
   // });
   // }
+
+  dropdowntolatest(){
+    this.contentArea.ionScrollEnd.subscribe((data)=>{
+
+      let dimensions = this.contentArea.getContentDimensions();
+  
+      let scrollTop = this.contentArea.scrollTop;
+      let contentHeight = dimensions.contentHeight;
+      let scrollHeight = dimensions.scrollHeight;
+  
+      if ( (scrollTop + contentHeight + 20) > scrollHeight) {
+        this.shouldScrollDown = true;
+        this.showScrollButton = false;
+        return true
+      } else {
+        this.shouldScrollDown = false;
+        this.showScrollButton = true;
+        return false
+      }
+  
+    });
+  }
 
   retrieveCollectionconsistently() : void
   { console.log(this.chatlength)

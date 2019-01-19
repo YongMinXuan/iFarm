@@ -72,7 +72,7 @@ export class GroupChatImagePage {
       
       const filename = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-      let ref = firebase.storage().ref("coolImages/" + filename);
+      let ref = firebase.storage().ref("messageImages/" + filename);
 
     
    
