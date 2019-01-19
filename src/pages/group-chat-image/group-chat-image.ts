@@ -59,21 +59,53 @@ export class GroupChatImagePage {
       // let loading = this.loadingCtrl.create({
       //   content: "Uploading Image..."
       // })
-  
-      // loading.present();
+      
+      let loading = this.loadingCtrl.create({
+        content: "Uploading Image..."
+      })
 
-      let type	            : string		= this.data.type,
-        user  	            : string		= this.data.nickname,
-        message  	            : string		= this.data.message,
+      loading.present();
+      // loading.present();
+     
+
+       
+      
+      const filename = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+      let ref = firebase.storage().ref("coolImages/" + filename);
+
+    
+   
+      let uploadTask = ref.putString(this.image.split(',')[1], "base64");
+     
+
+      uploadTask.on("state_changed", (taskSnapshot: any) => {
+        console.log(taskSnapshot)
+        // let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
+        // loading.setContent("Uploaded " + percentage + "% ...")
+  
+      }, (error) => {
+        console.log(error)
+      }, () => {
+        console.log("The upload is complete!");
+  
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+       console.log(url);
+          let type	            : string		= this.data.type,
+        user  	            : string		=   this.data.nickname,
+        message  	            : string		= " ",
+        image  	            : string		=  url,
         sendDate: Date = new Date();
+
         this._DB.sendchatmessage(this.collection1, this.collection2,
           {
             type : type,            
             user : user,
             message :message,
-            sendDate : sendDate
+            sendDate : sendDate,
+            image: image
         })
-.then((data) =>
+.then(async (data) =>
 {
 console.log(data);
 // if (this.image) {
@@ -86,65 +118,28 @@ console.log(data);
 // this.contentArea.scrollToBottom();
 // this.data.message = "";
 // this.contentArea.scrollToBottom();
-// this.image = "";
-const filename = Math.floor(Date.now() / 1000);
 
-let ref = firebase.storage().ref("postImages/" + filename);
-      console.log('Cluless Kncuklehead')
-      console.log(this.image)
-      console.log(this.image.split(',')[0])
-      console.log(this.image.split(',')[1])
-      let uploadTask = ref.putString(this.image.split(',')[1], "base64");
-      let loading = this.loadingCtrl.create({
-        content: "Uploading Image..."
-      })
-
-      loading.present();
-
-  
-      uploadTask.on("state_changed", (taskSnapshot: any) => {
-        console.log(taskSnapshot)
-        let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
-        loading.setContent("Uploaded " + percentage + "% ...")
-  
-      }, (error) => {
-        console.log(error)
-      }, () => {
-        console.log("The upload is complete!");
-  
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-  
-          firebase.firestore().collection(this.collection1).doc(this.collection2).collection("messages").doc(data.id).update({
-            image: url
-          }).then(() => {
-            loading.dismiss()
-            console.log('success')
-            this.viewCtrl.dismiss();
-            resolve()
-          }).catch((err) => {
-            // loading.dismiss()
-            console.log('fail')
-            reject()
-          })
-  
-        }).catch((err) => {
-          // loading.dismiss()
-          console.log('fail2')
-          reject()
-        })
-  
-      })
+this.viewCtrl.dismiss();
+loading.dismiss();
 })
 .catch((error) =>
 {
-// this.displayAlert();
 console.log(error)
 });
+  }).catch((error) =>
+  {
+  console.log(error)
+  }
+  
+      )})
+  
+  
+    
   
       
-  
-    })
   }
+
+)}
 
   close(){
     this.viewCtrl.dismiss();

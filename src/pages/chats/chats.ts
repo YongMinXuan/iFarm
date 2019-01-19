@@ -43,6 +43,7 @@ export class ChatsPage {
 chatreceive: Subscription;
 public base64Image : string;
 public photos : any;
+public chatlength : number;
 
 
 
@@ -52,7 +53,7 @@ public photos : any;
     this.nickname = firebase.auth().currentUser.displayName as string;
     this.data.type = 'message';
     this.data.nickname = this.nickname;
-   
+   this.chatlength = 0
 
     // let joinData = firebase.database().ref('chatrooms/'+this.roomkey+'/chats').push();
     // joinData.set({
@@ -84,18 +85,18 @@ ionViewDidLeave(){
 
 ionViewWillEnter(){
   this.chatreceive = Observable.interval(3000).subscribe(()=>{
-    this.retrieveCollection();
+    this.retrieveCollectionconsistently();
 });
   
      this.retrieveCollection();
-    //  this.content.scrollToBottom();
-    this.mutationObserver = new MutationObserver((mutations) => {
-      this.contentArea.scrollToBottom();
-  });
+     this.contentArea.scrollToBottom();
+  //   this.mutationObserver = new MutationObserver((mutations) => {
+  //     this.contentArea.scrollToBottom();
+  // });
 
-  this.mutationObserver.observe(this.chatList.nativeElement, {
-      childList: true
-  });
+  // this.mutationObserver.observe(this.chatList.nativeElement, {
+  //     childList: true
+  // });
   
 }
 
@@ -107,18 +108,23 @@ ngOnInit()
 
 
 ionViewDidLoad(){
-  this.chatreceive = Observable.interval(3000).subscribe(()=>{
-    this.retrieveCollection();
-});
-  this.retrieveCollection();
-  // setInterval(function(){ this.retrieveCollection()}, 3000);
-  this.mutationObserver = new MutationObserver((mutations) => {
-      this.contentArea.scrollToBottom();
-  });
+//   this.chatreceive = Observable.interval(3000).subscribe(()=>{
+//     this.retrieveCollection();
+// });
+  
+this.retrieveCollection();
+this.contentArea.scrollToBottom();
+//   // setInterval(function(){ this.retrieveCollection()}, 3000);
+//   this.mutationObserver = new MutationObserver((mutations) => {
+//       this.contentArea.scrollToBottom();
+//   });
 
-  this.mutationObserver.observe(this.chatList.nativeElement, {
-      childList: true
-  });
+//   this.mutationObserver.observe(this.chatList.nativeElement, {
+//       childList: true
+//   });
+this.chatreceive = Observable.interval(3000).subscribe(()=>{
+  this.retrieveCollectionconsistently();
+});
 
 }
 
@@ -135,6 +141,43 @@ ionViewDidLoad(){
   //     childList: true
   // });
   // }
+
+  retrieveCollectionconsistently() : void
+  { console.log(this.chatlength)
+     this._DB.getChatMessages(this._COLL,this._COLL2)
+     .then((data) =>
+     {
+        console.log(data.length);
+        console.log(this.chatlength);
+        
+        // IF we don't have any documents then the collection doesn't exist
+        // so we create it!
+        if(data.length > this.chatlength)
+        {
+          //  this.generateCollectionAndDocument();
+          this.chats = data;
+          this.chatlength = data.length
+          console.log(this.chatlength)
+          var currentTime = new Date();
+          console.log(currentTime)
+          setTimeout(()=>{this.contentArea.scrollToBottom();},500); 
+          setTimeout(()=>{this.contentArea.scrollToBottom();},1000); 
+        }
+
+        // Otherwise the collection does exist and we assign the returned
+        // documents to the public property of locations so this can be
+        // iterated through in the component template
+        else
+        {
+          //  this.chats = data;
+           console.log('no change')
+        }
+     })
+     .catch();
+  }
+
+
+
   retrieveCollection() : void
   {
      this._DB.getChatMessages(this._COLL,this._COLL2)
