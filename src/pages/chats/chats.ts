@@ -117,6 +117,8 @@ ionViewDidLoad(){
   
 this.retrieveCollection();
 this.contentArea.scrollToBottom();
+setTimeout(()=>{this.contentArea.scrollToBottom();},500); 
+setTimeout(()=>{this.contentArea.scrollToBottom();},1000); 
 //   // setInterval(function(){ this.retrieveCollection()}, 3000);
 //   this.mutationObserver = new MutationObserver((mutations) => {
 //       this.contentArea.scrollToBottom();

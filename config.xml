@@ -95,6 +95,12 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
     <plugin name="cordova-plugin-crop" spec="0.4.0" />
+    <plugin name="cordova-plugin-facebook4" spec="4.1.0">
+        <variable name="APP_ID" value="299049427417290" />
+        <variable name="APP_NAME" value="iFarm" />
+        <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.38.1" />
+    </plugin>
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>

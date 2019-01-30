@@ -134,7 +134,22 @@ console.log(error)
       )})
   
   
-    
+      this._DB.updateDocument(this.collection1,
+        this.collection2,
+        {
+           
+           name   : this.data.nickname,
+           lastmessage : "Image"
+           
+      })
+      .then((data) =>
+      {
+      
+      })
+      .catch((error) =>
+      {
+      
+      });
   
       
   }

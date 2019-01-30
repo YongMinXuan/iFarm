@@ -47,6 +47,9 @@
   </ion-list>
 </ion-content>
 <ion-footer>
+    <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton"(click)="scrollcontent()" >  <ion-icon name="arrow-dropdown"></ion-icon>
+    </button>
+
   <ion-grid>
     <ion-row class = "text">
       <ion-col col-10>

@@ -25,6 +25,7 @@ export class InboxPage {
   private _COLL 		: string 			= "Individual_Chats";
   public displayname = firebase.auth().currentUser.displayName;
   caOrCoCities$: Observable<any>;
+  chatreceive: Subscription;
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB  : DatabaseProvider,
     private _ALERT    : AlertController,) {
     // this.ref.on('value', resp => {
@@ -37,7 +38,16 @@ export class InboxPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RoomPage');
+    this.retrieveCollection();
+    this.chatreceive = Observable.interval(3000).subscribe(()=>{
+      this.retrieveCollection();
+      
+      });
   }
+
+  ionViewDidLeave(){
+    this.chatreceive.unsubscribe();
+    }
 
   ionViewDidEnter()
   {
@@ -59,6 +69,7 @@ room(){
 
   retrieveCollection() : void
   {
+    console.log("Did the retrieve load.")
     let name = firebase.auth().currentUser.uid
      this._DB.getChatsList(this._COLL, name )
      .then((data) =>

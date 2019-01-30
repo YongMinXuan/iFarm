@@ -30,6 +30,18 @@
 
   <ion-grid style="width: 75%;">
 
+    <button ion-button icon-only color="danger" clear (click)="addPhoto()">
+      <ion-icon name="images"></ion-icon>
+    </button>
+    <ion-row margin class="rowStyle" *ngIf="image">
+      <ion-card class="round-corners">
+        <img [src]="image" class="round-corners">
+      </ion-card>
+    </ion-row>
+    
+
+   
+    
     <ion-row class="rowStyle">
       <ion-icon name="person" color="danger"></ion-icon>
       <ion-input type="text" placeholder="your name" [(ngModel)]="name"></ion-input>

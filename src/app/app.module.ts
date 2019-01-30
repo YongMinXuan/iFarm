@@ -62,6 +62,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { IndividualchatPageModule } from '../pages/individualchat/individualchat.module';
 // import { ImagepickerProvider } from '../providers/imagepicker/imagepicker';
+import { Facebook } from '@ionic-native/facebook/ngx';
+
 
 
 //initialise firebase
@@ -86,7 +88,7 @@ firebase.firestore().settings({
     // GroupChatImagePage
   ],
   imports: [
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    // AngularFireModule.initializeApp(FIREBASE_CONFIG),
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(MyApp),
@@ -132,6 +134,7 @@ firebase.firestore().settings({
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Facebook,
     AuthService,
     DataService,
     Geolocation,
@@ -147,7 +150,8 @@ firebase.firestore().settings({
     LoadingServiceProvider,
     Network,
     LocationAccuracy,
-    ImagePicker
+    ImagePicker,
+    
     // ImagepickerProvider,
   ]
 })
