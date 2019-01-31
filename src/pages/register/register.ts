@@ -134,27 +134,77 @@ export class RegisterPage {
   //   }
   // }
   signup(){
-    firebase.firestore().collection("Profiles").add({
-      // likesCount: 0,
+    let loading = this.loadingCtrl.create({
+      content: "Uploading Image..."
+    })
+    loading.present();
+
+    firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+    .then((data) => {
       
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-      owner: firebase.auth().currentUser.uid,      
-      owner_name: firebase.auth().currentUser.displayName
-    }).then(async (doc) => {
-      console.log(doc)
+      console.log(data)
+      let ref = firebase.storage().ref("ProfileImages/" + data.user.uid);
 
-      if (this.image) {
-        await this.upload(doc.id)
-      }
+      let uploadTask = ref.putString(this.image.split(',')[1], "base64");
 
-      this.image = undefined;
+      uploadTask.on("state_changed", (taskSnapshot: any) => {
+        console.log(taskSnapshot)
+        let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
+        loading.setContent("Uploaded " + percentage + "% ...")
+
+      }, (error) => {
+        console.log(error)
+      },() => {
+        console.log("The upload is complete!");
+
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+
+          let newUser: firebase.User = data.user;
+          newUser.updateProfile({
+            displayName: this.name,
+            photoURL: url
+          }).then(() => {
+            console.log("Profile Updated")
+    
+            this.alertCtrl.create({
+              title: "Account Created",
+              message: "Your account has been created successfully.",
+              buttons: [
+                {
+                  text: "OK",
+                  handler: () => {
+                    //Navigate to the feeds page
+                    this.navCtrl.setRoot('TabsPage')
+                  }
+                }
+              ]
+            }).present();
+            loading.dismiss()
+          }).catch((err) => {
+            console.log(err)
+            loading.dismiss()
+          })
+    
+        }).catch((err) => {
+          console.log(err)
+          this.toast.create({
+            message: err.message,
+            duration: 3000
+          }).present();
+        })
+
+        })
+
+      })
+      
+      
+     
+
 
     
 
       
-    }).catch((err) => {
-      console.log(err)
-    })
+ 
 
     
   }
@@ -189,44 +239,7 @@ export class RegisterPage {
 
         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
 
-          firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-    .then((data) => {
-      
-      console.log(data)
-
-      let newUser: firebase.User = data.user;
-      newUser.updateProfile({
-        displayName: this.name,
-        photoURL: url
-      }).then(() => {
-        console.log("Profile Updated")
-
-        this.alertCtrl.create({
-          title: "Account Created",
-          message: "Your account has been created successfully.",
-          buttons: [
-            {
-              text: "OK",
-              handler: () => {
-                //Navigate to the feeds page
-                this.navCtrl.setRoot('TabsPage')
-              }
-            }
-          ]
-        }).present();
-        loading.dismiss()
-      }).catch((err) => {
-        console.log(err)
-        loading.dismiss()
-      })
-
-    }).catch((err) => {
-      console.log(err)
-      this.toast.create({
-        message: err.message,
-        duration: 3000
-      }).present();
-    })
+          
 
         }).catch((err) => {
           loading.dismiss()

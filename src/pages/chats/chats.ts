@@ -245,13 +245,15 @@ load(chat){
     let type	            : string		= this.data.type,
         user  	            : string		= this.data.nickname,
         message  	            : string		= this.data.message,
+        profilepic  	            : string		= firebase.auth().currentUser.photoURL,
         sendDate: Date = new Date();
         this._DB.sendchatmessage(this._COLL, this._COLL2,
           {
             type : type,            
             user : user,
             message :message,
-            sendDate : sendDate
+            sendDate : sendDate,
+            profilepic :profilepic
         })
 .then(async (data) =>
 {

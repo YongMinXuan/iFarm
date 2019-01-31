@@ -283,7 +283,8 @@ export class DatabaseProvider {
             message : doc.data().message,
             type : doc.data().type,
             user :doc.data().user,
-            image: doc.data().image
+            image: doc.data().image,
+            profilepic: doc.data().profilepic 
           });
         });
 
