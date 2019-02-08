@@ -11,4 +11,23 @@ page-login {
             margin-right: 10px;
         }
     }
+
+    .getstart{
+        background-image: url('../../assets/imgs/cover.jpg');
+        background-repeat: no-repeat;
+        background-size:cover;
+        // filter: blur(8px);
+        // -webkit-filter: blur(8px);
+    }
+
+    .item.item-trns {
+        border-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);
+        color: white; 
+    }
+
+    .icon{
+        margin: 13px 8px;
+        padding-top: 3px;
+        }
 }

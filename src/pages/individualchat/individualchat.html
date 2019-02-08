@@ -29,6 +29,9 @@
             <!-- <span class="msg-name">Me</span> -->
             <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
             <p text-wrap>You</p>
+            <ion-avatar>
+              <img [src]= chat.image  *ngIf="chat.image" class="round-corners">
+            </ion-avatar>
             <p text-wrap>{{chat.message}}</p>
           </div>
         </div>
