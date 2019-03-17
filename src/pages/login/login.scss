@@ -13,8 +13,9 @@ page-login {
     }
 
     .getstart{
-        background-image: url('../../assets/imgs/cover.jpg');
+        // background-image: url('../../assets/imgs/cover.jpg');
         background-repeat: no-repeat;
+        background-color: #33ca83;
         background-size:cover;
         // filter: blur(8px);
         // -webkit-filter: blur(8px);
@@ -30,4 +31,41 @@ page-login {
         margin: 13px 8px;
         padding-top: 3px;
         }
+
+    .input{
+        // background-color:white;
+    }
+
+    ion-content {
+        .scroll-content { 
+            background-color:  #33ca83
+        }
+    }
+
+    .item {
+        background-color:  #33ca83
+    }
+
+    .logo{
+        font-size: 25vh;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    h1, h6 {
+        color: white;
+        font-size: 1em;
+    }
+
+    .rowStyle {
+        background-color: white;
+        padding-left: 10px;
+        border-radius: 30px;
+        margin-top: 10px;
+
+        ion-icon {
+            margin-top: 13px;
+            margin-right: 10px;
+        }
+    }
 }

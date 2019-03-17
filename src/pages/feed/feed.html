@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar color="danger">
-    <ion-title>Your Feed</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Questions and Answer</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only clear (click)="logout()">
@@ -17,13 +17,13 @@
 <ion-content>
 
   <ion-row margin class="rowStyle">
-    <button ion-button icon-only color="danger" clear (click)="addPhoto()">
+    <button ion-button icon-only color="primary" clear (click)="addPhoto()">
       <ion-icon name="images"></ion-icon>
     </button>
 
     <ion-input type="text" placeholder="Ask a Question..." [(ngModel)]="text"></ion-input>
 
-    <button ion-button icon-only color="danger" clear (click)="post()">
+    <button ion-button icon-only color="primary" clear (click)="post()">
       <ion-icon name="send"></ion-icon>
     </button>
   </ion-row>
@@ -51,7 +51,7 @@
         Delete
       </button>
       </ion-item-options> -->
-    <ion-item-divider color="danger">
+    <ion-item-divider color="primary">
       {{ post.data().owner_name }} Says
       <ion-buttons end>
         <button ion-button icon-only clear (click)="deleteDocument(post)" *ngIf="user_identification(post)">
@@ -68,19 +68,19 @@
 
     <ion-row class="bottom-bar">
       <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="like(post)">
+        <button ion-button block icon-left clear small color="primary" class="border-right" (click)="like(post)">
           <ion-icon name="thumbs-up"></ion-icon>
           <small>{{ post.data().likesCount || 0 }} Likes</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small color="danger" class="border-right" (click)="comment(post)">
+        <button ion-button block icon-left clear small color="primary" class="border-right" (click)="comment(post)">
           <ion-icon name="text"></ion-icon>
           <small>{{ post.data().commentsCount || 0 }} Comments</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small color="danger">
+        <button ion-button block icon-left clear small color="primary">
           <small>{{ ago(post.data().created.toDate()) }} ago</small>
         </button>
       </ion-col> 

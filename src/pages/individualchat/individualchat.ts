@@ -1,3 +1,4 @@
+import { InboxPage } from './../inbox/inbox';
 
 import { GroupChatMulitpleImagePage } from './../group-chat-mulitple-image/group-chat-mulitple-image';
 import { Observable } from 'rxjs/Observable';
@@ -474,7 +475,7 @@ exitChat() {
 
   this.offStatus = true;
 
-  this.navCtrl.setRoot(RoomPage, {
+  this.navCtrl.setRoot(InboxPage, {
     nickname:this.nickname
   });
 }

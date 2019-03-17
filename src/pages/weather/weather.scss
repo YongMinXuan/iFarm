@@ -1,8 +1,26 @@
 page-weather {
+
+    .custom-icon {
+        font-size: 64px;
+      }
+    
 .slides-page {
     ion-slides {
         height: auto !important;
     }
+
+.background{
+    background-color: #33ca83;
+}
+
+.wall{
+    border-right-color: white
+}
+
+.words{
+    color: #f6d702;
+}
+
 
     .current-temp {
         color: color($colors, lightwhite);

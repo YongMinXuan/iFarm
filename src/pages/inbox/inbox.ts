@@ -5,7 +5,7 @@ import { GroupChatImagePage } from './../group-chat-image/group-chat-image';
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { User } from './../../models/chat/chats.models';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import {  IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List,normalizeURL } from 'ionic-angular';
+import { App, IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List,normalizeURL ,ToastController} from 'ionic-angular';
 import { RoomPage } from '../room/room';
 import * as firebase from 'Firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -27,7 +27,7 @@ export class InboxPage {
   caOrCoCities$: Observable<any>;
   chatreceive: Subscription;
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB  : DatabaseProvider,
-    private _ALERT    : AlertController,) {
+    private _ALERT    : AlertController,private toastCtrl: ToastController,private app: App,) {
     // this.ref.on('value', resp => {
     //   this.rooms = [];
     //   this.rooms = snapshotToArray(resp);
@@ -109,6 +109,23 @@ room(){
         }
      })
      .catch();
+  }
+
+  logout() {
+
+    firebase.auth().signOut().then(() => {
+
+      let toast = this.toastCtrl.create({
+        message: "You have been logged out successfully.",
+        duration: 3000
+      }).present();
+
+      // this.navCtrl.setRoot('LoginPage');
+      this.app.getRootNav().setRoot('LoginPage');
+
+
+    });
+
   }
 
 }

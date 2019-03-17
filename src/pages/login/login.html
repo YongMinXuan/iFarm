@@ -7,9 +7,9 @@
 </ion-header> -->
 
 <ion-content padding class = "getstart">
-  <!-- <ion-item text-center no-lines>
-    <ion-icon name="logo-rss" class="logo" color="light"></ion-icon>
-  </ion-item> -->
+  <ion-item text-center no-lines>
+    <ion-icon name="rose" class="logo" color="orange"></ion-icon>
+  </ion-item>
 
   <ion-item text-center no-lines class="item item-trns text-center">
     <h1>iFarm</h1>
@@ -19,22 +19,22 @@
   <ion-grid style="width: 75%;">
     <ion-row class="rowStyle">
       <ion-icon name="mail" color="light"></ion-icon>
-      <ion-input type="email" placeholder="your email" [(ngModel)]="email"></ion-input>
+      <ion-input type="email"  placeholder="your email" [(ngModel)]="email"></ion-input>
     </ion-row>
 
     <ion-row class="rowStyle">
       <ion-icon name="key" color="light"></ion-icon>
-      <ion-input type="password" placeholder="your password" [(ngModel)]="password"></ion-input>
+      <ion-input class = "input" type="password" placeholder="your password" [(ngModel)]="password"></ion-input>
     </ion-row>
 
     <ion-row>
-      <button ion-button block round color="light" style="margin-top: 20px;" (click)="login()">Login</button>
+      <button ion-button block round color="orange" style="margin-top: 20px;" (click)="login()">Login</button>
     </ion-row>
 
   </ion-grid>
 
-  <button ion-button block clear color="secondary" (click)="gotoSignup()">
-    Don't have an account? Sign Up
+  <button ion-button block clear color="orange" outline (click)="gotoSignup()">
+    Don't have an account? <br >Sign Up Here!
   </button>
 
 

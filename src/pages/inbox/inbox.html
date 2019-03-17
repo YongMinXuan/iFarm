@@ -7,6 +7,11 @@
         <ion-icon name="add-circle"></ion-icon>
       </button> -->
     </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -15,9 +20,12 @@
   <ion-list>
     <ion-item *ngFor="let room of rooms">
       <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
-    <ng-template #alternate>{{room.user1name}}</ng-template>
+    <ng-template #alternate >{{room.user1name}}</ng-template>
+    <ion-avatar>
+        <!-- <img [src]="room."> -->
+    </ion-avatar>
     <h4>{{room.name}}: {{room.lastmessage}}</h4>
-      <ion-icon name="chatboxes" item-end (click)="joinRoom(room.id)"></ion-icon>
+      <ion-icon color = "primary" name="chatboxes" item-end (click)="joinRoom(room.id)"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

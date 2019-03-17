@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Channels Chat
+      Individual Chat
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="exitChat()">
@@ -18,7 +18,7 @@
         <img [src]= chat.image  *ngIf="chat.image" class="round-corners">
         <span class="chat-date">{{chat.sendDate | date:'short'}}</span>
         <!-- <span class="chat-content-center">{{chat.message}}</span> -->
-        <p text-wrap>{{chat.message}}</p>
+        <p class="chat-content-center" text-wrap>{{chat.message}}</p>
       </div>
       <ng-template #message>
         <div class="chat-message" text-right *ngIf="chat.user === nickname">
@@ -29,9 +29,7 @@
             <!-- <span class="msg-name">Me</span> -->
             <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
             <p text-wrap>You</p>
-            <ion-avatar>
-              <img [src]= chat.image  *ngIf="chat.image" class="round-corners">
-            </ion-avatar>
+           
             <p text-wrap>{{chat.message}}</p>
           </div>
         </div>
@@ -65,6 +63,8 @@
       <ion-col col-1 (click)="sendMessage()">
         <ion-icon name="paper-plane"></ion-icon>
       </ion-col>
+      
+
     </ion-col>
       <!-- <ion-row margin class="rowStyle" *ngIf="image">
           <img [src]="image" class="round-corners">

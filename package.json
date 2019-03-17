@@ -27,6 +27,7 @@
     "@ionic-native/file": "^4.19.0",
     "@ionic-native/firebase": "^4.18.0",
     "@ionic-native/geolocation": "^4.18.0",
+    "@ionic-native/http": "^5.2.0",
     "@ionic-native/image-picker": "^4.19.0",
     "@ionic-native/location-accuracy": "^4.18.0",
     "@ionic-native/network": "^4.18.0",
@@ -94,7 +95,8 @@
         "APP_NAME": "iFarm",
         "FACEBOOK_HYBRID_APP_EVENTS": "false",
         "FACEBOOK_ANDROID_SDK_VERSION": "4.38.1"
-      }
+      },
+      "cordova-plugin-advanced-http": {}
     },
     "platforms": [
       "browser",

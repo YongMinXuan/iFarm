@@ -405,7 +405,7 @@ export class FeedPage {
 
     toast.present();
 
-    this.http.post("https://cors-anywhere.herokuapp.com/https://us-central1-ifarm-a79f0.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
+    this.http.post("https://ifarmfyp.herokuapp.com/https://us-central1-ifarm-a79f0.cloudfunctions.net/updateLikesCount", JSON.stringify(body), {
       responseType: "text"
     }).subscribe((data) => {
       console.log(data)
