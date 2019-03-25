@@ -114,7 +114,6 @@ export class FeedPage {
       content: "Loading Feed..."
     });
 
-
     loading.present();
 
     let query = firebase.firestore().collection("posts").orderBy("created", "desc").limit(this.pageSize);
@@ -302,16 +301,8 @@ export class FeedPage {
           this.imagePicker.getPictures(options).then(
             (results) => {
              
-                 this.image = "data:image/jpeg;base64," + results;
-               
-              // for (var i = 0; i < results.length; i++) {
-              //   this.uploadImageToFirebase(results[i]);
-              //   this.navCtrl.push(GroupChatMulitpleImagePage, {
-              //     "data": data.id,"image": results[i], "collection1": this._COLL,"collection2": this._COLL2
-              //   })
-              // this._DB.sendchatmessage(this._COLL, this._COLL2,
-              //   result[i]);
-              // }
+                 this.image = "data:image/jpeg;base64," + results;              
+             
             }, (err) => console.log(err)
           );
         }

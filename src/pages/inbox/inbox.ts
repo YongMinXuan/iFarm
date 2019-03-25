@@ -128,4 +128,42 @@ room(){
 
   }
 
+  deleteDocument(obj) : void
+   {
+      this._DB.deleteDocument(this._COLL,
+      						obj.id)
+      .then((data : any) =>
+      {
+         this.displayAlert('Success', 'The chat was successfully removed');
+      })
+      .catch((error : any) =>
+      {
+         this.displayAlert('Error', error.message);
+      });
+   }
+ /**
+    * Provide feedback to user after an operation has succeeded/failed
+    *
+    * @public
+    * @method displayAlert
+    * @param  title          {String}           Heading for alert message
+    * @param  message        {String}           Content for alert message
+    * @return {none}
+    */
+   displayAlert(title      : string,
+    message    : string) : void
+{
+let alert : any     = this._ALERT.create({
+title      : title,
+subTitle   : message,
+buttons    : [{
+text      : 'Got It!',
+handler   : () =>
+{
+this.retrieveCollection();
+}
+}]
+});
+alert.present();
+}
 }

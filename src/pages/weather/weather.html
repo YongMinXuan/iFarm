@@ -18,18 +18,19 @@
         </p>
       </ion-col>
       <ion-col col-66  color = "orange">
-        <h1 text-center style="color: black; padding-top: 20%;">
+        <h1 text-center style="color: black;">
           <ion-icon style="
           font-size: 4em;
       " color ="orange" name="{{ forecast.daily.data[0].icon | weatherIcon }}"></ion-icon>
           
         </h1>
-        <p text-center>
-          {{ this.locationName }}
-        </p>
+       
 
       </ion-col>
     </ion-row>
+    <p text-center>
+      {{ this.locationName }}
+    </p>
     <ion-row>
       <ion-col col-6 text-center class = "wall">
         <p>

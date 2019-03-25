@@ -256,7 +256,8 @@ sendMessage() {
           user : user,
           message :message,
           sendDate : sendDate,
-          profilepic :profilepic
+          profilepic :profilepic,
+          
       })
 .then(async (data) =>
 {
@@ -283,7 +284,8 @@ this._DB.updateDocument(this._COLL,
   {
      
      name   : user,
-     lastmessage : message
+     lastmessage : message,
+     profilepic :profilepic
      
 })
 .then((data) =>
@@ -294,6 +296,8 @@ this._DB.updateDocument(this._COLL,
 {
 
 });
+
+
 
 }
 

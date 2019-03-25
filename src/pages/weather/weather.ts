@@ -51,7 +51,7 @@ export class WeatherPage {
        
   };     
 
-    // this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCStWuZ8Z2PFmw04iTjA1nr_gWZr9c81XM', JSON.stringify(location),{headers: headers}).subscribe((location) => {
+    
       this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
         () => {  
     this.geolocation.getCurrentPosition(posOptions).then((location) => {

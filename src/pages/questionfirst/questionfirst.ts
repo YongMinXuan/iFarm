@@ -216,7 +216,9 @@ export class QuestionFirstPage {
                user2: firebase.auth().currentUser.uid,
                user1name: location.name,
                user2name: firebase.auth().currentUser.displayName,
-               roomname : roomName
+               roomname : roomName,
+               user2display: firebase.auth().currentUser.photoURL,
+               
           }).then((data) =>
           {
              console.log("Added Success")
