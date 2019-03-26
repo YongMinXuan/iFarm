@@ -40,7 +40,18 @@
         >
       </ion-input>
 
-      
+      <ion-item >
+          <ion-label stacked>Enter the Date of Your Event</ion-label>
+          <ion-input 
+          type="text" 
+          hidden
+          displayFormat="DD MMM , YYYY HH:mm" 
+          (click)='openCalendar()'
+          [(ngModel)]="this.start"
+          formControlName='OfficialStartDate'
+          >
+        </ion-input>
+      </ion-item>
       <!-- <ion-label stacked>What will you be teaching?:</ion-label>
    
       <ion-calendar 

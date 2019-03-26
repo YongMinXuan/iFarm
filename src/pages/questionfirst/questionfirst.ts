@@ -42,7 +42,7 @@ export class QuestionFirstPage {
     * @description      Used to store/provide the initial document data for the database collection
     */
    private _CONTENT  	: any;
-
+   public days  	: any;
 
 
    /**
@@ -138,6 +138,9 @@ export class QuestionFirstPage {
          else
          {
             this.locations = data;
+             let date : any;
+             console.log(this.locations.StartDate);
+            date = this.locations.StartDate - this.locations.EndDate;
          }
       })
       .catch();

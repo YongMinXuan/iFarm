@@ -28,6 +28,8 @@ export class WeatherPage {
 
   public bgColorClassName: string;
 
+  public weather: any;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -39,6 +41,8 @@ export class WeatherPage {
     public http: Http,
     private locationAccuracy: LocationAccuracy
   ) {}
+
+
 
   ionViewDidLoad() {
     this.loadingServiceProvider.show();

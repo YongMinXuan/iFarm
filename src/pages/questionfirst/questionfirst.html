@@ -1,39 +1,49 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
+<ion-header color = "dark">
+  <ion-navbar color = "dark">
+    <ion-title text-center>
       Events Page
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="addDocument()">
+        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+  
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="background-color: #F29559;">
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-  <button
-    ion-button
-    block
-    color='primary'
-    (click)='addDocument()'>
-    Add an Event
-  </button>
+ 
 
-  <ion-list>
-    <ion-item-sliding *ngFor='let location of locations'>
-        <ion-item>
+  <ion-list class=“item-borderless”>
+    <ion-item-sliding style="    
+    margin-bottom: 20px; background-color: #F29559;     border-radius: 15px;
+" *ngFor='let location of locations' >
+ 
+        <ion-item  no-lines color = "dark">
+        <div class = "row">
 
-      <h2>{{ location.city }}</h2>
-      <p>
-        <!-- StartDate: {{ location.StartDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
-        StartDate: {{ location.StartDate }}<br>
-        EndDate: {{ location.EndDate }}<br>
-        StartTime: {{ location.StartTime }}<br>
-        EndTime: {{ location.EndTime }}<br>
-        <!-- EndDate: {{ location.EndDate.seconds * 1000 | date: 'EEEE, d MMMM, y, h:mm:ss a zzzz'}}<br> -->
-        Location: {{ location.location}}<br>
-        Description: {{ location.population}}<br>
-        Items to Bring: {{ location.established }}
-      </p>
+            <div>
+            <h6 style="
+     margin-bottom: 20px;
+ ">{{location.StartDate}}</h6>
+      
+          
+            </div>    
+      <div>
+        <h2>
+        {{ location.city }}  <br>    
+        {{ location.StartDate }} - {{ location.EndDate }}<br>       
+        {{ location.StartTime }} - {{ location.EndTime }}<br>
+        {{ location.location}}<br>
+        {{ location.population}}<br>
+        {{ location.established }}
+      </h2>
+    </div>
+    </div> 
     </ion-item>
       <ion-item-options  side="right">
       <button

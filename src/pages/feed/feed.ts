@@ -31,6 +31,7 @@ export class FeedPage {
   cursor: any;
   infiniteEvent: any;
   image: string;
+  size: any;
   
   constructor(private app: App, public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private http: HttpClient, private actionSheetCtrl: ActionSheetController, private _DB     : DatabaseProvider, private alertCtrl: AlertController, private modalCtrl: ModalController, private firebaseCordova: Firebase,public imagePicker: ImagePicker,) {
     this.getPosts();
@@ -468,6 +469,14 @@ export class FeedPage {
                           duration: 3000
                         }).present();
                       })
+
+                      firebase.firestore().collection('comments').where("post", "==", post.id).get().then(snap => {
+                        this.size = snap.size // will return the collection size
+                        console.log("new")
+                        console.log(this.size)
+                        firebase.firestore().collection('posts').doc(post.id).update({commentsCount: this.size})
+                        
+                     });
 
                     }
 

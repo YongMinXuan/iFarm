@@ -1,7 +1,7 @@
-<ion-header>
+<ion-header color = "dark">
 
-  <ion-navbar>
-    <ion-title>Room</ion-title>
+  <ion-navbar color = "dark">
+    <ion-title text-center>Room</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addRoom()">
         <ion-icon name="add-circle"></ion-icon>
@@ -11,7 +11,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="background-color: #F29559;">
   <ion-list>
     <ion-item *ngFor="let room of rooms">
       {{room.roomname}}

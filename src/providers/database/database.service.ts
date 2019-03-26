@@ -53,7 +53,7 @@ export class DatabaseProvider {
   getDocuments(collectionObj: string) : Promise<any>{
     return new Promise((resolve, reject) => {
       this._DB.collection(collectionObj)
-      .orderBy("StartDate", "asc")
+      .orderBy("OfficialStartDate", "asc")
       .get()
       .then((querySnapshot) => {
         let obj : any = [];
@@ -73,6 +73,7 @@ export class DatabaseProvider {
            established    : doc.data().established,
            name: doc.data().name,
            user : doc.data().user,
+           OfficialStartDate    : doc.data().OfficialStartDate,
           });
         });
 

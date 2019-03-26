@@ -83,6 +83,7 @@ export class QuestionPage {
 
    public starting       : string;
    public ending      : string;
+   public start      : any;
 
     /**
     * @name StartTime
@@ -99,6 +100,8 @@ export class QuestionPage {
     * @description     Defines an object for returning documents from Cloud Firestore database
     */
    public EndTime       : Date;
+
+   public OfficialStartDate       : Date;
 
 
 
@@ -171,7 +174,8 @@ export class QuestionPage {
          'EndTime' 		        : ['', Validators.required],
          'location' 		        : ['', Validators.required],
          'population' 	        : ['', Validators.required],
-         'established'	        : ['', Validators.required]
+         'established'	        : ['', Validators.required],
+         'OfficialStartDate'	        : ['', Validators.required]
       });
 
 
@@ -191,6 +195,8 @@ export class QuestionPage {
           this.established      = record.location.established;
           this.location     = record.location.location;
           this.docID            = record.location.id;
+          this.OfficialStartDate      = record.location.OfficialStartDate
+          ;
           this.isEditable       = true;
           this.title            = 'Update this document';
       }
@@ -218,7 +224,8 @@ export class QuestionPage {
           location        : string 		= this.form.controls["location"].value,
          established       : string		= this.form.controls["established"].value,
          user	            : string		= firebase.auth().currentUser.uid,
-         name	            : string		= firebase.auth().currentUser.displayName;
+         name	            : string		= firebase.auth().currentUser.displayName,
+         OfficialStartDate       : Date		= this.form.controls["OfficialStartDate"].value;
          ;
 
       // console.log(StartDate);
@@ -279,7 +286,8 @@ export class QuestionPage {
                               location : location,
                               established   : established,
                               name   : name,
-                              user : user
+                              user : user,
+                              OfficialStartDate : OfficialStartDate
 	                        })
          .then((data) =>
          {
@@ -360,7 +368,7 @@ export class QuestionPage {
          console.log(new Date(date.to.time));
          this.starting = moment(date.from.time).format('Do MMM YYYY');;
          this.ending = moment(date.to.time).format('Do MMM YYYY');
-
+         this.start = date.from.time;
          console.log(typeof this.starting);
       });
 }
