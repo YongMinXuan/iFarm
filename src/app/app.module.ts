@@ -65,6 +65,7 @@ import { IndividualchatPageModule } from '../pages/individualchat/individualchat
 // import { ImagepickerProvider } from '../providers/imagepicker/imagepicker';
 import { Facebook } from '@ionic-native/facebook/ngx';
 
+declare var require: any    
 
 
 //initialise firebase

@@ -7,6 +7,12 @@
     "sourceMap": true,
     "target": "es6"
   },
+  "files": [
+    "node_modules/typescript/lib/lib.es6.d.ts"
+],
+"exclude": [
+    "node_modules"
+],
   "compileOnSave": true,
   "include": [
     "src"

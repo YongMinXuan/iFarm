@@ -45,6 +45,24 @@ const sendNotification = (owner_uid, type) => {
     
 }
 
+export const returnemail = functions.https.onRequest((request, response) => {
+
+    const email = JSON.parse(request.body).email;
+    admin.auth().getUserByEmail(email)
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    console.log('Successfully fetched user data:', userRecord.toJSON());
+    response.status(200).send(userRecord.toJSON())
+    return userRecord.toJSON()
+  })
+  .catch(function(error) {
+   console.log('Error fetching user data:', error);
+   response.status(error.code).send(error.message);
+
+  });
+})
+
+
 export const updateLikesCount = functions.https.onRequest((request, response) => {
 
     console.log(request.body);
