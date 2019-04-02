@@ -1,8 +1,12 @@
 <ion-header color = "dark">
 
   <ion-navbar color = "dark">
+    <ion-row>
+      <ion-avatar item-start (click)="update()">
+          <img [src] = "profilepic">
+        </ion-avatar>
     <ion-title text-center>Inbox</ion-title>
-    <ion-buttons end>
+    <ion-buttons end> 
       <!-- <button ion-button icon-only (click)="addRoom()">
         <ion-icon name="add-circle"></ion-icon>
       </button> -->
@@ -12,14 +16,21 @@
         <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
+  </ion-row>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding style="background-color: #F29559;">
+
+  <!-- <ion-avatar>
+    <img src= "data:image/*;base64,{{profilepic}}">
+  </ion-avatar> -->
   <ion-list>
     <ion-item-sliding *ngFor="let room of rooms">
-    <ion-item (click)="joinRoom(room.id)">
+    <ion-item (click)="joinRoom(room.id)" style="    
+    margin-bottom: 20px; background-color: white;     border-radius: 15px;
+">
       <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
     <ng-template #alternate >{{room.user1name}}</ng-template>
   

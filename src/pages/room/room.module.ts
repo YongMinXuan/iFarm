@@ -5,9 +5,11 @@ import { RoomPage } from './room';
 @NgModule({
   declarations: [
     RoomPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(RoomPage),
+   
   ],
 })
 export class RoomPageModule {}

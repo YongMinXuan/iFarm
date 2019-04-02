@@ -291,24 +291,7 @@ export class DatabaseProvider {
 
         resolve(obj);
       })
-      // (function (querySnapshot) {
-      //   let commentaries = []
-      //   console.log(querySnapshot.docChanges())
-      //   querySnapshot.forEach(function (doc) {
-      //     commentaries.push({
-      //       id : doc.id,
-      //       message : doc.data().message,
-      //       type : doc.data().type,
-      //       user :doc.data().user,
-      //       image: doc.data().image
-      //     })
-      //   })
-      //   resolve(commentaries);
-      // })
-      // .catch((error : any) => {
-      //   reject(error);
-      //   console.log(error)
-      // });
+      
     });
   }
 

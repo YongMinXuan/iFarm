@@ -235,14 +235,6 @@ return `https://cors-anywhere.herokuapp.com/${chat}`
 }
 
 sendMessage() {
-  // let newData = firebase.database().ref('chatrooms/'+this.roomkey+'/chats').push();
-  // newData.set({
-  //   type:this.data.type,
-  //   user:this.data.nickname,
-  //   message:this.data.message,
-  //   sendDate:Date()
-  // });
-  // this.data.message = '';
 
   let type	            : string		= this.data.type,
       user  	            : string		= this.data.nickname,
@@ -262,10 +254,7 @@ sendMessage() {
 .then(async (data) =>
 {
 console.log(data);
-// if (this.image) {
-//   await this.upload(this._COLL, this._COLL2, data.id)
-// }
-// this.clearForm();
+
 this.displayAlert();
 
 this.retrieveCollection();

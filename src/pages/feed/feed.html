@@ -81,13 +81,13 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small color="primary" class="border-right" (click)="comment(post)">
+        <button ion-button block icon-left clear small color="dark" class="border-right" (click)="comment(post)">
           <ion-icon name="text"></ion-icon>
           <small>{{ post.data().commentsCount || 0 }} Comments</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small color="primary">
+        <button ion-button block icon-left clear small color="dark">
           <small>{{ ago(post.data().created.toDate()) }} ago</small>
         </button>
       </ion-col> 

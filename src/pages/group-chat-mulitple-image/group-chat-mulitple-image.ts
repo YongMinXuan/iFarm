@@ -99,42 +99,28 @@ export class GroupChatMulitpleImagePage {
 
   sendImage(){
     return new Promise((resolve, reject) => {
-
-      // let loading = this.loadingCtrl.create({
-      //   content: "Uploading Image..."
-      // })
-      
       let loading = this.loadingCtrl.create({
         content: "Uploading Image..."
       })
 
       loading.present();
       // loading.present();
-      for (var i = 0; i < this.image.length; i++){
-
-       
+      for (var i = 0; i < this.image.length; i++){      
       
       const filename = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-      let ref = firebase.storage().ref("coolImages/" + filename);
-
-    
+      let ref = firebase.storage().ref("coolImages/" + filename);    
    
-      let uploadTask = ref.putString(this.image[i].split(',')[1], "base64");
-     
+      let uploadTask = ref.putString(this.image[i].split(',')[1], "base64");   
 
       uploadTask.on("state_changed", (taskSnapshot: any) => {
-        console.log(taskSnapshot)
-        // let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
-        // loading.setContent("Uploaded " + percentage + "% ...")
-  
+        console.log(taskSnapshot)          
       }, (error) => {
         console.log(error)
       }, () => {
         console.log("The upload is complete!");
   
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-  console.log(url);
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => { 
           let type	            : string		= this.data.type,
         user  	            : string		=   this.data.nickname,
         message  	            : string		= " ",
@@ -152,16 +138,6 @@ export class GroupChatMulitpleImagePage {
 .then(async (data) =>
 {
 console.log(data);
-// if (this.image) {
-//   await this.upload(this._COLL, this._COLL2, data.id)
-// }
-// this.clearForm();
-// this.displayAlert();
-
-// this.retrieveCollection();
-// this.contentArea.scrollToBottom();
-// this.data.message = "";
-// this.contentArea.scrollToBottom();
 this.image = [];
 while (this.image.length !== 0) {
   this.image.pop()

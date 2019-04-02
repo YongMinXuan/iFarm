@@ -5,13 +5,15 @@ import { GroupChatImagePage } from './../group-chat-image/group-chat-image';
 import { DatabaseProvider } from './../../providers/database/database.service';
 import { User } from './../../models/chat/chats.models';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { App, IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List,normalizeURL ,ToastController} from 'ionic-angular';
+import { App, IonicPage,ModalController, ActionSheetController, NavController, NavParams, Content ,AlertController,List,normalizeURL ,ToastController,MenuController} from 'ionic-angular';
 import { RoomPage } from '../room/room';
 import * as firebase from 'Firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Subscription } from "rxjs/Subscription";
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @IonicPage()
 @Component({
@@ -19,7 +21,7 @@ import { Crop } from '@ionic-native/crop';
   templateUrl: 'inbox.html',
 })
 export class InboxPage {
-
+  profilepic: any;
   rooms = [];
   ref = firebase.database().ref('chatrooms/');
   private _COLL 		: string 			= "Individual_Chats";
@@ -27,13 +29,18 @@ export class InboxPage {
   caOrCoCities$: Observable<any>;
   chatreceive: Subscription;
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB  : DatabaseProvider,
-    private _ALERT    : AlertController,private toastCtrl: ToastController,private app: App,) {
+    private _ALERT    : AlertController,private toastCtrl: ToastController,private app: App, private menu: MenuController,private sanitizer: DomSanitizer,) {
     // this.ref.on('value', resp => {
     //   this.rooms = [];
     //   this.rooms = snapshotToArray(resp);
     // });
     let displayname = firebase.auth().currentUser.displayName;
       console.log(displayname)
+      console.log(firebase.auth().currentUser.photoURL)
+    var image = firebase.auth().currentUser.photoURL;
+    this.profilepic = this.sanitizer.bypassSecurityTrustUrl(image);
+    console.log("profile pic");
+    console.log(this.profilepic)
   }
 
   ionViewDidLoad() {
@@ -56,6 +63,24 @@ export class InboxPage {
 
 room(){
   
+}
+
+update(){
+  this.navCtrl.push('EditprofilePage')
+}
+
+openFirst() {
+  this.menu.enable(true, 'first');
+  this.menu.open('first');
+}
+
+openEnd() {
+  this.menu.open('end');
+}
+
+openCustom() {
+  this.menu.enable(true, 'custom');
+  this.menu.open('custom');
 }
 
 

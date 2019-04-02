@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-navbar>
+<ion-header  color = "dark">
+  <ion-navbar  color = "dark">
     <ion-title>
       Individual Chat
     </ion-title>
@@ -48,24 +48,20 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-    <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton"(click)="scrollcontent()" >  <ion-icon name="arrow-dropdown"></ion-icon>
-    </button>
+  <button ion-button class = "scrollbutton" *ngIf="this.showScrollButton"(click)="scrollcontent()" >  <ion-icon name="arrow-dropdown"></ion-icon>
+  </button>
 
   <ion-grid>
     <ion-row class = "text">
-      <ion-col col-10>
+      <ion-col col-9>
         <ion-input type="text" placeholder="Type a message" [(ngModel)]="data.message" name="message"></ion-input>
-      </ion-col>
-      <ion-col col3>
-      <ion-col col-1 (click)="addimage(data)">
-        <ion-icon name="images"></ion-icon>
-      </ion-col>      
-      <ion-col col-1 (click)="sendMessage()">
-        <ion-icon name="paper-plane"></ion-icon>
-      </ion-col>
+      </ion-col> 
+      <ion-icon name="images"(click)="addimage(data)"></ion-icon>
+       <ion-icon name="paper-plane" (click)="sendMessage()"></ion-icon>
+      
       
 
-    </ion-col>
+    
       <!-- <ion-row margin class="rowStyle" *ngIf="image">
           <img [src]="image" class="round-corners">
       </ion-row> -->

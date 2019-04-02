@@ -1,13 +1,13 @@
-<ion-header>
+<ion-header color = "dark">
 
-  <ion-navbar>
+  <ion-navbar color = "dark">
     <ion-title>AddRoom</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding style="background-color: #F29559;">
   <form (ngSubmit)="addRoom()">
     <ion-list>
       <ion-item>
@@ -15,7 +15,7 @@
         <ion-input type="text" [(ngModel)]="data.roomname" name="roomname" required=""></ion-input>
       </ion-item>
       <ion-item>
-        <button ion-button full round color="secondary" type="submit">Add</button>
+        <button ion-button full round color="dark" type="submit">Add</button>
       </ion-item>
     </ion-list>
   </form>
