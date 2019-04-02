@@ -50,6 +50,10 @@ export class LoginPage {
     this.navCtrl.push("RegisterPage");
   }
 
+  gotoreset(){
+    this.navCtrl.push("ForgetpasswordPage");
+  }
+
 }
 // export class LoginPage implements OnDestroy{
 
