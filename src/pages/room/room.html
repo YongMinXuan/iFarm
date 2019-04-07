@@ -16,7 +16,11 @@
   <ion-list>
     <ion-item *ngFor="let room of rooms" style="    
     margin-bottom: 20px; background-color: white;     border-radius: 15px;
-" (click)="joinRoom(room.id)"><ion-icon name="chatboxes" item-left ></ion-icon>
+" (click)="joinRoom(room.id)">
+<ion-avatar>
+  <img src="{{room.image}}">
+</ion-avatar>
+<ion-icon name="chatboxes" item-end ></ion-icon>
       {{room.roomname}}
       
     </ion-item>

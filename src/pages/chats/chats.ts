@@ -274,6 +274,25 @@ this.image = "";
 {
 this.displayAlert();
 });
+
+
+this._DB.updateDocument(this._COLL,
+  this._COLL2,
+  {
+     
+     name   : user,
+     lastmessage : message,
+     profilepic :profilepic
+     
+})
+.then((data) =>
+{
+
+})
+.catch((error) =>
+{
+
+});
   }
 
   displayAlert() : void

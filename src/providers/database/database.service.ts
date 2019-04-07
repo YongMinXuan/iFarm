@@ -256,6 +256,7 @@ export class DatabaseProvider {
           obj.push({
             id : doc.id,
             roomname : doc.data().roomname,
+            image : doc.data().image,
           });
         });
 

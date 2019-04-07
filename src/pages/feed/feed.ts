@@ -78,16 +78,36 @@ export class FeedPage {
 
   deleteDocument(obj) : void
    {
-      this._DB.deleteDocument('posts',
+  console.log("is this working?")
+   let alert  = this.alertCtrl.create({
+        title      : "Are you Sure?",
+        // message: 'Message <strong>text</strong>!!!',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'Okay',
+            handler: () => {
+              this._DB.deleteDocument('posts',
       						obj.id)
       .then((data : any) =>
       {
-         this.displayAlert('Success', 'The record ' + obj.city + ' was successfully removed');
+         this.displayAlert('Success', 'The post was successfully removed');
       })
       .catch((error : any) =>
       {
          this.displayAlert('Error', error.message);
       });
+            }
+          }
+        ]
+      });
+      alert.present();
    }
 
    displayAlert(title      : string,
@@ -401,8 +421,7 @@ export class FeedPage {
       responseType: "text"
     }).subscribe((data) => {
       console.log(data)
-
-      toast.setMessage("Like updated!");
+     toast.setMessage("Like updated!");
       setTimeout(() => {
         toast.dismiss();
       }, 3000)

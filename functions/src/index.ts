@@ -58,7 +58,7 @@ export const returnemail = functions.https.onRequest((request, response) => {
   .catch(function(error) {
    console.log('Error fetching user data:', error);
    response.status(error.code).send(error.message);
-
+   return error
   });
 })
 

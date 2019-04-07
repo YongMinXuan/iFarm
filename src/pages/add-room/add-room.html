@@ -8,6 +8,12 @@
 
 
 <ion-content padding style="background-color: #F29559;">
+  <ion-row margin class="rowStyle" *ngIf="image">
+    <ion-card class="round-corners">
+      <img [src]="image" class="round-corners">
+    </ion-card>
+  </ion-row>
+  <button ion-button full round color="dark" (click) = "addPhoto()">Add</button>
   <form (ngSubmit)="addRoom()">
     <ion-list>
       <ion-item>

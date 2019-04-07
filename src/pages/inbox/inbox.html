@@ -1,5 +1,4 @@
 <ion-header color = "dark">
-
   <ion-navbar color = "dark">
     <ion-row>
       <ion-avatar item-start (click)="update()">
@@ -27,7 +26,9 @@
     <img src= "data:image/*;base64,{{profilepic}}">
   </ion-avatar> -->
   <ion-list>
-    <ion-item-sliding *ngFor="let room of rooms">
+    <ion-item-sliding *ngFor="let room of rooms" style="    
+    margin-bottom: 20px; background-color: white;     border-radius: 15px;
+">
     <ion-item (click)="joinRoom(room.id)" style="    
     margin-bottom: 20px; background-color: white;     border-radius: 15px;
 ">

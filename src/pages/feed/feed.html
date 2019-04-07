@@ -58,13 +58,16 @@
       </button>
       </ion-item-options> -->
     <ion-item-divider color="dark">
-
+      <ion-row>
       {{ post.data().owner_name }} Says
       <ion-buttons end>
-        <button ion-button icon-only clear (click)="deleteDocument(post)" *ngIf="user_identification(post)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
+        
       </ion-buttons>
+    </ion-row>
+
+    <button ion-button item-end icon-only clear (click)="deleteDocument(post)" *ngIf="user_identification(post)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
     </ion-item-divider>
 
     <ion-item text-wrap>
