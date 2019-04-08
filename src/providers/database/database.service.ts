@@ -196,7 +196,9 @@ export class DatabaseProvider {
             user1name : doc.data().user1name,
             user2name : doc.data().user2name,
             lastmessage: doc.data().lastmessage,
-            name : doc.data().name
+            name : doc.data().name,
+            user1display : doc.data().user1display,
+            user2display : doc.data().user2display,
           });
         });
 
@@ -208,6 +210,36 @@ export class DatabaseProvider {
     });
   }
 
+  getChatsList3(collectionObj: string,roomkey :string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).doc(roomkey)   
+      .get()
+      .then(function(doc) {
+        let obj : any = [];
+          console.log("HELLO")
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            roomname : doc.data().roomname,
+            user1 : doc.data().user1,
+            user2 : doc.data().user2,
+            user1name : doc.data().user1name,
+            user2name : doc.data().user2name,
+            lastmessage: doc.data().lastmessage,
+            name : doc.data().name,
+            user1display : doc.data().user1display,
+            user2display : doc.data().user2display,
+          });
+          console.log(obj)
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
   getChatsList2(collectionObj: string, name :string) : Promise<any>{
     
     let user	            : string		= firebase.auth().currentUser.uid;
@@ -228,7 +260,9 @@ export class DatabaseProvider {
             user1name : doc.data().user1name,
             user2name : doc.data().user2name,
             lastmessage: doc.data().lastmessage,
-            name : doc.data().name
+            name : doc.data().name,
+            user1display : doc.data().user1display,
+            user2display : doc.data().user2display,
           });
         });
 

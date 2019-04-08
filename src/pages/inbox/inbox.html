@@ -34,6 +34,9 @@
 ">
       <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
     <ng-template #alternate >{{room.user1name}}</ng-template>
+
+    <ion-avatar *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display"></ion-avatar>
+      <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display"></ion-avatar></ng-template>
   
         <!-- <img [src]="room."> -->
     

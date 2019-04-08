@@ -195,7 +195,7 @@ export class RegisterPage {
       let newUser: firebase.User = data.user;
       newUser.updateProfile({
         displayName: this.name,
-        photoURL: ""
+        photoURL: "https://firebasestorage.googleapis.com/v0/b/ifarm-a79f0.appspot.com/o/ProfileImages%2Fprofile.png?alt=media&token=80acc646-06a4-4917-8802-9c5f96f4528a"
       }).then(() => {
         console.log("Profile Updated")
 

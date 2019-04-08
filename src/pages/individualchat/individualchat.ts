@@ -49,7 +49,8 @@ public photos : any;
 public shouldScrollDown: boolean
 public showScrollButton: boolean
 public chatlength : number;
-
+public profile :any;
+public info: any;
 constructor(public navCtrl: NavController, public navParams: NavParams,private _DB: DatabaseProvider,
   private _ALERT: AlertController,private actionSheetCtrl: ActionSheetController,private camera: Camera,private modalCtrl : ModalController,public imagePicker: ImagePicker,) {
   this.roomkey = this.navParams.get("key") as string;
@@ -103,6 +104,64 @@ this.chatreceive = Observable.interval(3000).subscribe(()=>{
 //     childList: true
 // });
 this.dropdowntolatest()
+
+console.log(this.roomkey)
+let name = firebase.auth().currentUser.uid
+this._DB.getChatsList3(this._COLL, this.roomkey)
+   .then((data) =>
+   {
+      
+      this.profile = firebase.auth().currentUser.uid
+      console.log(data)
+      console.log(data.id)
+      console.log(data.name)
+      console.log(data.user1)
+      console.log(this.profile)
+      this.info = data;
+
+      console.log(this.info[0].user1)
+      console.log(this.info.name)
+
+      if(this.profile === this.info[0].user1)
+      {
+        this._DB.updateDocument(this._COLL,
+          this._COLL2,
+          {
+             
+             user2display : firebase.auth().currentUser.photoURL
+             
+        })
+        .then((data) =>
+        {
+        
+        })
+        .catch((error) =>
+        {
+        
+        });
+      }
+
+     
+      else
+      {
+        this._DB.updateDocument(this._COLL,
+          this._COLL2,
+          {
+             
+             user1display : firebase.auth().currentUser.photoURL
+             
+        })
+        .then((data) =>
+        {
+        
+        })
+        .catch((error) =>
+        {
+        
+        });
+      }
+   })
+   .catch();
 }
 
 ngOnInit() 

@@ -26,6 +26,7 @@ export class InboxPage {
   ref = firebase.database().ref('chatrooms/');
   private _COLL 		: string 			= "Individual_Chats";
   public displayname = firebase.auth().currentUser.displayName;
+  public uid = firebase.auth().currentUser.uid;
   caOrCoCities$: Observable<any>;
   chatreceive: Subscription;
   constructor(public navCtrl: NavController, public navParams: NavParams,private _DB  : DatabaseProvider,
@@ -45,6 +46,8 @@ export class InboxPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RoomPage');
+    let name = firebase.auth().currentUser.uid;
+    
     this.retrieveCollection();
     this.chatreceive = Observable.interval(3000).subscribe(()=>{
       this.retrieveCollection();
@@ -95,15 +98,16 @@ openCustom() {
   retrieveCollection() : void
   {
     console.log("Did the retrieve load.")
-    let name = firebase.auth().currentUser.uid
-     this._DB.getChatsList(this._COLL, name )
+    let cool = firebase.auth().currentUser.uid
+    console.log(cool)
+     this._DB.getChatsList(this._COLL, cool)
      .then((data) =>
      {
         // IF we don't have any documents then the collection doesn't exist
         // so we create it!
         if(data.length === 0)
         {
-          this._DB.getChatsList2(this._COLL , name )
+          this._DB.getChatsList2(this._COLL , cool)
           .then((data) =>
      {
         // IF we don't have any documents then the collection doesn't exist
