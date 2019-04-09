@@ -25,22 +25,29 @@
   <!-- <ion-avatar>
     <img src= "data:image/*;base64,{{profilepic}}">
   </ion-avatar> -->
-  <ion-list>
+  <ion-list no-lines>
     <ion-item-sliding *ngFor="let room of rooms" style="    
     margin-bottom: 20px; background-color: white;     border-radius: 15px;
 ">
     <ion-item (click)="joinRoom(room.id)" style="    
     margin-bottom: 20px; background-color: white;     border-radius: 15px;
-">
-      <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
+"><ion-grid>
+     <ion-row>
+      <ion-col col-3 >
+        <ion-avatar slot="start"  *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display"></ion-avatar>
+    <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display"></ion-avatar></ng-template>
+      </ion-col>
+      <ion-col size = "6">
+    <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
     <ng-template #alternate >{{room.user1name}}</ng-template>
-
-    <ion-avatar *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display"></ion-avatar>
-      <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display"></ion-avatar></ng-template>
-  
+    <h4>{{room.name}}: {{room.lastmessage}}</h4>
+      </ion-col> 
+    </ion-row>
+    </ion-grid>
+    
+    
         <!-- <img [src]="room."> -->
     
-    <h4>{{room.name}}: {{room.lastmessage}}</h4>
       <!-- <ion-icon color = "primary" name="chatboxes" item-end (click)="joinRoom(room.id)"></ion-icon> -->
     </ion-item>
     <ion-item-options  side="right">

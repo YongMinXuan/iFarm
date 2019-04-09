@@ -291,6 +291,8 @@ export class DatabaseProvider {
             id : doc.id,
             roomname : doc.data().roomname,
             image : doc.data().image,
+            lastmessage: doc.data().lastmessage,
+            name: doc.data().name
           });
         });
 

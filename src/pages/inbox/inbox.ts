@@ -49,10 +49,10 @@ export class InboxPage {
     let name = firebase.auth().currentUser.uid;
     
     this.retrieveCollection();
-    this.chatreceive = Observable.interval(3000).subscribe(()=>{
-      this.retrieveCollection();
+    // this.chatreceive = Observable.interval(3000).subscribe(()=>{
+    //   this.retrieveCollection();
       
-      });
+    //   });
   }
 
   ionViewDidLeave(){

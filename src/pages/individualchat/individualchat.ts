@@ -1,5 +1,4 @@
 import { InboxPage } from './../inbox/inbox';
-
 import { GroupChatMulitpleImagePage } from './../group-chat-mulitple-image/group-chat-mulitple-image';
 import { Observable } from 'rxjs/Observable';
 import { GroupChatImagePage } from './../group-chat-image/group-chat-image';

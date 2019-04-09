@@ -17,11 +17,29 @@
     <ion-item *ngFor="let room of rooms" style="    
     margin-bottom: 20px; background-color: white;     border-radius: 15px;
 " (click)="joinRoom(room.id)">
-<ion-avatar>
-  <img src="{{room.image}}">
-</ion-avatar>
-<ion-icon name="chatboxes" item-end ></ion-icon>
-      {{room.roomname}}
+<ion-grid>
+  <ion-row>
+      <ion-col col-3 >
+        <ion-avatar slot="start">
+          <img src="{{room.image}}">
+          </ion-avatar>
+      </ion-col>
+
+      <ion-col col-3 >
+          <h3>{{room.roomname}} </h3><br>
+          <h4 *ngIf="room.name; else alternate">{{room.name}}: {{room.lastmessage}}</h4>           
+          <ng-template #alternate >No Chats Yet!!</ng-template>
+        </ion-col>
+    
+        <ion-col col-3 >
+          <!-- <ion-icon name="chatboxes" item-end ></ion-icon> -->
+      
+        </ion-col>
+
+  </ion-row>
+
+</ion-grid>
+
       
     </ion-item>
   </ion-list>
