@@ -24,24 +24,34 @@
 " *ngFor='let location of locations' >
  
         <ion-item  no-lines color = "dark">
+<h6 style="
+     margin-bottom: 20px;
+ ">{{location.StartDate}}</h6>
+          <ion-row>
+            <ion-col col-3>
+                <img [src]="location.image" class="round-corners">
+            </ion-col>
+
+            <ion-col col-3>
+                <h2>
+                    {{ location.city }}  <br>    
+                    {{ location.StartDate }} - {{ location.EndDate }}<br>       
+                    {{ location.StartTime }} - {{ location.EndTime }}<br>
+                    {{ location.location}}<br>
+                    {{ location.population}}<br>
+                    {{ location.established }}
+                  </h2>
+            </ion-col>
+          </ion-row>
         <div class = "row">
 
             <div>
-            <h6 style="
-     margin-bottom: 20px;
- ">{{location.StartDate}}</h6>
+            
       
           
             </div>    
       <div>
-        <h2>
-        {{ location.city }}  <br>    
-        {{ location.StartDate }} - {{ location.EndDate }}<br>       
-        {{ location.StartTime }} - {{ location.EndTime }}<br>
-        {{ location.location}}<br>
-        {{ location.population}}<br>
-        {{ location.established }}
-      </h2>
+        
     </div>
     </div> 
     </ion-item>

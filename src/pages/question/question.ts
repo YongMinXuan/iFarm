@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, LoadingController,ActionSheetController, } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database.service';
 import * as moment from 'moment';
 import { Firebase } from '@ionic-native/firebase'
 import firebase from 'firebase';
 import { CalendarComponentOptions } from 'ion2-calendar'
 import { ModalController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpClient } from '@angular/common/http';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { CalendarModal, CalendarModalOptions, DayConfig, CalendarResult } from "ion2-calendar";
 @IonicPage()
 @Component({
@@ -14,6 +17,7 @@ import { CalendarModal, CalendarModalOptions, DayConfig, CalendarResult } from "
   templateUrl: 'question.html',
 })
 export class QuestionPage {
+   image: string;
 
    ionViewDidLoad() {
       console.log(firebase.auth().currentUser);
@@ -160,7 +164,12 @@ export class QuestionPage {
                private _FB 	         : FormBuilder,
                private _DB           : DatabaseProvider,
                private _ALERT        : AlertController,
-               public modalCtrl: ModalController,)
+               public modalCtrl: ModalController,
+               private loadingCtrl: LoadingController,
+               private camera: Camera,
+               private http: HttpClient,
+               public imagePicker: ImagePicker,
+               private actionSheetCtrl: ActionSheetController)
    {
 
       // Use Formbuilder API to create a FormGroup object
@@ -241,9 +250,30 @@ export class QuestionPage {
       if(this.isEditable)
       {
 
-         // Call the DatabaseProvider service and pass/format the data for use
-         // with the updateDocument method
-         this._DB.updateDocument(this._COLL,
+         if(this.image){
+
+            let loading = this.loadingCtrl.create({
+               content: "Uploading Image..."
+             })
+         
+             loading.present();
+         
+             let ref = firebase.storage().ref("GroupImages/" + name);
+         
+             let uploadTask = ref.putString(this.image.split(',')[1], "base64");
+         
+             uploadTask.on("state_changed", (taskSnapshot: any) => {
+               console.log(taskSnapshot)
+               let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
+               loading.setContent("Uploaded " + percentage + "% ...")
+         
+             }, (error) => {
+               console.log(error)
+             }, () => {
+               console.log("The upload is complete!");
+         
+               uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                     this._DB.updateDocument(this._COLL,
                                this.docID,
                                {
                                   city    		 : city,
@@ -255,53 +285,165 @@ export class QuestionPage {
                                   location    : location,
                                   established   : established,
                                   name   : name,
-                                  user : user
+                                  user : user,
+                                 image: url,
+                                 OfficialStartDate : OfficialStartDate
+
                                   
 	                           })
          .then((data) =>
          {
             this.clearForm();
-            this.displayAlert('Success', 'The document ' +  city + ' was successfully updated');
+            this.displayAlert('Success', 'The document was successfully updated');
          })
          .catch((error) =>
          {
             this.displayAlert('Updating document failed', error.message);
          });
+
+
+               }).catch((err) => {
+                  loading.dismiss()
+                  
+                })
+                
+              })
+              loading.dismiss()
+              this.navCtrl.pop()
+
+         }
+
+         else{
+            this._DB.updateDocument(this._COLL,
+               this.docID,
+               {
+                  city    		 : city,
+                  StartDate    	: StartDate,
+                 EndDate        :EndDate,
+                 StartTime    	: StartTime,
+                 EndTime      :EndTime,
+                  population    : population,
+                  location    : location,
+                  established   : established,
+                  name   : name,
+                  user : user,
+                  image: "https://firebasestorage.googleapis.com/v0/b/ifarm-a79f0.appspot.com/o/4k-wallpaper-close-up-dew-807598%20(1).jpg?alt=media&token=afe0194c-1b51-4108-9140-138050998e2f",
+                  OfficialStartDate : OfficialStartDate
+
+                  
+              }).then((data) =>
+              {
+                 
+                 this.displayAlert('Success', 'The document was successfully updated');
+              }) .catch((error) =>
+              {
+                 this.displayAlert('Updating document failed', error.message);
+              });
+
+
+          }
+
+         
+         
       }
 
       // Otherwise we are adding a new record
       else
       {
+         if(this.image){
 
-         // Call the DatabaseProvider service and pass/format the data for use
-         // with the addDocument method
-         this._DB.addDocument(this._COLL,
-                            {
-                              city    		 : city,
-                              StartDate    	: StartDate,
-                              EndDate         :EndDate,
-                              StartTime    	: StartTime,
-                              EndTime      : EndTime,
-                              population    : population,
-                              location : location,
-                              established   : established,
-                              name   : name,
-                              user : user,
-                              OfficialStartDate : OfficialStartDate
-	                        })
+            let loading = this.loadingCtrl.create({
+               content: "Uploading Image..."
+             })
+         
+             loading.present();
+         
+             let ref = firebase.storage().ref("GroupImages/" + name);
+         
+             let uploadTask = ref.putString(this.image.split(',')[1], "base64");
+         
+             uploadTask.on("state_changed", (taskSnapshot: any) => {
+               console.log(taskSnapshot)
+               let percentage = taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100;
+               loading.setContent("Uploaded " + percentage + "% ...")
+         
+             }, (error) => {
+               console.log(error)
+             }, () => {
+               console.log("The upload is complete!");
+         
+               uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                     this._DB.addDocument(this._COLL,
+                              
+                               {
+                                  city    		 : city,
+                                  StartDate    	: StartDate,
+                                 EndDate        :EndDate,
+                                 StartTime    	: StartTime,
+                                 EndTime      :EndTime,
+                                  population    : population,
+                                  location    : location,
+                                  established   : established,
+                                  name   : name,
+                                  user : user,
+                                 image: url,
+                                 OfficialStartDate : OfficialStartDate
+
+                                  
+	                           })
          .then((data) =>
          {
-            console.log(data);
-            this.clearForm();
-            this.displayAlert('Record added', 'The document ' +  city + ' was successfully added');
+            
+            this.displayAlert('Success', 'The document was successfully updated');
          })
          .catch((error) =>
          {
-            this.displayAlert('Adding document failed', error.message);
+            this.displayAlert('Updating document failed', error.message);
          });
-         this.navCtrl.pop();
+
+
+               }).catch((err) => {
+                  loading.dismiss()
+                  
+                })
+                
+              })
+              loading.dismiss()
+              this.navCtrl.pop()
+        
       }
+
+      else{
+         this._DB.addDocument(this._COLL,
+            
+            {
+               city    		 : city,
+               StartDate    	: StartDate,
+              EndDate        :EndDate,
+              StartTime    	: StartTime,
+              EndTime      :EndTime,
+               population    : population,
+               location    : location,
+               established   : established,
+               name   : name,
+               user : user,
+               image: "https://firebasestorage.googleapis.com/v0/b/ifarm-a79f0.appspot.com/o/4k-wallpaper-close-up-dew-807598%20(1).jpg?alt=media&token=afe0194c-1b51-4108-9140-138050998e2f",
+               OfficialStartDate : OfficialStartDate
+
+               
+           }).then((data) =>
+           {
+              
+              this.displayAlert('Success', 'The document was successfully updated');
+           }) .catch((error) =>
+           {
+              this.displayAlert('Updating document failed', error.message);
+           });
+      }
+
+
    }
+}
    // StartDate    	: new Date(moment().format(StartDate)),
    // EndDate         :new Date(moment().format(EndDate)),
 
@@ -326,7 +468,89 @@ export class QuestionPage {
       alert.present();
    }
 
-
+   addPhoto(){
+      this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: "Camera",
+            handler: () => {
+              console.log();
+              console.log("Camera");
+              
+    
+                this.launchCamera();
+                console.log("Before Modal Cntrl")
+            
+            
+              
+            }
+          },
+          {
+            text: "Image Gallery",
+            handler: () => {
+              console.log("Image Gallery");
+              this.openImagePicker();
+    
+            }
+          }
+        ]
+      }).present();
+    
+    }
+    
+    openImagePicker(){
+      this.imagePicker.hasReadPermission().then(
+        (result) => {
+    
+          if(result == false){
+            // no callbacks required as this opens a popup which returns async
+            this.imagePicker.requestReadPermission();
+          }
+          else if(result == true){
+            const options = {
+              maximumImagesCount: 1,
+              quality: 75,
+              width: 512,
+              height: 512,
+              outputType: 1
+              }
+    
+            this.imagePicker.getPictures(options).then(
+              (results) => {
+               
+                   this.image = "data:image/jpeg;base64," + results;              
+               
+              }, (err) => console.log(err)
+            );
+          }
+        }, (err) => {
+          console.log(err);
+        });
+      }
+    
+    launchCamera() {
+      let options: CameraOptions = {
+        quality: 100,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.PNG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        targetHeight: 512,
+        targetWidth: 512,
+        allowEdit: true
+      }
+    
+      this.camera.getPicture(options).then((base64Image) => {
+        console.log(base64Image);
+    
+        this.image = "data:image/png;base64," + base64Image;
+    
+    
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
 
    /**
     * Clear all form data

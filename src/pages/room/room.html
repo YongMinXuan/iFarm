@@ -28,7 +28,7 @@
       <ion-col col-3 >
           <h3>{{room.roomname}} </h3><br>
           <h4 *ngIf="room.name; else alternate">{{room.name}}: {{room.lastmessage}}</h4>           
-          <ng-template #alternate >No Chats Yet!!</ng-template>
+          <ng-template #alternate ><h4>No Chats Yet!!</h4></ng-template>
         </ion-col>
     
         <ion-col col-3 >

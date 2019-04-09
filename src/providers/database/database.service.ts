@@ -74,6 +74,7 @@ export class DatabaseProvider {
            name: doc.data().name,
            user : doc.data().user,
            OfficialStartDate    : doc.data().OfficialStartDate,
+           image: doc.data().image,
           });
         });
 

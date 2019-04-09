@@ -3,6 +3,7 @@ import { DatabaseProvider } from './../../providers/database/database.service';
 import { Component } from '@angular/core';
 import { NavController, AlertController, IonicPage,NavParams } from 'ionic-angular';
 import firebase from 'firebase';
+import { QuestionPage } from '../question/question';
 @IonicPage()
 @Component({
   selector: 'questionfirst',
@@ -182,7 +183,7 @@ export class QuestionFirstPage {
     */
    addDocument() : void
    {
-      this.navCtrl.push('QuestionPage');
+      this.navCtrl.push(QuestionPage);
    }
 
    signup_event(location)
@@ -319,7 +320,7 @@ export class QuestionFirstPage {
       						obj.id)
       .then((data : any) =>
       {
-         this.displayAlert('Success', 'The record ' + obj.city + ' was successfully removed');
+         this.displayAlert('Success', 'The record was successfully removed');
       })
       .catch((error : any) =>
       {
