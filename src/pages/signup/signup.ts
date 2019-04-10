@@ -206,7 +206,8 @@ export class SignupPage {
 	 	      population        : string 		= this.form.controls["population"].value,
   		    established       : string		= this.form.controls["established"].value,
           eventid	            : string		= this.params.data.data.id,
-          user	            : string		= firebase.auth().currentUser.uid;
+          user	            : string		= firebase.auth().currentUser.uid,
+          image	            : string		= firebase.auth().currentUser.photoURL;
           ;
 
           console.log(this.counts)
@@ -265,7 +266,8 @@ export class SignupPage {
 	                           population    : population,
                              established   : established,
                              eventid: eventid,
-                             user : user
+                             user : user,
+                             image: image
 	                        })
          .then((data) =>
          {

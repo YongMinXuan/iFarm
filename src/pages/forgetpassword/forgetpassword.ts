@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController, } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,AlertController } from 'ionic-angular';
 import firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ForgetpasswordPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private http: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private http: HttpClient, private alertCtrl: AlertController,) {
   }
 
   ionViewDidLoad() {
@@ -25,7 +25,19 @@ export class ForgetpasswordPage {
   }
   email: string = "";
   password: string = "";
+  displayAlert(title      : string,
+    message    : string) : void
+{
+let alert : any     = this.alertCtrl.create({
+title      : title,
+subTitle   : message,
+buttons    : [{
+text      : 'Got It!',
 
+}]
+});
+alert.present();
+}
   reset(){
     // var admin = require('firebase-admin');
     let body = {
@@ -35,7 +47,7 @@ export class ForgetpasswordPage {
 
     console.log(body);
     let toast = this.toastCtrl.create({
-      message: "Updating like... Please wait."
+      message: "Contacting our servers now... Please wait."
     });
 
     toast.present();
@@ -51,6 +63,15 @@ export class ForgetpasswordPage {
         firebase.auth().sendPasswordResetEmail(this.email).then(function() {
           // Email sent.
           console.log("email is sent")
+          this.navCtrl.pop();
+          toast.dismiss();
+
+          this.displayAlert('Success', 'The email was successfully sent');
+          let ultra = this.toastCtrl.create({
+            message: "The email was successfully sent",
+            duration: 3000
+          }).present();
+    
         }).catch(function(error) {
           // An error happened.
           console.log('an error occured')

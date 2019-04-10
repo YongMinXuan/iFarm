@@ -137,6 +137,7 @@ export class DatabaseProvider {
            location   : doc.data().location,
            established    : doc.data().established,
            user : doc.data().user,
+           image : doc.data().image,
           });
         });
 

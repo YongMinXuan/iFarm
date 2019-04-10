@@ -13,10 +13,14 @@
       <img [src]="image" class="round-corners">
     </ion-card>
   </ion-row>
-  <button ion-button full round color="dark" (click) = "addPhoto()">Add</button>
-  <form (ngSubmit)="addRoom()">
-    <ion-list>
-      <ion-item>
+  <button ion-button full round color="dark" (click) = "addPhoto()" style="
+ margin-bottom: 20px;
+">Add an Image</button>
+  <form (ngSubmit)="addRoom()" style="
+      border-radius: 20px;
+  ">
+    <ion-list >
+      <ion-item >
         <ion-label floating>Enter Room Name</ion-label>
         <ion-input type="text" [(ngModel)]="data.roomname" name="roomname" required=""></ion-input>
       </ion-item>
