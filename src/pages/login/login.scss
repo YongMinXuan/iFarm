@@ -27,6 +27,14 @@ page-login {
         color: white; 
     }
 
+    .label {
+        margin: 0;
+     }
+     
+     .item-inner {
+        padding-right: 0px!important;
+     }
+
     .icon{
         margin: 13px 8px;
         padding-top: 3px;
@@ -38,12 +46,16 @@ page-login {
 
     ion-content {
         .scroll-content { 
-            background-color:  #013220
+            // background-color:  #013220
+            background-image: url(../../assets/imgs/background.jpg);
+            background-repeat: no-repeat;
+            background-size: contain, cover;
+            
         }
     }
 
     .item {
-        background-color:  #013220
+        // background-color:  #013220
     }
 
     .logo{

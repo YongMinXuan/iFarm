@@ -1,7 +1,11 @@
 page-register {
     ion-content {
         .scroll-content {
-            background-color: map-get($colors, dark )
+            // background-color: map-get($colors, dark );
+            background-image: url(../../assets/imgs/background.jpg);
+            background-repeat: no-repeat;
+            background-size: contain, cover;
+            margin-top: 0px!important;
         }
     }
     .item {
@@ -11,6 +15,8 @@ page-register {
         font-size: 25vh;
         margin-top: 40px;
         margin-bottom: 20px;
+        margin-left: 33%;
+        margin-right: auto!important;
     }
     ion-card ion-row{
         padding: 10px;
