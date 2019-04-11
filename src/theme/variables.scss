@@ -37,18 +37,18 @@ $colors: (
   primary:    #33ca83,
   secondary:  #327eff,
   danger:     #f53d3d,
-  light:      #F29559,
+  light:      white,
   dark:      #434A42,
   lightwhite: #327eff,
   orange: #DDB967,
 );
 
 .tabs-md .tab-button {
-  color: #DDB967 !important;
+  color: #434A42 !important;
  }
 
  .tabs-md .tab-button[aria-selected=true] {
-   color: #F29559 !important;
+   color: #077E6C !important;
  }
 
 // App iOS Variables

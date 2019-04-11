@@ -1,5 +1,5 @@
-<ion-header color = "dark">
-  <ion-navbar color = "dark">
+<ion-header >
+  <ion-navbar >
     <ion-title text-center>
       Events Page
     </ion-title>
@@ -12,24 +12,25 @@
   
 </ion-header>
 
-<ion-content padding style="background-color: #F29559;">
+<ion-content padding>
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
  
 
-  <ion-list class=“item-borderless”>
+  <ion-list class=“item-borderless” >
     <ion-item-sliding style="    
-    margin-bottom: 20px; background-color: #F29559;     border-radius: 15px;
-" *ngFor='let location of locations' >
+    margin-bottom: 20px;  border-radius: 15px;background-color: #077E6C;" 
+    *ngFor='let location of locations' >
  
-        <ion-item  no-lines color = "dark">
-<h6 style="
-     margin-bottom: 20px;
- ">{{location.StartDate}}</h6>
+        <ion-item  no-lines style="background-color: #077E6C; padding-left:0px;">
+          <ion-row style ="background-color: #077E6C;">
+            <h6 style="margin-bottom: 20px;">{{location.StartDate}}</h6>
+          </ion-row>
+          <div ng-style="{'background-image': 'url('+location.image+')'}"></div>
           <ion-row>
             <ion-col col-3>
-                <img [src]="location.image" class="round-corners">
+                
             </ion-col>
 
             <ion-col col-3>

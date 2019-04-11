@@ -1,3 +1,20 @@
 page-room {
+    .my-custom-menu {
+        --width: 500px;
+      }
 
+      ion-avatar,
+ion-avatar > img{
+    border-radius:50%;
+    height:40px;
+    width:40px;
+}
+
+.odd{
+    background-color: #077E6C;
+    color:white
+  }
+  .even{
+    background-color: white;
+  }
 }

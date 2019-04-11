@@ -1,4 +1,8 @@
 page-questionfirst {
+  .item .item-inner {
+    padding-left: 0px!important;
+  }
+
     @import 'https://fonts.googleapis.com/css?family=Open+Sans:300, 400';
 
     %reset {
@@ -44,6 +48,13 @@ page-questionfirst {
       position: relative;
       animation: animatop 0.9s cubic-bezier(0.425, 1.14, 0.47, 1.125) forwards;
     }
+
+    
+
+    .item-md.item-block .item-inner {
+       padding-right: 0px!important; 
+     
+  }
     
     .card {
       @include dimensions( 500px,  100px);

@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar color="dark">
+    <ion-navbar >
       <ion-title text-center>Weather</ion-title>
   
       <!-- <ion-buttons end>
@@ -13,13 +13,13 @@
   
   </ion-header>
 
-<ion-content  fullscreen="true" padding  style="background-color: #F29559;">
+<ion-content  fullscreen="true" padding  >
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
   <div *ngIf="location && forecast" margin-top>
-      <h5 style="color: white;">Today's Forecast</h5>
-    <ion-card color="dark" style= "border-radius:20px">
+      <h5 color = "dark">Today's Forecast</h5>
+    <ion-card style= "background-color: #077E6C;border-radius:20px">
       <ion-grid style = "padding: 20px">
         <ion-row>
         <ion-col text-center col-33>
@@ -32,26 +32,26 @@
       </ion-col>
       <ion-col col-66  color = "orange">
         <h1 text-center style="color: white;">
-          <ion-icon style="
+          <ion-icon color= "orange" style="
           font-size: 550%;
-      " color ="orange" name="{{ forecast.daily.data[0].icon | weatherIcon }}"></ion-icon>
+      "  name="{{ forecast.daily.data[0].icon | weatherIcon }}"></ion-icon>
           
         </h1>
        
 
       </ion-col>
     </ion-row>
-    <p text-center style="color: rgb(248, 220, 220);">
+    <p text-center style="color: white;">
       {{ this.locationName }}
     </p>
     <ion-row>
       <ion-col col-6 text-center class = "wall" style="color: white;">
-        <p>
+        <p style="color: white;">
           Pressure: {{ forecast.daily.data[0].pressure | number:'.0-0' }} hPa    
         </p>
       </ion-col>
       <ion-col col-6>
-        <p >
+        <p style="color: white;">
           Wind Speed: {{ forecast.daily.data[0].windSpeed | number:'.0-0' }} kph
         </p>
       </ion-col>
@@ -72,9 +72,9 @@
       
     </ion-row>
     <hr>
-    <h5 style="color: white;">Full Forecast for the next 12 hours</h5>
+    <h5 color = "dark">Full Forecast for the next 12 hours</h5>
      
-        <ion-card color = "dark" style= "border-radius:20px">
+        <ion-card  style= "background-color: #077E6C;border-radius:20px">
           <ion-row  color = "dark" style = "padding: 20px">
         <ion-col col-4 *ngFor= "let hourForecast of forecast.hourly.data | slice:0:12">
           <p text-center style="color: white;">
@@ -94,8 +94,8 @@
     
 
     <hr>
-    <h5 style="color: white;">Full Forecast for the next 4 days</h5>
-    <ion-card color = "dark" style= "border-radius:20px">
+    <h5 color = "dark">Full Forecast for the next 4 days</h5>
+    <ion-card  style= "background-color: #077E6C;border-radius:20px">
        <ion-row color = "orange" style = "padding: 20px">
       <ion-col col-3 *ngFor="let index of [1,2,3,4]" text-center style = "padding: 10px">        
         <p style="color: white;">

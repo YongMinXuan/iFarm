@@ -1,6 +1,6 @@
-<ion-header color = "dark">
+<ion-header>
 
-  <ion-navbar color = "dark">
+  <ion-navbar >
     <ion-title text-center>Room</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addRoom()">
@@ -12,11 +12,14 @@
 </ion-header>
 
 
-<ion-content padding style="background-color: #F29559;">
-  <ion-list>
-    <ion-item *ngFor="let room of rooms" style="    
-    margin-bottom: 20px; background-color: white;     border-radius: 15px;
-" (click)="joinRoom(room.id)">
+<ion-content padding >
+  <ion-list no-lines>
+    <ion-item *ngFor="let room of rooms;let i = index;" [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
+    margin-bottom: 20px;     border-radius: 15px;-webkit-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
+box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75); margin-bottom: 20px;     border-radius: 15px;"    
+   
+ (click)="joinRoom(room.id)">
 <ion-grid>
   <ion-row>
       <ion-col col-3 >

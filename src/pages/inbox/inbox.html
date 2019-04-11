@@ -1,5 +1,5 @@
-<ion-header color = "dark">
-  <ion-navbar color = "dark">
+<ion-header >
+  <ion-navbar >
     <ion-row>
       <ion-avatar item-start (click)="update()">
           <img [src] = "profilepic">
@@ -20,21 +20,26 @@
 
 </ion-header>
 
-<ion-content padding style="background-color: #F29559;">
+<ion-content padding>
 
   <!-- <ion-avatar>
     <img src= "data:image/*;base64,{{profilepic}}">
   </ion-avatar> -->
   <ion-list no-lines>
-    <ion-item-sliding *ngFor="let room of rooms" style="    
-    margin-bottom: 20px; background-color: white;     border-radius: 15px;
+    <ion-item-sliding *ngFor="let room of rooms ;let i = index;"  [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
+    margin-bottom: 20px;     border-radius: 15px;-webkit-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
+box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
 ">
-    <ion-item (click)="joinRoom(room.id)" style="    
-    margin-bottom: 20px; background-color: white;     border-radius: 15px;
+    <ion-item (click)="joinRoom(room.id)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
+    margin-bottom: 20px;   border-radius: 15px;
 "><ion-grid>
      <ion-row>
       <ion-col col-3 >
-        <ion-avatar slot="start"  *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display"></ion-avatar>
+        <ion-avatar style = "width:55px;height:55px" slot="start"  *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display" style="
+          width: 65px;
+          height: 60px;
+      "></ion-avatar>
     <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display"></ion-avatar></ng-template>
       </ion-col>
       <ion-col size = "6">

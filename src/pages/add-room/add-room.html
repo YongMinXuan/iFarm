@@ -1,13 +1,13 @@
-<ion-header color = "dark">
+<ion-header >
 
-  <ion-navbar color = "dark">
+  <ion-navbar >
     <ion-title>AddRoom</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding style="background-color: #F29559;">
+<ion-content padding >
   <ion-row margin class="rowStyle" *ngIf="image">
     <ion-card class="round-corners">
       <img [src]="image" class="round-corners">
@@ -17,15 +17,25 @@
  margin-bottom: 20px;
 ">Add an Image</button>
   <form (ngSubmit)="addRoom()" style="
-      border-radius: 20px;
+      border-radius: 20px; background-color: #077E6C;
   ">
-    <ion-list >
-      <ion-item >
-        <ion-label floating>Enter Room Name</ion-label>
-        <ion-input type="text" [(ngModel)]="data.roomname" name="roomname" required=""></ion-input>
+    <ion-list style="
+    border-radius: 20px; background-color: #077E6C;
+">
+      <ion-item  style="
+      border-radius: 20px; background-color: #077E6C;
+  ">
+        <ion-label floating style="
+        color:white;
+    ">Enter Room Name</ion-label>
+        <ion-input style="
+        background-color:white; border-radius: 20px
+    "type="text" [(ngModel)]="data.roomname" name="roomname" required=""></ion-input>
       </ion-item>
-      <ion-item>
-        <button ion-button full round color="dark" type="submit">Add</button>
+      <ion-item style="
+      border-radius: 20px; background-color: #077E6C;
+  ">
+        <button ion-button full round color="dark" type="submit">Add the event</button>
       </ion-item>
     </ion-list>
   </form>

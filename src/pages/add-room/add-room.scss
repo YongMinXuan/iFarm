@@ -1,3 +1,14 @@
 page-add-room {
+    .item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating]{
+        color: white; //label color when focusing
+}
+.item-input .label-md{
+        color: #434A42; //label color
 
+
+}
+
+.item-md.item-input .item-inner {
+    color: #434A42;
+}
 }
