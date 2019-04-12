@@ -1,5 +1,10 @@
 // http://ionicframework.com/docs/theming/
-
+ion-content.content {
+    .scroll-content {
+      padding-top: 1px;
+      padding-bottom: 1px;
+    }
+  }
 
 // App Global Sass
 // --------------------------------------------------

@@ -1,3 +1,6 @@
+import { IndividualarticlePage } from './../pages/individualarticle/individualarticle';
+import { ArticlesPageModule } from './../pages/articles/articles.module';
+import { ArticlesPage } from './../pages/articles/articles';
 import { GroupChatMulitpleImagePageModule } from './../pages/group-chat-mulitple-image/group-chat-mulitple-image.module';
 import { GroupChatImagePageModule } from './../pages/group-chat-image/group-chat-image.module';
 import { GroupChatImagePage } from './../pages/group-chat-image/group-chat-image';
@@ -42,7 +45,6 @@ import {AngularFireDatabaseModule} from 'angularfire2/database'
 import {FIREBASE_CONFIG} from "./app.firebase.config";
 import { DatetimePickerModule } from 'ion-datetime-picker';
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
-
 //providers
 import { AuthService } from '../providers/auth/auth.service';
 import { DataService } from '../providers/data/data.service';
@@ -64,6 +66,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { IndividualchatPageModule } from '../pages/individualchat/individualchat.module';
 // import { ImagepickerProvider } from '../providers/imagepicker/imagepicker';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { IndividualarticlePageModule } from '../pages/individualarticle/individualarticle.module';
 
 declare var require: any    
 
@@ -118,7 +121,9 @@ firebase.firestore().settings({
     GroupChatImagePageModule,
     GroupChatMulitpleImagePageModule,
     IndividualchatPageModule,
-    VerticalTimelineModule
+    VerticalTimelineModule,
+    ArticlesPageModule,
+    IndividualarticlePageModule
 
   ],
   
@@ -132,7 +137,9 @@ firebase.firestore().settings({
     CommentsPage,
     EventPage,
     AddEventPage,
-    GroupChatImagePage
+    GroupChatImagePage,
+    ArticlesPage,
+    IndividualarticlePage
   ],
   providers: [
     StatusBar,

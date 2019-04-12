@@ -2,13 +2,7 @@
 
     <ion-navbar >
       <ion-title text-center>Weather</ion-title>
-  
-      <!-- <ion-buttons end>
-        <button ion-button icon-only clear (click)="logout()">
-          <ion-icon name="log-out"></ion-icon>
-        </button>
-      </ion-buttons>
-   -->
+      
     </ion-navbar>
   
   </ion-header>
@@ -19,21 +13,23 @@
       </ion-refresher>
   <div *ngIf="location && forecast" margin-top>
       <h5 color = "dark">Today's Forecast</h5>
-    <ion-card style= "background-color: #077E6C;border-radius:20px">
+    <ion-card style= "background-color: #ADD4CE;border-radius:20px">
       <ion-grid style = "padding: 20px">
         <ion-row>
         <ion-col text-center col-33>
-            <h5 style="color: white;padding-top: 10%;font-size: 1.4em;">
+            <h5 style="color: black;padding-top: 10%;font-size: 1.4em;">
                 {{ forecast.daily.data[0].summary }}
             </h5>
-        <p style="color: white;">
-            {{ forecast.daily.data[0].temperatureMin | number:'.0-0' }}&deg;C&nbsp;-&nbsp;{{ forecast.daily.data[0].temperatureMax | number:'.0-0' }}&deg;C
+            <!-- <ion-icon name="thermometer"></ion-icon> -->
+ 
+        <p style="color:#006458; font-size:20px ;">
+           <b>{{ forecast.daily.data[0].temperatureMin | number:'.0-0' }}&deg;C&nbsp;-&nbsp;{{ forecast.daily.data[0].temperatureMax | number:'.0-0' }}&deg;C</b>
         </p>
       </ion-col>
       <ion-col col-66  color = "orange">
-        <h1 text-center style="color: white;">
-          <ion-icon color= "orange" style="
-          font-size: 550%;
+        <h1 text-center style="color: black;">
+          <ion-icon  style="
+          font-size: 550%; color: white
       "  name="{{ forecast.daily.data[0].icon | weatherIcon }}"></ion-icon>
           
         </h1>
@@ -41,17 +37,17 @@
 
       </ion-col>
     </ion-row>
-    <p text-center style="color: white;">
+    <p text-center style="color: black;">
       {{ this.locationName }}
     </p>
     <ion-row>
       <ion-col col-6 text-center class = "wall" style="color: white;">
-        <p style="color: white;">
+        <p style="color: black;">
           Pressure: {{ forecast.daily.data[0].pressure | number:'.0-0' }} hPa    
         </p>
       </ion-col>
       <ion-col col-6>
-        <p style="color: white;">
+        <p style="color: black;">
           Wind Speed: {{ forecast.daily.data[0].windSpeed | number:'.0-0' }} kph
         </p>
       </ion-col>
@@ -74,19 +70,19 @@
     <hr>
     <h5 color = "dark">Full Forecast for the next 12 hours</h5>
      
-        <ion-card  style= "background-color: #077E6C;border-radius:20px">
+        <ion-card  style= "background-color: #ADD4CE;border-radius:20px">
           <ion-row  color = "dark" style = "padding: 20px">
         <ion-col col-4 *ngFor= "let hourForecast of forecast.hourly.data | slice:0:12">
-          <p text-center style="color: white;">
+          <p text-center style="color: black;">
             {{ hourForecast.time * 1000 | date: 'HH:mm' }}
           </p>
           <p text-center>
             <!-- {{ hourForecast.precipIntensity | number:'.0-0'}}&nbsp;mm -->
-            <ion-icon color="orange" center name="{{ hourForecast.icon | weatherIcon }}"></ion-icon><br>
+            <ion-icon style ="color: white" center name="{{ hourForecast.icon | weatherIcon }}"></ion-icon><br>
             <!-- {{ hourForecast.summary }} -->
           </p>
-          <p text-center style="color: white;" >
-            {{ hourForecast.temperature | number:'.0-0' }}&deg;C
+          <p text-center style="color:  #006458" >
+           <b> {{ hourForecast.temperature | number:'.0-0' }}&deg;C</b>
           </p>
         </ion-col>
       </ion-row>
@@ -95,17 +91,17 @@
 
     <hr>
     <h5 color = "dark">Full Forecast for the next 4 days</h5>
-    <ion-card  style= "background-color: #077E6C;border-radius:20px">
-       <ion-row color = "orange" style = "padding: 20px">
+    <ion-card  style= "background-color: #ADD4CE;border-radius:20px">
+       <ion-row  style = "padding: 20px">
       <ion-col col-3 *ngFor="let index of [1,2,3,4]" text-center style = "padding: 10px">        
         <p style="color: white;">
           {{ forecast.daily.data[index].time | formatDate:'ddd' }}
         </p>
         <h2>
-          <ion-icon color = "orange" name="{{ forecast.daily.data[index].icon | weatherIcon }}"></ion-icon>
+          <ion-icon style ="color: white" name="{{ forecast.daily.data[index].icon | weatherIcon }}"></ion-icon>
         </h2>
-        <p style="color: white;">
-          {{ forecast.daily.data[index].temperatureMax | number:'.0-0'}}&deg;C
+        <p style="color:  #006458">
+          <b>{{ forecast.daily.data[index].temperatureMax | number:'.0-0'}}&deg;C</b>
         </p>
       </ion-col>
     </ion-row>

@@ -12,13 +12,90 @@
   
 </ion-header>
 
-<ion-content padding>
+<ion-content no-padding class="card-background-page">
     <ion-refresher (ionRefresh)="refresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
- 
+      <ion-item-sliding  text-wrap style = "margin-bottom: 30px" no-lines>
+      <ion-item *ngFor='let location of locations' no-lines>
+      <ion-card div class="card">
+          <img [src] = "location.image">
+        <ion-item>
+          <h1>{{location.city}}</h1>
+          <p>{{ location.population}}</p>
+        </ion-item>
+      <ion-item>
+          <ion-icon style="color: #ADD4CE" name="calendar" item-start large></ion-icon>
+          <h2>{{ location.StartDate }} - {{ location.EndDate }}</h2>
+          <p> {{ location.StartTime }} - {{ location.EndTime }}</p>
+      </ion-item>
+      
+        <ion-item>
+          <ion-icon style="color: #ADD4CE" name="compass" item-start large ></ion-icon>
+          <h2>{{ location.location}}</h2>
+          <!-- <p>14 S. Hop Avenue, Madison, WI 53703</p> -->
+        </ion-item>
 
-  <ion-list class=“item-borderless” >
+        <ion-item>
+            <ion-icon style="color: #ADD4CE" name="calendar" item-start large></ion-icon>
+            <h2 text-wrap>{{ location.StartDate }} - {{ location.EndDate }}</h2>
+            <p> {{ location.StartTime }} - {{ location.EndTime }}</p>
+        </ion-item>
+      
+        <ion-item>
+            <ion-icon style="color: #ADD4CE" name="create" item-start large></ion-icon>
+            <h2>Things to Bring</h2>
+            <p>{{ location.established }}</p>
+           
+        </ion-item>
+     <ion-grid text-center>
+      <ion-row *ngIf="user_identification(location);else alternate2" text-center>
+           
+        <ion-col col-4 (click)='updateDocument(location)' text-center> 
+            
+              <ion-icon style="color: #ADD4CE" name="clipboard"></ion-icon>
+                <div style="color: #ADD4CE">
+                  UPDATE
+                </div>
+           
+          </ion-col>
+          <ion-col (click)="deleteDocument(location)" col-4  text-center>
+            
+              <ion-icon style="color: #ADD4CE" name="trash"></ion-icon><br>
+              <div style="color: #ADD4CE">DELETE</div>
+           
+          </ion-col>
+          <ion-col (click)="view(location)" col-4  text-center>
+              
+                <ion-icon style="color: #ADD4CE" name="people"></ion-icon><br>
+                <div style="color: #ADD4CE">ATN</div>
+              
+            </ion-col>
+     </ion-row>
+     </ion-grid> 
+    
+   <ng-template #alternate2 >
+     <ion-row>
+      <ion-col (click)='signup_event(location)'>
+         
+            <ion-icon style="color: #ADD4CE" name="ios-person-add"></ion-icon>
+            <div style="color: #ADD4CE">Register</div>
+         
+        </ion-col>
+        <ion-col (click)='chat(location)'>
+         
+            <ion-icon  style="color: #ADD4CE" name="ios-chatbubbles"></ion-icon>
+            <div style="color: #ADD4CE">Chat</div>
+          
+        </ion-col>
+      </ion-row>
+   </ng-template>
+     
+    </ion-card>
+    </ion-item> 
+  
+  </ion-item-sliding>
+  <!-- <ion-list class=“item-borderless” >
     <ion-item-sliding style="    
     margin-bottom: 20px;  border-radius: 15px;background-color: #077E6C;" 
     *ngFor='let location of locations' >
@@ -99,6 +176,6 @@
     </ion-item-options>
     
     </ion-item-sliding>
-  </ion-list>
+  </ion-list> -->
   
 </ion-content>

@@ -1,6 +1,6 @@
-<ion-header color = "dark"> 
+<ion-header > 
 
-  <ion-navbar color = "dark">
+  <ion-navbar >
     
     <ion-title>Registering For an Event</ion-title>
   </ion-navbar>
@@ -8,10 +8,15 @@
 </ion-header>
 
 
-<ion-content padding style="background-color: #F29559;">
+<ion-content padding >
   <form
     [formGroup]='form'
-    (ngSubmit)='saveDocument(form.value)'>
+    (ngSubmit)='saveDocument(form.value)'
+    style="    
+    margin-bottom: 20px;      border-radius: 15px;-webkit-box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33);
+-moz-box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33);
+box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33);
+">
 
     <ion-item>
       <ion-label stacked>Name:</ion-label>
@@ -49,7 +54,7 @@
          text-center
          padding-top
          padding-bottom
-         [disabled]="!form.valid">
+         [disabled]="!form.valid" style ="background-color: #ADD4CE">
           <div *ngIf="!isEditable">
              Register for this Event Now!
           </div>

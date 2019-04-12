@@ -16,23 +16,37 @@
 
 <ion-content padding>
 
+  <ion-row margin class="rowStyle" text-center>
+   
+    <div class ="center" text-center>
+  <button ion-button
+  
+  
+  text-center
+  padding-top
+  padding-bottom (click)="articles()" style ="-webkit-box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33);
+  -moz-box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33);
+  box-shadow: 0px 3px 5px 2px rgba(0,0,0,0.33); background-color:  #ADD4CE;  ">Click Here for some Pro-Tips!</button>
+</div>
+
+</ion-row>
+
   <ion-row margin class="rowStyle" style="
   background-color: white;
   border-radius: 20px; border-radius: 20px; -webkit-box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);
     -moz-box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);
     box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);
 ">
-    <button ion-button icon-only style="color:  #077E6C;webkit-box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);
-    -moz-box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);
-    box-shadow: -15px 15px 16px -19px rgba(0,0,0,0.75);" clear (click)="addPhoto()">
-      <ion-icon name="images"></ion-icon>
-    </button>
+ <button ion-button icon-only  clear (click)="addPhoto()" style ="color:  #ADD4CE;">
+    <ion-icon name="images"></ion-icon>
+  </button>
+    
 
-    <ion-input style ="-webkit-box-shadow: 13px 15px 16px -19px rgba(0,0,0,0.75);
+    <ion-input style ="color:  #ADD4CE;-webkit-box-shadow: 13px 15px 16px -19px rgba(0,0,0,0.75);
     -moz-box-shadow: 13px 15px 16px -19px rgba(0,0,0,0.75);
-    box-shadow: 13px 15px 16px -19px rgba(0,0,0,0.75);" type="text" placeholder="Ask a Question..." [(ngModel)]="text"></ion-input>
+    box-shadow: 13px 15px 16px -19px rgba(0,0,0,0.75);" type="text" placeholder="Or Ask a Question Here..." [(ngModel)]="text"></ion-input>
 
-    <button ion-button icon-only style ="color:  #077E6C; -webkit-box-shadow: 15px 12px 16px -18px rgba(0,0,0,0.75);
+    <button ion-button icon-only style ="color:  #ADD4CE; -webkit-box-shadow: 15px 12px 16px -18px rgba(0,0,0,0.75);
     -moz-box-shadow: 15px 12px 16px -18px rgba(0,0,0,0.75);
     box-shadow: 15px 12px 16px -18px rgba(0,0,0,0.75);" clear (click)="post()">
       <ion-icon style ="-webkit-box-shadow: 15px 12px 16px -18px rgba(0,0,0,0.75);
@@ -67,7 +81,7 @@
         Delete
       </button>
       </ion-item-options> -->
-    <ion-item-divider no-lines style="background-color: #077E6C">
+    <ion-item-divider no-lines style="background-color: #ADD4CE">
       <ion-row style="color: white">
       {{ post.data().owner_name }} Says
       <ion-buttons end>
@@ -76,7 +90,7 @@
     </ion-row>
 
     <button ion-button item-end icon-only clear (click)="deleteDocument(post)" *ngIf="user_identification(post)">
-        <ion-icon name="trash"></ion-icon>
+        <ion-icon style="color:#7e0711;" name="trash"></ion-icon>
       </button>
     </ion-item-divider>
 
@@ -88,19 +102,19 @@
 
     <ion-row class="bottom-bar">
       <ion-col>
-        <button ion-button block icon-left clear small style="color: #077E6C" class="border-right" (click)="like(post)">
+        <button ion-button block icon-left clear small style="color: #ADD4CE" class="border-right" (click)="like(post)">
           <ion-icon name="thumbs-up"></ion-icon>
           <small>{{ post.data().likesCount || 0 }} Likes</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left clear small style="color: #077E6C" class="border-right" (click)="comment(post)">
+        <button ion-button block icon-left clear small style="color: #ADD4CE" class="border-right" (click)="comment(post)">
           <ion-icon name="text"></ion-icon>
           <small>{{ post.data().commentsCount || 0 }} Comments</small>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button block icon-left style="color: #077E6C" clear small color="dark">
+        <button ion-button block icon-left style="color: #ADD4CE" clear small color="dark">
           <small>{{ ago(post.data().created.toDate()) }} ago</small>
         </button>
       </ion-col> 

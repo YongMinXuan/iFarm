@@ -1,3 +1,4 @@
+import { ArticlesPage } from './../articles/articles';
 import { Component } from '@angular/core';
 // import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, ActionSheetController, AlertController, ModalController, Modal } from 'ionic-angular';
@@ -217,6 +218,10 @@ export class FeedPage {
 
     event.complete();
 
+  }
+
+  articles(){
+    this.navCtrl.push(ArticlesPage);
   }
 
   post() {

@@ -242,6 +242,35 @@ export class DatabaseProvider {
       });
     });
   }
+
+
+  getIndivarticles(collectionObj: string,roomkey :string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj).doc(roomkey)   
+      .get()
+      .then(function(doc) {
+        let obj : any = [];
+          console.log("HELLO")
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            image: doc.data().image,
+            article:doc.data().article,
+            title:doc.data().title,
+            description:doc.data().description
+          });
+          console.log(obj)
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+  
   getChatsList2(collectionObj: string, name :string) : Promise<any>{
     
     let user	            : string		= firebase.auth().currentUser.uid;
@@ -295,6 +324,36 @@ export class DatabaseProvider {
             image : doc.data().image,
             lastmessage: doc.data().lastmessage,
             name: doc.data().name
+          });
+        });
+
+        resolve(obj);
+      })
+      .catch((error : any) => {
+        reject(error);
+      });
+    });
+  }
+
+
+  getArticles(collectionObj: string) : Promise<any>{
+    
+    let user	            : string		= firebase.auth().currentUser.uid;
+    return new Promise((resolve, reject) => {
+      this._DB.collection(collectionObj)   
+      .get()
+      .then((querySnapshot) => {
+        let obj : any = [];
+
+        querySnapshot 
+        .forEach((doc: any) => {
+          console.log(doc);
+          obj.push({
+            id : doc.id,
+            title : doc.data().title,
+            image : doc.data().image,
+            description: doc.data().description,      
+            Article: doc.data().Article,         
           });
         });
 

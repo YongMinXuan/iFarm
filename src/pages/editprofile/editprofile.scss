@@ -1,7 +1,11 @@
 page-editprofile {
     ion-content {
-        .scroll-content {
-            background-color: map-get($colors, dark )
+        .scroll-content { 
+            // background-color:  #013220
+            background-image: url(../../assets/imgs/background.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            
         }
     }
     .item {

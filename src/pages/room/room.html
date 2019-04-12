@@ -17,19 +17,19 @@
     <ion-item *ngFor="let room of rooms;let i = index;" [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
     margin-bottom: 20px;     border-radius: 15px;-webkit-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
 -moz-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75); margin-bottom: 20px;     border-radius: 15px;"    
+box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75); margin-bottom: 20px; border-radius: 15px; height: 100px;"    
    
  (click)="joinRoom(room.id)">
 <ion-grid>
   <ion-row>
       <ion-col col-3 >
-        <ion-avatar slot="start">
+        <ion-avatar style = "width:55px;"  slot="start">
           <img src="{{room.image}}">
           </ion-avatar>
       </ion-col>
 
       <ion-col col-3 >
-          <h3>{{room.roomname}} </h3><br>
+          <h1>{{room.roomname}} </h1>
           <h4 *ngIf="room.name; else alternate">{{room.name}}: {{room.lastmessage}}</h4>           
           <ng-template #alternate ><h4>No Chats Yet!!</h4></ng-template>
         </ion-col>

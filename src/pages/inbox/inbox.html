@@ -29,23 +29,31 @@
     <ion-item-sliding *ngFor="let room of rooms ;let i = index;"  [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
     margin-bottom: 20px;     border-radius: 15px;-webkit-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
 -moz-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
-box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75);
+box-shadow: 1px 8px 16px -6px rgba(0,0,0,0.75); height: 100px;
 ">
     <ion-item (click)="joinRoom(room.id)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even' " style="    
     margin-bottom: 20px;   border-radius: 15px;
 "><ion-grid>
      <ion-row>
-      <ion-col col-3 >
-        <ion-avatar style = "width:55px;height:55px" slot="start"  *ngIf="displayname === room.user1name; else alternate2"><img [src] = "room.user1display" style="
-          width: 65px;
+      <ion-col col-3 style="
+      margin-right: 30px;
+  ">
+        <ion-avatar class ="imglist" slot="start"  *ngIf="uid === room.user1; else alternate2"><img style=" 
+          width: 60px;
           height: 60px;
+      " [src] = "room.user1display" style="
+          width: 55px;
+          height: 55px;
       "></ion-avatar>
-    <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display"></ion-avatar></ng-template>
+    <ng-template #alternate2 ><ion-avatar><img [src] = "room.user2display" img style="
+      width: 55px;
+      height: 55px;
+  "></ion-avatar></ng-template>
       </ion-col>
       <ion-col size = "6">
-    <h2 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h2>
-    <ng-template #alternate >{{room.user1name}}</ng-template>
-    <h4>{{room.name}}: {{room.lastmessage}}</h4>
+    <h1 *ngIf="displayname === room.user1name; else alternate">{{room.user2name}}</h1>
+    <ng-template #alternate ><h1>{{room.user1name}}</h1></ng-template>
+    <h2>{{room.name}}: {{room.lastmessage}}</h2>
       </ion-col> 
     </ion-row>
     </ion-grid>
